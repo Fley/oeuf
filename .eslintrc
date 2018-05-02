@@ -1,0 +1,27 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "react/style-prop-object": "off",
+    "no-empty": "warn",
+    "no-empty-function": "warn",
+    "max-len": [
+      "warn",
+      {
+        "code": 120,
+        "tabWidth": 2
+      }
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ]
+  }
+}

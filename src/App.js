@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Theme from './components/theme/Theme';
+import Shell from './components/shell/Shell';
+import ExercisesPage from './pages/exercises/ExercisesPage';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Theme>
+        <Shell>
+          <ExercisesPage
+            exercises={[
+              { name: 'Lorem ipsum', id: '1' },
+              { name: 'Lorem ipsum', id: '2' },
+              { name: 'Lorem ipsum', id: '3' },
+              { name: 'Lorem ipsum', id: '4' },
+              { name: 'Lorem ipsum', id: '5' },
+              { name: 'Lorem ipsum', id: '6' },
+              { name: 'Lorem ipsum', id: '7' },
+              { name: 'Lorem ipsum', id: '8' },
+              { name: 'Lorem ipsum', id: '9' },
+              { name: 'Lorem ipsum', id: '10' },
+              { name: 'Lorem ipsum', id: '11' }
+            ]}
+          />
+        </Shell>
+      </Theme>
     );
   }
 }
