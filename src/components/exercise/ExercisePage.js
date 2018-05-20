@@ -4,16 +4,16 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlusSquare from '@fortawesome/fontawesome-free-solid/faPlusSquare';
 import faPlay from '@fortawesome/fontawesome-free-solid/faPlay';
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
-import Exercise from '../../components/exercise/Exercise';
+import Exercise from './Exercise';
 
-const ExercisePage = ({ exercise: { name, steps } }) => (
+const ExercisePage = ({ exercise: { id, name, steps } = { steps: [] } }) => (
   <div>
-    <nav className="navbar sticky-top navbar-dark shadow-sm bg-secondary">
-      <button className="btn btn-link text-white">
+    <nav className="navbar sticky-top navbar-light shadow-sm bg-white">
+      <button className="btn btn-link text-dark">
         <FontAwesomeIcon icon={faTimes} />
       </button>
     </nav>
-    <div className="col-sm-10 mx-auto mb-5 py-3">
+    <div className="col-sm-10 mx-auto mb-5 py-3 px-0 px-xs-2">
       <Exercise name={name} steps={steps} />
     </div>
     <nav className="navbar fixed-bottom navbar-light bg-white p-0 navbar-expand shadow-up-sm">
@@ -33,13 +33,12 @@ const ExercisePage = ({ exercise: { name, steps } }) => (
   </div>
 );
 
-Exercise.propTypes = {
-  exercise: PropTypes.objectOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      steps: PropTypes.array
-    })
-  ).isRequired
+ExercisePage.propTypes = {
+  exercise: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    steps: PropTypes.array
+  }).isRequired
 };
 
 export default ExercisePage;

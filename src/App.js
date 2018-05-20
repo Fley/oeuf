@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Theme from './components/theme/Theme';
 import Shell from './components/shell/Shell';
-import ExercisesPage from './pages/exercises/ExercisesPage';
+import ExercisesPage from './components/exercise-list/ExercisesPage';
 
 class App extends Component {
   render() {

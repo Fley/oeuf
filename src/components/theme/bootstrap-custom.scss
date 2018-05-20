@@ -1,27 +1,13 @@
-$sweet-corn: #ffff8d;
-$cerise-red: #d81b60;
-// https://material.io/tools/color/#!/?view.left=0&view.right=0&secondary.color=D81B60&primary.color=FFFF8D
+$primary: #ff6f00;
+$secondary: #bdbdbd;
+$info: #33b5e5;
+$success: #00c851;
+$warning: #ffbb33;
+$danger: #ff4444;
+$light: #f5f5f5;
+$dark: #616161;
 
-$mantis: #80c164;
-$pomegranate: #f44336;
-$sun: #fcb02c;
-
-$astronaut: #2b3d76;
-$athens-gray: #f2f2f4;
-$pumice: #dadbda;
-
-$chablis: #fff4f4;
-
-$primary: $sweet-corn;
-$secondary: $cerise-red;
-$success: $mantis;
-$info: $astronaut;
-$warning: $sun;
-$danger: $pomegranate;
-$light: $athens-gray;
-$dark: $pumice;
-
-$body-bg: $chablis;
+$body-bg: #eeeeee;
 
 $enable-rounded: false;
 
@@ -79,29 +65,50 @@ $input-border-width: 2px;
   box-shadow: none;
 }
 
-// Sortable list-group-item
-.list-group-item-sortable {
+.list-group-item-header {
   @extend .list-group-item;
-  padding: 0;
-  .list-group-item-sortable-drag-handle {
-    // @extend .float-left;
-    padding: $list-group-item-padding-y $list-group-item-padding-x;
+}
+
+// Sortable list-group-item
+.list-group-item {
+  animation: fadein 1s;
+  .list-group-item-drag-handle {
     cursor: grab;
     color: $black;
     opacity: 0.25;
-  }
-  .list-group-item-sortable-content {
-    // @extend .float-left;
-    padding: $list-group-item-padding-y $list-group-item-padding-x;
-    padding-left: 0;
   }
 
   &.list-group-item-sortable-helper {
     cursor: grabbing;
     pointer-events: auto !important;
     opacity: 0.75;
-    .list-group-item-sortable-drag-handle {
+    .list-group-item-drag-handle {
       cursor: grabbing;
     }
+  }
+}
+
+// Sortable table
+.table.table-sortable {
+  .th-drag-handle {
+    cursor: grab;
+    opacity: 0.25;
+  }
+}
+tr.tr-sortable-helper {
+  @extend .table-light;
+  cursor: grabbing;
+  pointer-events: auto !important;
+  opacity: 0.75;
+  display: table;
+  th,
+  td {
+    padding: $table-cell-padding;
+    vertical-align: top;
+    border-top: $table-border-width solid $table-border-color;
+  }
+  .th-drag-handle {
+    cursor: grabbing;
+    opacity: 0.25;
   }
 }

@@ -1,0 +1,35 @@
+{
+  "exercises": {
+    "ids": ["q1", "w2"],
+    "byIds": {
+      "q1": {
+        "name": "Chess press",
+        "steps": [
+          { "id": "1", "type": "kg", "content": { "kg": 25, "repetition": 15, "rest": 30 } },
+          { "id": "2", "type": "kg", "content": { "kg": 20, "repetition": 10, "rest": 30 } },
+          { "id": "3", "type": "kg", "content": { "kg": 20, "repetition": 10, "rest": 30 } },
+          { "id": "4", "type": "kg", "content": { "kg": 20, "repetition": 10, "rest": 30 } }
+        ],
+        "history": {
+          "2018-05-21": {
+            "steps": [
+              { "id": "1", "type": "kg", "content": { "kg": 15, "repetition": 15, "rest": 30 }, "done": true },
+              { "id": "2", "type": "kg", "content": { "kg": 10, "repetition": 10, "rest": 30 }, "done": true },
+              { "id": "3", "type": "kg", "content": { "kg": 10, "repetition": 10, "rest": 30 }, "done": true },
+              { "id": "4", "type": "kg", "content": { "kg": 10, "repetition": 10, "rest": 30 }, "done": true }
+            ]
+          }
+        }
+      },
+      "w2": {
+        "name": "Abs",
+        "steps": [
+          { "id": "1", "type": "time", "content": { "duration": 25, "rest": 30 } },
+          { "id": "2", "type": "time", "content": { "duration": 25, "rest": 30 } },
+          { "id": "3", "type": "time", "content": { "duration": 25, "rest": 30 } },
+          { "id": "4", "type": "time", "content": { "duration": 25, "rest": 30 } }
+        ]
+      }
+    }
+  }
+}

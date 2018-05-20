@@ -1,72 +1,117 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faBars from '@fortawesome/fontawesome-free-solid/faBars';
 import faDumbbell from '@fortawesome/fontawesome-free-solid/faDumbbell';
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 import faHandPaper from '@fortawesome/fontawesome-free-solid/faHandPaper';
+import faCheck from '@fortawesome/fontawesome-free-solid/faCheck';
+import faUndo from '@fortawesome/fontawesome-free-solid/faUndo';
+import faStopwatch from '@fortawesome/fontawesome-free-solid/faStopwatch';
+import SwipeableListItem from '../swipeable-list-item/SwipeableListItem';
 
 const DragHandle = SortableHandle(() => (
-  <div className="list-group-item-sortable-drag-handle">
+  <div className="list-group-item-drag-handle" style={{ width: '1em' }}>
     <FontAwesomeIcon icon={faBars} />
   </div>
 ));
 
-const RepetitionHeader = () => (
-  <li className="list-group-item-sortable d-flex flex-row justify-content-around w-100">
-    <div className="text-dark">
-      <FontAwesomeIcon icon={faDumbbell} size="lg" />
-    </div>
-    <div className="text-dark">
-      <FontAwesomeIcon icon={faTimes} size="lg" />
-    </div>
-    <div className="text-dark">
-      <FontAwesomeIcon icon={faHandPaper} size="lg" />
-    </div>
-  </li>
+const InputNumber = ({ defaultValue, placeholder }) => (
+  <input
+    type="number"
+    className="form-control form-control-sm mx-auto"
+    placeholder={placeholder}
+    defaultValue={defaultValue}
+    min="0"
+    max="999"
+    style={{ width: '4em' }}
+    required
+  />
 );
 
-const SortableStep = SortableElement(({ step: { type, content } }) => (
-  <li className="list-group-item-sortable d-flex">
-    <DragHandle />
-    <div className="list-group-item-sortable-content d-flex flex-row justify-content-around flex-grow-1">
-      <div className="form-inline">
-        <input
-          type="number"
-          className="form-control"
-          placeholder="kg"
-          defaultValue={content.kg}
-          min="0"
-          max="999"
-          style={{ width: '3em' }}
-          required
-        />
-      </div>
-      <div>{content.repetition}</div>
-      <div>{content.rest}</div>
+const StepRepetition = ({ kg, repetition, rest }) => (
+  <div className="d-flex justify-content-between p-3">
+    <div>
+      <InputNumber defaultValue={kg} placeholder="Kg" />
     </div>
-  </li>
-));
+    <div>
+      <InputNumber defaultValue={repetition} placeholder="Repetition" />
+    </div>
+    <div>
+      <InputNumber defaultValue={rest} placeholder="Rest" />
+    </div>
+    <DragHandle />
+  </div>
+);
 
-const SortableStepList = SortableContainer(({ steps }) => (
-  <ul className="list-group">
-    {steps.map((step, index, steps) => (
-      <div>
-        {(index === 0 || steps[index - 1].type !== step.type) && <RepetitionHeader />}
-        <SortableStep key={`item-${index}`} index={index} step={step} />
-      </div>
-    ))}
-  </ul>
-));
+const swipedItemAcknowledged = (
+  <div className="d-flex bg-success text-white p-3 h-100 justify-content-end">
+    <FontAwesomeIcon icon={faCheck} className="align-self-center" />
+  </div>
+);
+
+const swipedItemRemoved = (
+  <div className="bg-danger text-white p-3 h-100">
+    <FontAwesomeIcon icon={faTimes} className="align-self-center" />
+  </div>
+);
+
+const swipedItemCanceled = (
+  <div className="d-flex bg-warning text-white p-3 h-100 justify-content-end">
+    <FontAwesomeIcon icon={faUndo} className="align-self-center" />
+  </div>
+);
+
+const SortableStep = SortableElement(
+  ({
+    step: {
+      type,
+      content: { kg, repetition, rest },
+      done
+    },
+    onSwipeLeft,
+    onSwipeRight,
+    leftSwipeElement,
+    rightSwipeElement
+  }) => (
+    <SwipeableListItem
+      className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
+      onSwipeLeft={onSwipeLeft}
+      onSwipeRight={onSwipeRight}
+      leftSwipeElement={leftSwipeElement}
+      rightSwipeElement={rightSwipeElement}
+    >
+      <StepRepetition done={done} kg={kg} repetition={repetition} rest={rest} />
+    </SwipeableListItem>
+  )
+);
+
+const SortableStepList = SortableContainer(
+  ({ steps, onSwipeLeft, onSwipeRight, leftSwipeElement, rightSwipeElement }) => (
+    <ul className="list-group list-group-flush">
+      {steps.map((step, index) => (
+        <SortableStep
+          key={`item-${step.id}`}
+          index={index}
+          step={step}
+          onSwipeRight={() => onSwipeRight(step)}
+          onSwipeLeft={() => onSwipeLeft(step)}
+          leftSwipeElement={leftSwipeElement}
+          rightSwipeElement={rightSwipeElement}
+        />
+      ))}
+    </ul>
+  )
+);
 
 class Exercise extends Component {
   constructor(props) {
     super(props);
+    const { name, steps } = props;
     this.state = {
-      name: props.name,
-      steps: props.steps
+      name: name,
+      steps: steps
     };
   }
 
@@ -74,32 +119,91 @@ class Exercise extends Component {
     this.setState({ ...this.state, steps: arrayMove(this.state.steps, oldIndex, newIndex) });
   };
 
+  onStepRemoved = step => {
+    const newSteps = [...this.state.steps];
+    newSteps.splice(newSteps.findIndex(s => s.id === step.id), 1);
+    this.setState({ ...this.state, steps: newSteps });
+  };
+
+  onStepAknowledged = step => {
+    const newSteps = [...this.state.steps];
+    newSteps.find(s => s.id === step.id).done = true;
+    this.setState({ ...this.state, steps: newSteps });
+  };
+
+  onStepCanceled = step => {
+    const newSteps = [...this.state.steps];
+    newSteps.find(s => s.id === step.id).done = false;
+    this.setState({ ...this.state, steps: newSteps });
+  };
+
   render() {
     const { name, steps } = this.state;
     return (
-      <div>
+      <div className="card">
         <form onSubmit={e => e.preventDefault()}>
-          <div className="form-group">
+          <div class="card-body">
             <label htmlFor="exerciseName" className="d-none">
               Exercise name
             </label>
             <input
               type="text"
-              className="form-control font-weight-bold"
+              className="form-control font-weight-bold text-primary"
               id="exerciseName"
               placeholder="Your exercise name"
               defaultValue={name}
               required
             />
-            <div className="mt-3">
-              <SortableStepList
-                steps={steps}
-                onSortEnd={this.onSortStepsEnd}
-                lockAxis="y"
-                useDragHandle={true}
-                helperclassName="list-group-item-sortable-helper"
-              />
-            </div>
+          </div>
+          <div>
+            {steps && steps.length > 0 ? (
+              <div>
+                <div className="list-group-item-header border-top-0 border-left-0 border-right-0 d-flex justify-content-between text-dark text-center">
+                  <div style={{ width: '4em' }}>
+                    <FontAwesomeIcon icon={faDumbbell} size="lg" />
+                  </div>
+                  <div style={{ width: '4em' }}>
+                    <FontAwesomeIcon icon={faTimes} size="lg" />
+                  </div>
+                  <div style={{ width: '4em' }}>
+                    <FontAwesomeIcon icon={faHandPaper} size="lg" />
+                  </div>
+                  <div style={{ width: '1em' }} />
+                </div>
+                <SortableStepList
+                  steps={steps.filter(step => !step.done)}
+                  onSortEnd={this.onSortStepsEnd}
+                  onSwipeLeft={this.onStepAknowledged}
+                  onSwipeRight={this.onStepRemoved}
+                  leftSwipeElement={swipedItemAcknowledged}
+                  rightSwipeElement={swipedItemRemoved}
+                  lockAxis="y"
+                  useDragHandle={true}
+                  helperClass="list-group-item-sortable-helper"
+                />
+                <SortableStepList
+                  steps={steps.filter(step => step.done)}
+                  onSortEnd={this.onSortStepsEnd}
+                  onSwipeLeft={this.onStepCanceled}
+                  onSwipeRight={this.onStepRemoved}
+                  leftSwipeElement={swipedItemCanceled}
+                  rightSwipeElement={swipedItemRemoved}
+                  lockAxis="y"
+                  useDragHandle={true}
+                  helperClass="list-group-item-sortable-helper"
+                />
+              </div>
+            ) : (
+              <div className="card-body text-center">
+                <p className="card-text lead">Choose your exercise type:</p>
+                <button type="button" class="btn btn-outline-primary m-1">
+                  <FontAwesomeIcon icon={faStopwatch} /> Time serie
+                </button>
+                <button type="button" class="btn btn-outline-primary m-1">
+                  <FontAwesomeIcon icon={faDumbbell} /> Repetition serie
+                </button>
+              </div>
+            )}
           </div>
         </form>
       </div>
@@ -109,7 +213,7 @@ class Exercise extends Component {
 
 Exercise.propTypes = {
   name: PropTypes.string,
-  steps: PropTypes.object
+  steps: PropTypes.array.isRequired
 };
 
 export default Exercise;

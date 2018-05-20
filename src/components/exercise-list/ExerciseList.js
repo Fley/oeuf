@@ -25,7 +25,10 @@ const ExerciseList = ({ exercises = [] }) => (
       <EmptyPage
         text="You have no exercises yet"
         icon={faListAlt}
-        action={<button className="btn btn-sm btn-secondary">Create your first exercice</button>}
+        action={<div>
+          <button className="btn btn-sm btn-primary m-1">Create your first exercise</button>
+          <button className="btn btn-sm btn-outline-primary m-1">Import exercises</button>
+        </div>}
       />
     )}
     <div className="list-group">
