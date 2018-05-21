@@ -16,7 +16,12 @@ const ExerciceItem = ({ name, done = false, started = false }) => (
 
 const ExerciseList = ({ exercises = [], onAddExercise }) => (
   <div>
-    {exercises.length > 1 || (
+    {exercises.length > 0 ? (
+      <div className="list-group">
+        {exercises &&
+          exercises.map(({ name, id, done }) => <ExerciceItem key={`exercise-${id}`} name={name} done={done} />)}
+      </div>
+    ) : (
       <EmptyPage
         text="You have no exercises yet"
         icon={faListAlt}
@@ -30,10 +35,6 @@ const ExerciseList = ({ exercises = [], onAddExercise }) => (
         }
       />
     )}
-    <div className="list-group">
-      {exercises &&
-        exercises.map(({ name, id, done }) => <ExerciceItem key={`exercise-${id}`} name={name} done={done} />)}
-    </div>
   </div>
 );
 
