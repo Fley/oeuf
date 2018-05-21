@@ -1,25 +1,27 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import ExercisesPage from './ExercisesPage';
+import { action } from '@storybook/addon-actions';
+import ExerciseListPage from './ExerciseListPage';
 import Shell from '../../components/shell/Shell';
 
-storiesOf('pages/ExercisesPage', module)
+storiesOf('exercise-list/ExerciseListPage', module)
   .addDecorator((story, context) => withInfo()(story)(context))
   .add('with exercises list', () => (
     <Shell>
-      <ExercisesPage
+      <ExerciseListPage
         exercises={[
           { id: '1', name: 'Chess press' },
           { id: '2', name: 'Leg press' },
           { id: '3', name: 'Running 40 minutes', done: true }
         ]}
+        onAddExercise={action('onAddExercise')}
       />
     </Shell>
   ))
   .add('with long exercises list', () => (
     <Shell>
-      <ExercisesPage
+      <ExerciseListPage
         exercises={[
           { id: '21', name: 'Chess press' },
           { id: '22', name: 'Leg press' },
@@ -36,11 +38,12 @@ storiesOf('pages/ExercisesPage', module)
           { name: 'Lorem ipsum', id: '11' },
           { id: '23', name: 'Running 40 minutes', done: true }
         ]}
+        onAddExercise={action('onAddExercise')}
       />
     </Shell>
   ))
   .add('with empty exercise list', () => (
     <Shell>
-      <ExercisesPage />
+      <ExerciseListPage onAddExercise={action('onAddExercise')} />
     </Shell>
   ));

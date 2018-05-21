@@ -24,7 +24,7 @@ const EmptyPage = ({ icon, text, action }) => {
 
 EmptyPage.propTypes = {
   icon: PropTypes.object.isRequired,
-  text: PropTypes.oneOf([PropTypes.string, PropTypes.element]).isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   action: PropTypes.element
 };
 

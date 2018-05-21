@@ -4,7 +4,7 @@ import { withInfo } from '@storybook/addon-info';
 import Shell from '../../components/shell/Shell';
 import ExercisePage from './ExercisePage';
 
-storiesOf('pages/ExercisePage', module)
+storiesOf('exercise/ExercisePage', module)
   .addDecorator((story, context) => withInfo()(story)(context))
   .add('Empty', () => (
     <Shell>
