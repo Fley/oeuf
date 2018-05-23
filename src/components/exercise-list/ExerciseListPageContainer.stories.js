@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import RootContainer from './RootContainer';
+import RootContainer from '../../redux/RootContainer';
 import ExerciseListPageContainer from './ExerciceListPageContainer';
 
 const rootContainerDecorator = storyFn => <RootContainer>{storyFn()}</RootContainer>;

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight';
 import faListAlt from '@fortawesome/fontawesome-free-regular/faListAlt';
+import faSun from '@fortawesome/fontawesome-free-solid/faSun';
+import faPoo from '@fortawesome/fontawesome-free-solid/faPoo';
 import EmptyPage from '../empty-page/EmptyPage';
 
 const ExerciceItem = ({ name, done = false, started = false }) => (
@@ -14,13 +16,21 @@ const ExerciceItem = ({ name, done = false, started = false }) => (
   </a>
 );
 
-const ExerciseList = ({ exercises = [], onAddExercise }) => (
+const ExerciseList = ({ exercises = [], onAddExercise, loading = false, errorLoading = false }) => (
   <div>
     {exercises.length > 0 ? (
       <div className="list-group">
         {exercises &&
           exercises.map(({ name, id, done }) => <ExerciceItem key={`exercise-${id}`} name={name} done={done} />)}
       </div>
+    ) : loading ? (
+      <EmptyPage text="Loading ..." icon={faSun} action={<div>Your exercises are being loaded</div>} />
+    ) : errorLoading ? (
+      <EmptyPage
+        text="Error loading your exercises"
+        icon={faPoo}
+        action={<div>Sorry an error occured loading your exercices !</div>}
+      />
     ) : (
       <EmptyPage
         text="You have no exercises yet"
@@ -46,7 +56,9 @@ ExerciseList.propTypes = {
       done: PropTypes.bool
     })
   ),
-  onAddExercise: PropTypes.func.isRequired
+  onAddExercise: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  errorLoading: PropTypes.bool
 };
 
 export default ExerciseList;

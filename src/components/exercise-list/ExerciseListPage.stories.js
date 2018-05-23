@@ -46,4 +46,14 @@ storiesOf('exercise-list/ExerciseListPage', module)
     <Shell>
       <ExerciseListPage onAddExercise={action('onAddExercise')} />
     </Shell>
+  ))
+  .add('loading', () => (
+    <Shell>
+      <ExerciseListPage onAddExercise={action('onAddExercise')} loading />
+    </Shell>
+  ))
+  .add('error loading', () => (
+    <Shell>
+      <ExerciseListPage onAddExercise={action('onAddExercise')} errorLoading />
+    </Shell>
   ));

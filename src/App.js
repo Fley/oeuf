@@ -3,7 +3,7 @@ import './App.css';
 import Theme from './components/theme/Theme';
 import Shell from './components/shell/Shell';
 import ExerciseListPage from './components/exercise-list/ExerciseListPage';
-import RootContainer from './containers/RootContainer';
+import RootContainer from './redux/RootContainer';
 
 class App extends Component {
   render() {
