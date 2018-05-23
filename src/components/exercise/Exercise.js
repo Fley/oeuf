@@ -6,10 +6,12 @@ import faBars from '@fortawesome/fontawesome-free-solid/faBars';
 import faDumbbell from '@fortawesome/fontawesome-free-solid/faDumbbell';
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 import faHandPaper from '@fortawesome/fontawesome-free-solid/faHandPaper';
-import faCheck from '@fortawesome/fontawesome-free-solid/faCheck';
-import faUndo from '@fortawesome/fontawesome-free-solid/faUndo';
 import faStopwatch from '@fortawesome/fontawesome-free-solid/faStopwatch';
-import SwipeableListItem from '../swipeable-list-item/SwipeableListItem';
+import SwipeableListItem, {
+  SwipedItemAcknowledged,
+  SwipedItemRemoved,
+  SwipedItemCanceled
+} from '../swipeable-list-item/SwipeableListItem';
 
 const DragHandle = SortableHandle(() => (
   <div className="list-group-item-drag-handle" style={{ width: '1em' }}>
@@ -42,24 +44,6 @@ const StepRepetition = ({ kg, repetition, rest }) => (
       <InputNumber defaultValue={rest} placeholder="Rest" />
     </div>
     <DragHandle />
-  </div>
-);
-
-const swipedItemAcknowledged = (
-  <div className="d-flex bg-success text-white p-3 h-100 justify-content-end">
-    <FontAwesomeIcon icon={faCheck} className="align-self-center" />
-  </div>
-);
-
-const swipedItemRemoved = (
-  <div className="bg-danger text-white p-3 h-100">
-    <FontAwesomeIcon icon={faTimes} className="align-self-center" />
-  </div>
-);
-
-const swipedItemCanceled = (
-  <div className="d-flex bg-warning text-white p-3 h-100 justify-content-end">
-    <FontAwesomeIcon icon={faUndo} className="align-self-center" />
   </div>
 );
 
@@ -175,8 +159,8 @@ class Exercise extends Component {
                   onSortEnd={this.onSortStepsEnd}
                   onSwipeLeft={this.onStepAknowledged}
                   onSwipeRight={this.onStepRemoved}
-                  leftSwipeElement={swipedItemAcknowledged}
-                  rightSwipeElement={swipedItemRemoved}
+                  leftSwipeElement={<SwipedItemAcknowledged />}
+                  rightSwipeElement={<SwipedItemRemoved />}
                   lockAxis="y"
                   useDragHandle={true}
                   helperClass="list-group-item-sortable-helper"
@@ -186,8 +170,8 @@ class Exercise extends Component {
                   onSortEnd={this.onSortStepsEnd}
                   onSwipeLeft={this.onStepCanceled}
                   onSwipeRight={this.onStepRemoved}
-                  leftSwipeElement={swipedItemCanceled}
-                  rightSwipeElement={swipedItemRemoved}
+                  leftSwipeElement={<SwipedItemCanceled />}
+                  rightSwipeElement={<SwipedItemRemoved />}
                   lockAxis="y"
                   useDragHandle={true}
                   helperClass="list-group-item-sortable-helper"

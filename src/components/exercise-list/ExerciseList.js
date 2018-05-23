@@ -6,14 +6,26 @@ import faListAlt from '@fortawesome/fontawesome-free-regular/faListAlt';
 import faSun from '@fortawesome/fontawesome-free-solid/faSun';
 import faPoo from '@fortawesome/fontawesome-free-solid/faPoo';
 import EmptyPage from '../empty-page/EmptyPage';
+import SwipeableListItem, { SwipedItemAcknowledged, SwipedItemRemoved } from '../swipeable-list-item/SwipeableListItem';
 
-const ExerciceItem = ({ name, done = false, started = false }) => (
-  <a href="#" className={`d-flex list-group-item list-group-item-action ${done ? 'list-group-item-success' : ''}`}>
-    <span className="flex-grow-1">{name}</span>
-    <span>
-      <FontAwesomeIcon icon={faAngleRight} />
-    </span>
-  </a>
+const ExerciceItem = ({ name, done = false, started = false, onAcknowledgeExercise, onDeleteExercise }) => (
+  <SwipeableListItem
+    className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
+    onSwipeLeft={onAcknowledgeExercise}
+    onSwipeRight={onDeleteExercise}
+    leftSwipeElement={<SwipedItemAcknowledged />}
+    rightSwipeElement={<SwipedItemRemoved />}
+  >
+    <a
+      href="#"
+      className={`d-flex list-group-item list-group-item-action ${done ? 'list-group-item-success' : ''} h-100`}
+    >
+      <span className="flex-grow-1">{name}</span>
+      <span>
+        <FontAwesomeIcon icon={faAngleRight} />
+      </span>
+    </a>
+  </SwipeableListItem>
 );
 
 const ExerciseList = ({ exercises = [], onAddExercise, loading = false, errorLoading = false }) => (
