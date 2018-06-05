@@ -16,6 +16,9 @@ storiesOf('exercise-list/ExerciseListPage', module)
           { id: '3', name: 'Running 40 minutes', done: true }
         ]}
         onAddExercise={action('onAddExercise')}
+        onAcknowledgeExercise={action('onAcknowledgeExercise')}
+        onCancelExercise={action('onCancelExercise')}
+        onDeleteExercise={action('onDeleteExercise')}
       />
     </Shell>
   ))
@@ -39,21 +42,41 @@ storiesOf('exercise-list/ExerciseListPage', module)
           { id: '23', name: 'Running 40 minutes', done: true }
         ]}
         onAddExercise={action('onAddExercise')}
+        onAcknowledgeExercise={action('onAcknowledgeExercise')}
+        onCancelExercise={action('onCancelExercise')}
+        onDeleteExercise={action('onDeleteExercise')}
       />
     </Shell>
   ))
   .add('with empty exercise list', () => (
     <Shell>
-      <ExerciseListPage onAddExercise={action('onAddExercise')} />
+      <ExerciseListPage
+        onAddExercise={action('onAddExercise')}
+        onAcknowledgeExercise={action('onAcknowledgeExercise')}
+        onCancelExercise={action('onCancelExercise')}
+        onDeleteExercise={action('onDeleteExercise')}
+      />
     </Shell>
   ))
   .add('loading', () => (
     <Shell>
-      <ExerciseListPage onAddExercise={action('onAddExercise')} loading />
+      <ExerciseListPage
+        onAddExercise={action('onAddExercise')}
+        onAcknowledgeExercise={action('onAcknowledgeExercise')}
+        onCancelExercise={action('onCancelExercise')}
+        onDeleteExercise={action('onDeleteExercise')}
+        loading
+      />
     </Shell>
   ))
   .add('error loading', () => (
     <Shell>
-      <ExerciseListPage onAddExercise={action('onAddExercise')} errorLoading />
+      <ExerciseListPage
+        onAddExercise={action('onAddExercise')}
+        onAcknowledgeExercise={action('onAcknowledgeExercise')}
+        onCancelExercise={action('onCancelExercise')}
+        onDeleteExercise={action('onDeleteExercise')}
+        errorLoading
+      />
     </Shell>
   ));

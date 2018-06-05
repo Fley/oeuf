@@ -4,13 +4,29 @@ import ExerciseList from './ExerciseList';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlusSquare from '@fortawesome/fontawesome-free-solid/faPlusSquare';
 
-const ExerciseListPage = ({ exercises, onAddExercise, loading = false, errorLoading = false }) => (
+const ExerciseListPage = ({
+  exercises,
+  onAddExercise,
+  onDeleteExercise,
+  onAcknowledgeExercise,
+  onCancelExercise,
+  loading = false,
+  errorLoading = false
+}) => (
   <div>
     <nav className="navbar sticky-top navbar-dark shadow-sm bg-primary">
       <span className="navbar-brand mb-0 h1">Exercises</span>
     </nav>
     <div className="col-sm-10 p-0 mx-auto mb-5 py-3">
-      <ExerciseList exercises={exercises} onAddExercise={onAddExercise} loading={loading} errorLoading={errorLoading} />
+      <ExerciseList
+        exercises={exercises}
+        onAddExercise={onAddExercise}
+        onDeleteExercise={onDeleteExercise}
+        onAcknowledgeExercise={onAcknowledgeExercise}
+        onCancelExercise={onCancelExercise}
+        loading={loading}
+        errorLoading={errorLoading}
+      />
     </div>
     <nav className="navbar fixed-bottom navbar-light bg-white p-0 navbar-expand shadow-up-sm">
       <ul className="d-flex navbar-nav w-100">
@@ -27,6 +43,9 @@ const ExerciseListPage = ({ exercises, onAddExercise, loading = false, errorLoad
 ExerciseListPage.propTypes = {
   exercises: PropTypes.array,
   onAddExercise: PropTypes.func.isRequired,
+  onDeleteExercise: PropTypes.func.isRequired,
+  onAcknowledgeExercise: PropTypes.func.isRequired,
+  onCancelExercise: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   errorLoading: PropTypes.bool
 };

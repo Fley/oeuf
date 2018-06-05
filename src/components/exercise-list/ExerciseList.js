@@ -6,20 +6,22 @@ import faListAlt from '@fortawesome/fontawesome-free-regular/faListAlt';
 import faSun from '@fortawesome/fontawesome-free-solid/faSun';
 import faPoo from '@fortawesome/fontawesome-free-solid/faPoo';
 import EmptyPage from '../empty-page/EmptyPage';
-import SwipeableListItem, { SwipedItemAcknowledged, SwipedItemRemoved } from '../swipeable-list-item/SwipeableListItem';
+import SwipeableListItem, {
+  SwipedItemAcknowledged,
+  SwipedItemRemoved,
+  SwipedItemCanceled
+} from '../swipeable-list-item/SwipeableListItem';
 
-const ExerciceItem = ({ name, done = false, started = false, onAcknowledgeExercise, onDeleteExercise }) => (
+const mapExerciceItem = (onSwipeLeft, onSwipeRight) => ({ id, name, done }) => (
   <SwipeableListItem
+    key={`exercise-${id}`}
     className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
-    onSwipeLeft={onAcknowledgeExercise}
-    onSwipeRight={onDeleteExercise}
-    leftSwipeElement={<SwipedItemAcknowledged />}
+    onSwipeLeft={() => onSwipeLeft(id)}
+    onSwipeRight={() => onSwipeRight(id)}
+    leftSwipeElement={done ? <SwipedItemCanceled /> : <SwipedItemAcknowledged />}
     rightSwipeElement={<SwipedItemRemoved />}
   >
-    <a
-      href="#"
-      className={`d-flex list-group-item list-group-item-action ${done ? 'list-group-item-success' : ''} h-100`}
-    >
+    <a href="#" className={`d-flex p-3 list-group-item-action ${done ? 'list-group-item-success' : ''} h-100`}>
       <span className="flex-grow-1">{name}</span>
       <span>
         <FontAwesomeIcon icon={faAngleRight} />
@@ -28,13 +30,21 @@ const ExerciceItem = ({ name, done = false, started = false, onAcknowledgeExerci
   </SwipeableListItem>
 );
 
-const ExerciseList = ({ exercises = [], onAddExercise, loading = false, errorLoading = false }) => (
+const ExerciseList = ({
+  exercises = [],
+  onAddExercise,
+  onAcknowledgeExercise,
+  onDeleteExercise,
+  onCancelExercise,
+  loading = false,
+  errorLoading = false
+}) => (
   <div>
     {exercises.length > 0 ? (
-      <div className="list-group">
-        {exercises &&
-          exercises.map(({ name, id, done }) => <ExerciceItem key={`exercise-${id}`} name={name} done={done} />)}
-      </div>
+      <ul className="list-group shadow-y-sm">
+        {exercises && exercises.filter(e => !e.done).map(mapExerciceItem(onAcknowledgeExercise, onDeleteExercise))}
+        {exercises && exercises.filter(e => e.done).map(mapExerciceItem(onCancelExercise, onDeleteExercise))}
+      </ul>
     ) : loading ? (
       <EmptyPage text="Loading ..." icon={faSun} action={<div>Your exercises are being loaded</div>} />
     ) : errorLoading ? (
@@ -69,6 +79,9 @@ ExerciseList.propTypes = {
     })
   ),
   onAddExercise: PropTypes.func.isRequired,
+  onAcknowledgeExercise: PropTypes.func.isRequired,
+  onDeleteExercise: PropTypes.func.isRequired,
+  onCancelExercise: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   errorLoading: PropTypes.bool
 };

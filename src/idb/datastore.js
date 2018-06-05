@@ -19,11 +19,12 @@ export default dbPromise;
 
 // EXERCISE
 
-export const putExercise = async (exercise) => {
+export const putExercise = async exercise => {
   const db = await dbPromise;
   const tx = db.transaction(EXERCISE_STORE, RW);
   tx.objectStore(EXERCISE_STORE).put(exercise);
-  return tx.complete;
+  await tx.complete;
+  return exercise;
 };
 
 export const deleteExercise = async id => {

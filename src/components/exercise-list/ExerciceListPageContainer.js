@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ExerciseListPage from './ExerciseListPage';
 import { getExerciceList, isLoading, hasErrorLoading } from '../../redux/exercicesReducers';
-import { addExercise, loadAllExercices } from '../../redux/exerciceActions';
+import {
+  addExercise,
+  loadAllExercices,
+  deleteExercise,
+  acknowledgeExercise,
+  cancelExercise
+} from '../../redux/exerciceActions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -15,7 +21,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     load: () => dispatch(loadAllExercices()),
-    onAddExercise: () => dispatch(addExercise())
+    onAddExercise: () => dispatch(addExercise()),
+    onDeleteExercise: id => dispatch(deleteExercise(id)),
+    onAcknowledgeExercise: id => dispatch(acknowledgeExercise(id)),
+    onCancelExercise: id => dispatch(cancelExercise(id))
   };
 };
 

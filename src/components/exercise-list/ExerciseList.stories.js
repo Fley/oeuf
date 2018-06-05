@@ -6,7 +6,14 @@ import { action } from '@storybook/addon-actions';
 
 storiesOf('exercise-list/ExerciseList', module)
   .addDecorator((story, context) => withInfo()(story)(context))
-  .add('with empty exercise list', () => <ExerciseList onAddExercise={action('onAddExercise')} />)
+  .add('with empty exercise list', () => (
+    <ExerciseList
+      onAddExercise={action('onAddExercise')}
+      onAcknowledgeExercise={action('onAcknowledgeExercise')}
+      onCancelExercise={action('onCancelExercise')}
+      onDeleteExercise={action('onDeleteExercise')}
+    />
+  ))
   .add('with exercises list', () => (
     <ExerciseList
       exercises={[
@@ -15,5 +22,8 @@ storiesOf('exercise-list/ExerciseList', module)
         { id: '3', name: 'Running 40 minutes', done: true }
       ]}
       onAddExercise={action('onAddExercise')}
+      onAcknowledgeExercise={action('onAcknowledgeExercise')}
+      onCancelExercise={action('onCancelExercise')}
+      onDeleteExercise={action('onDeleteExercise')}
     />
   ));

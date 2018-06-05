@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Theme from './components/theme/Theme';
 import Shell from './components/shell/Shell';
-import ExerciseListPage from './components/exercise-list/ExerciseListPage';
+import ExerciseListPageContainer from './components/exercise-list/ExerciceListPageContainer';
 import RootContainer from './redux/RootContainer';
 
 class App extends Component {
@@ -11,21 +11,7 @@ class App extends Component {
       <RootContainer>
         <Theme>
           <Shell>
-            <ExerciseListPage
-              exercises={[
-                { name: 'Lorem ipsum', id: '1' },
-                { name: 'Lorem ipsum', id: '2' },
-                { name: 'Lorem ipsum', id: '3' },
-                { name: 'Lorem ipsum', id: '4' },
-                { name: 'Lorem ipsum', id: '5' },
-                { name: 'Lorem ipsum', id: '6' },
-                { name: 'Lorem ipsum', id: '7' },
-                { name: 'Lorem ipsum', id: '8' },
-                { name: 'Lorem ipsum', id: '9' },
-                { name: 'Lorem ipsum', id: '10' },
-                { name: 'Lorem ipsum', id: '11' }
-              ]}
-            />
+            <ExerciseListPageContainer />
           </Shell>
         </Theme>
       </RootContainer>
