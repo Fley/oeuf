@@ -123,10 +123,11 @@ class Exercise extends Component {
 
   render() {
     const { name, steps } = this.state;
+    const { onAddStep } = this.props;
     return (
       <div className="card">
         <form onSubmit={e => e.preventDefault()}>
-          <div class="card-body">
+          <div className="card-body">
             <label htmlFor="exerciseName" className="d-none">
               Exercise name
             </label>
@@ -180,10 +181,10 @@ class Exercise extends Component {
             ) : (
               <div className="card-body text-center">
                 <p className="card-text lead">Choose your exercise type:</p>
-                <button type="button" class="btn btn-outline-primary m-1">
+                <button type="button" className="btn btn-outline-primary m-1" onClick={() => onAddStep('time')}>
                   <FontAwesomeIcon icon={faStopwatch} /> Time serie
                 </button>
-                <button type="button" class="btn btn-outline-primary m-1">
+                <button type="button" className="btn btn-outline-primary m-1" onClick={() => onAddStep('repetition')}>
                   <FontAwesomeIcon icon={faDumbbell} /> Repetition serie
                 </button>
               </div>
@@ -197,7 +198,8 @@ class Exercise extends Component {
 
 Exercise.propTypes = {
   name: PropTypes.string,
-  steps: PropTypes.array.isRequired
+  steps: PropTypes.array.isRequired,
+  onAddStep: PropTypes.func.isRequired
 };
 
 export default Exercise;
