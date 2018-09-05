@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getExerciseList, areExercisesLoading, hasErrorLoadingExercises } from '../../store/selectors';
 import ExerciseListPage from './ExerciseListPage';
-import { getExerciceList, isLoading, hasErrorLoading } from '../../redux/exercicesReducers';
 import {
-  addExercise,
-  loadAllExercices,
-  deleteExercise,
-  acknowledgeExercise,
-  cancelExercise
-} from '../../redux/exerciceActions';
+  fetchAllExercisesRequest,
+  deleteExerciseRequest,
+  acknowledgeExerciseRequest,
+  cancelExerciseRequest,
+  addExerciseRequest
+} from '../../store/actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    exercises: getExerciceList(state.exercises),
-    loading: isLoading(state.exercises),
-    errorLoading: hasErrorLoading(state.exercises)
+    exercises: getExerciseList(state),
+    loading: areExercisesLoading(state),
+    errorLoading: hasErrorLoadingExercises(state)
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    load: () => dispatch(loadAllExercices()),
-    onAddExercise: () => dispatch(addExercise()),
-    onDeleteExercise: id => dispatch(deleteExercise(id)),
-    onAcknowledgeExercise: id => dispatch(acknowledgeExercise(id)),
-    onCancelExercise: id => dispatch(cancelExercise(id))
+    load: () => dispatch(fetchAllExercisesRequest()),
+    onAddExercise: () => dispatch(addExerciseRequest()),
+    onDeleteExercise: id => dispatch(deleteExerciseRequest(id)),
+    onAcknowledgeExercise: id => dispatch(acknowledgeExerciseRequest(id)),
+    onCancelExercise: id => dispatch(cancelExerciseRequest(id))
   };
 };
 

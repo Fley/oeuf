@@ -638,44 +638,9 @@ Object {
 
 exports[`exercise/reducer exercises should add exercise 1`] = `
 Object {
-  "byId": Object {
-    "1": Object {
-      "done": true,
-      "id": 1,
-      "name": "Chess press",
-      "steps": Array [
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 15,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-      ],
-      "type": "repetition",
-    },
-  },
+  "byId": Object {},
   "error": null,
-  "ids": Array [
-    1,
-  ],
+  "ids": Array [],
   "loading": false,
 }
 `;
@@ -1656,7 +1621,69 @@ Object {
 }
 `;
 
-exports[`exercise/reducer exercises should fetch exercises 1`] = `
+exports[`exercise/reducer exercises should fetch a specific exercise 1`] = `
+Object {
+  "byId": Object {},
+  "error": null,
+  "ids": Array [],
+  "loading": false,
+}
+`;
+
+exports[`exercise/reducer exercises should fetch a specific exercise 2`] = `
+Object {
+  "byId": Object {
+    "1": Object {
+      "done": true,
+      "id": 1,
+      "name": "Chess press",
+      "steps": Array [
+        Object {
+          "done": true,
+          "kg": 30,
+          "repetition": 15,
+          "rest": 60,
+        },
+        Object {
+          "done": true,
+          "kg": 30,
+          "repetition": 10,
+          "rest": 60,
+        },
+        Object {
+          "done": true,
+          "kg": 30,
+          "repetition": 10,
+          "rest": 60,
+        },
+        Object {
+          "done": true,
+          "kg": 30,
+          "repetition": 10,
+          "rest": 60,
+        },
+      ],
+      "type": "repetition",
+    },
+  },
+  "error": null,
+  "ids": Array [
+    1,
+  ],
+  "loading": false,
+}
+`;
+
+exports[`exercise/reducer exercises should fetch a specific exercise 3`] = `
+Object {
+  "byId": Object {},
+  "error": null,
+  "ids": Array [],
+  "loading": false,
+}
+`;
+
+exports[`exercise/reducer exercises should fetch all exercises 1`] = `
 Object {
   "byId": Object {},
   "error": null,
@@ -1665,7 +1692,7 @@ Object {
 }
 `;
 
-exports[`exercise/reducer exercises should fetch exercises 2`] = `
+exports[`exercise/reducer exercises should fetch all exercises 2`] = `
 Object {
   "byId": Object {
     "1": Object {
@@ -1771,74 +1798,12 @@ Object {
 }
 `;
 
-exports[`exercise/reducer exercises should fetch exercises 3`] = `
+exports[`exercise/reducer exercises should fetch all exercises 3`] = `
 Object {
   "byId": Object {},
   "error": Object {
     "message": "A failure message",
   },
-  "ids": Array [],
-  "loading": false,
-}
-`;
-
-exports[`exercise/reducer exercises should fetch exercises 4`] = `
-Object {
-  "byId": Object {},
-  "error": null,
-  "ids": Array [],
-  "loading": false,
-}
-`;
-
-exports[`exercise/reducer exercises should fetch exercises 5`] = `
-Object {
-  "byId": Object {
-    "1": Object {
-      "done": true,
-      "id": 1,
-      "name": "Chess press",
-      "steps": Array [
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 15,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-      ],
-      "type": "repetition",
-    },
-  },
-  "error": null,
-  "ids": Array [
-    1,
-  ],
-  "loading": false,
-}
-`;
-
-exports[`exercise/reducer exercises should fetch exercises 6`] = `
-Object {
-  "byId": Object {},
-  "error": null,
   "ids": Array [],
   "loading": false,
 }

@@ -1,4 +1,4 @@
-import * as actions from './actions';
+import { TYPES as actions } from './actions';
 import { combineReducers } from 'redux';
 import { PROGRESS } from './propTypes';
 
@@ -18,7 +18,7 @@ export const exercises = (state = exsercisesInitialState, action) => {
       };
     case actions.FETCH_EXERCISES.FAILURE:
       return { ...state, loading: false, error: action.error };
-    case actions.ADD_EXERCISE.REQUEST:
+    case actions.ADD_EXERCISE.SUCCESS:
     case actions.FETCH_EXERCISE.SUCCESS:
       return {
         ...state,

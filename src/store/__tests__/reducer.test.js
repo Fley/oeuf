@@ -53,223 +53,186 @@ describe('exercise/reducer', () => {
   };
 
   describe('exercises', () => {
-    it('should fetch exercises', () => {
-      const stateRequest = exercises(exsercisesInitialState, {
-        type: actions.FETCH_EXERCISES.REQUEST
-      });
+    it('should fetch all exercises', () => {
+      const stateRequest = exercises(exsercisesInitialState, actions.fetchAllExercisesRequest());
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, {
-        type: actions.FETCH_EXERCISES.SUCCESS,
-        exercises: existingState.exercises.ids.map(id => existingState.exercises.byId[id])
-      });
+      const stateSuccess = exercises(
+        stateRequest,
+        actions.fetchAllExercisesSuccess(existingState.exercises.ids.map(id => existingState.exercises.byId[id]))
+      );
       expect(stateSuccess).toMatchSnapshot();
 
-      const stateFailure = exercises(stateRequest, {
-        type: actions.FETCH_EXERCISES.FAILURE,
-        error: { message: 'A failure message' }
-      });
+      const stateFailure = exercises(stateRequest, actions.fetchAllExercisesFailure({ message: 'A failure message' }));
       expect(stateFailure).toMatchSnapshot();
     });
 
-    it('should fetch exercises', () => {
+    it('should fetch a specific exercise', () => {
       const fetchedId = 1;
-      const stateRequest = exercises(exsercisesInitialState, {
-        type: actions.FETCH_EXERCISE.REQUEST,
-        id: fetchedId
-      });
+      const stateRequest = exercises(exsercisesInitialState, actions.fetchExerciseRequest(fetchedId));
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, {
-        type: actions.FETCH_EXERCISE.SUCCESS,
-        exercise: existingState.exercises.byId[fetchedId]
-      });
+      const stateSuccess = exercises(
+        stateRequest,
+        actions.fetchExerciseSuccess(existingState.exercises.byId[fetchedId])
+      );
       expect(stateSuccess).toMatchSnapshot();
 
-      const stateFailure = exercises(stateRequest, {
-        type: actions.FETCH_EXERCISE.FAILURE,
-        id: fetchedId,
-        error: { message: 'A failure message' }
-      });
+      const stateFailure = exercises(
+        stateRequest,
+        actions.fetchExerciseFailure(fetchedId, { message: 'A failure message' })
+      );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should add exercise', () => {
-      const stateRequest = exercises(exsercisesInitialState, {
-        type: actions.ADD_EXERCISE.REQUEST,
-        exercise: existingState.exercises.byId[1]
-      });
+      const stateRequest = exercises(exsercisesInitialState, actions.addExerciseRequest());
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, {
-        type: actions.ADD_EXERCISE.SUCCESS
-      });
+      const stateSuccess = exercises(stateRequest, actions.addExerciseSuccess(existingState.exercises.byId[1]));
       expect(stateSuccess).toMatchSnapshot();
 
-      const stateFailure = exercises(stateRequest, {
-        type: actions.ADD_EXERCISE.FAILURE,
-        exercise: existingState.exercises.byId[1],
-        error: { message: 'A failure message' }
-      });
+      const stateFailure = exercises(
+        stateRequest,
+        actions.addExerciseFailure(existingState.exercises.byId[1], { message: 'A failure message' })
+      );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should delete exercise', () => {
       const exerciseId = 1;
-      const stateRequest = exercises(existingState.exercises, {
-        type: actions.DELETE_EXERCISE.REQUEST,
-        id: exerciseId
-      });
+      const stateRequest = exercises(existingState.exercises, actions.deleteExerciseRequest(exerciseId));
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, {
-        type: actions.DELETE_EXERCISE.SUCCESS,
-        id: exerciseId
-      });
+      const stateSuccess = exercises(stateRequest, actions.deleteExerciseSuccess(exerciseId));
       expect(stateSuccess).toMatchSnapshot();
 
-      const stateFailure = exercises(stateRequest, {
-        type: actions.DELETE_EXERCISE.FAILURE,
-        id: exerciseId,
-        error: { message: 'A failure message' }
-      });
+      const stateFailure = exercises(
+        stateRequest,
+        actions.deleteExerciseFailure(exerciseId, { message: 'A failure message' })
+      );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should acknowledge an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(existingState.exercises, {
-        type: actions.ACKNOWLEDGE_EXERCISE.REQUEST,
-        id: exerciseId
-      });
+      const stateRequest = exercises(existingState.exercises, actions.acknowledgeExerciseRequest(exerciseId));
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, {
-        type: actions.ACKNOWLEDGE_EXERCISE.SUCCESS,
-        exercise: {
+      const stateSuccess = exercises(
+        stateRequest,
+        actions.acknowledgeExerciseSuccess({
           ...existingState.exercises.byId[exerciseId],
           done: true,
           steps: existingState.exercises.byId[exerciseId].steps.map(step => ({ ...step, done: true }))
-        }
-      });
+        })
+      );
       expect(stateSuccess).toMatchSnapshot();
 
-      const stateFailure = exercises(stateRequest, {
-        type: actions.ACKNOWLEDGE_EXERCISE.FAILURE,
-        exercise: { ...existingState.exercises.byId[exerciseId] },
-        error: { message: 'A failure message' }
-      });
+      const stateFailure = exercises(
+        stateRequest,
+        actions.acknowledgeExerciseFailure(
+          { ...existingState.exercises.byId[exerciseId] },
+          { message: 'A failure message' }
+        )
+      );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should cancel an exercise', () => {
       const exerciseId = 1;
-      const stateRequest = exercises(existingState.exercises, {
-        type: actions.CANCEL_EXERCISE.REQUEST,
-        id: exerciseId
-      });
+      const stateRequest = exercises(existingState.exercises, actions.cancelExerciseRequest(exerciseId));
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, {
-        type: actions.CANCEL_EXERCISE.SUCCESS,
-        exercise: {
+      const stateSuccess = exercises(
+        stateRequest,
+        actions.cancelExerciseSuccess({
           ...existingState.exercises.byId[exerciseId],
           done: false,
           steps: existingState.exercises.byId[exerciseId].steps.map(step => ({ ...step, done: false }))
-        }
-      });
+        })
+      );
       expect(stateSuccess).toMatchSnapshot();
 
-      const stateFailure = exercises(stateRequest, {
-        type: actions.CANCEL_EXERCISE.FAILURE,
-        exercise: { ...existingState.exercises.byId[exerciseId] },
-        error: { message: 'A failure message' }
-      });
+      const stateFailure = exercises(
+        stateRequest,
+        actions.cancelExerciseFailure({ ...existingState.exercises.byId[exerciseId] }, { message: 'A failure message' })
+      );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should acknowledge an exercise step', () => {
       const exerciseId = 3;
       const stepIndex = 1;
-      const stateRequest = exercises(existingState.exercises, {
-        type: actions.ACKNOWLEDGE_EXERCISE_STEP.REQUEST,
-        exerciseId,
-        stepIndex
-      });
+      const stateRequest = exercises(
+        existingState.exercises,
+        actions.acknowledgeExerciseStepRequest(exerciseId, stepIndex)
+      );
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, {
-        type: actions.ACKNOWLEDGE_EXERCISE_STEP.SUCCESS,
-        exercise: {
+      const stateSuccess = exercises(
+        stateRequest,
+        actions.acknowledgeExerciseStepSuccess({
           ...existingState.exercises.byId[exerciseId],
           steps: existingState.exercises.byId[exerciseId].steps.map(
             (step, index) => (index === stepIndex ? { ...step, done: true } : step)
           )
-        }
-      });
+        })
+      );
       expect(stateSuccess).toMatchSnapshot();
 
-      const stateFailure = exercises(stateRequest, {
-        type: actions.ACKNOWLEDGE_EXERCISE_STEP.FAILURE,
-        exercise: { ...existingState.exercises.byId[exerciseId] },
-        error: { message: 'A failure message' }
-      });
+      const stateFailure = exercises(
+        stateRequest,
+        actions.acknowledgeExerciseStepFailure(
+          { ...existingState.exercises.byId[exerciseId] },
+          { message: 'A failure message' }
+        )
+      );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should cancel an exercise step', () => {
       const exerciseId = 3;
       const stepIndex = 0;
-      const stateRequest = exercises(existingState.exercises, {
-        type: actions.CANCEL_EXERCISE_STEP.REQUEST,
-        exerciseId,
-        stepIndex
-      });
+      const stateRequest = exercises(existingState.exercises, actions.cancelExerciseStepRequest(exerciseId, stepIndex));
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, {
-        type: actions.CANCEL_EXERCISE_STEP.SUCCESS,
-        exercise: {
+      const stateSuccess = exercises(
+        stateRequest,
+        actions.cancelExerciseStepSuccess({
           ...existingState.exercises.byId[exerciseId],
           steps: existingState.exercises.byId[exerciseId].steps.map(
             (step, index) => (index === stepIndex ? { ...step, done: false } : step)
           )
-        }
-      });
+        })
+      );
       expect(stateSuccess).toMatchSnapshot();
 
-      const stateFailure = exercises(stateRequest, {
-        type: actions.CANCEL_EXERCISE_STEP.FAILURE,
-        exercise: { ...existingState.exercises.byId[exerciseId] },
-        error: { message: 'A failure message' }
-      });
+      const stateFailure = exercises(
+        stateRequest,
+        actions.cancelExerciseStepFailure(
+          { ...existingState.exercises.byId[exerciseId] },
+          { message: 'A failure message' }
+        )
+      );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should start an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(existingState.exercises, {
-        type: actions.START_EXERCISE,
-        id: exerciseId
-      });
+      const stateRequest = exercises(existingState.exercises, actions.startExercise(exerciseId));
       expect(stateRequest).toMatchSnapshot();
     });
 
     it('should stop an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(existingState.exercises, {
-        type: actions.STOP_EXERCISE,
-        id: exerciseId
-      });
+      const stateRequest = exercises(existingState.exercises, actions.stopExercise(exerciseId));
       expect(stateRequest).toMatchSnapshot();
     });
-    
+
     it('should pause an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(existingState.exercises, {
-        type: actions.PAUSE_EXERCISE,
-        id: exerciseId
-      });
+      const stateRequest = exercises(existingState.exercises, actions.pauseExercise(exerciseId));
       expect(stateRequest).toMatchSnapshot();
     });
   });
