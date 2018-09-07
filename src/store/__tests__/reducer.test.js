@@ -5,7 +5,7 @@ import { exercises, exsercisesInitialState } from '../reducer';
 const DATE_TO_USE = new Date('2018');
 global.Date = jest.fn(() => DATE_TO_USE);
 
-describe('exercise/reducer', () => {
+describe('store/reducer', () => {
   const existingState = {
     exercises: {
       loading: false,

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { EXERCISE_TYPE } from '../../store/propTypes';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight';
 import faListAlt from '@fortawesome/fontawesome-free-regular/faListAlt';
@@ -71,13 +72,7 @@ const ExerciseList = ({
 );
 
 ExerciseList.propTypes = {
-  exercises: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-      done: PropTypes.bool
-    })
-  ),
+  exercises: PropTypes.arrayOf(EXERCISE_TYPE),
   onAddExercise: PropTypes.func.isRequired,
   onAcknowledgeExercise: PropTypes.func.isRequired,
   onDeleteExercise: PropTypes.func.isRequired,

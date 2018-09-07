@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ExerciseList from './ExerciseList';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faPlusSquare from '@fortawesome/fontawesome-free-solid/faPlusSquare';
+import { EXERCISE_TYPE } from '../../store/propTypes';
 
 const ExerciseListPage = ({
   exercises,
@@ -41,7 +42,7 @@ const ExerciseListPage = ({
 );
 
 ExerciseListPage.propTypes = {
-  exercises: PropTypes.array,
+  exercises: PropTypes.arrayOf(EXERCISE_TYPE),
   onAddExercise: PropTypes.func.isRequired,
   onDeleteExercise: PropTypes.func.isRequired,
   onAcknowledgeExercise: PropTypes.func.isRequired,
