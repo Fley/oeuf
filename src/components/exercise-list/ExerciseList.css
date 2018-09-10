@@ -1,0 +1,5 @@
+.list-toolbar-hover {
+  visibility: hidden; }
+
+a:hover .list-toolbar-hover {
+  visibility: visible; }

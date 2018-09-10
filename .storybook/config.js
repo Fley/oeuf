@@ -7,7 +7,7 @@ function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
 
-configure(loadStories, module);
-
 // Decorators
 addDecorator(StoryWrapper);
+
+configure(loadStories, module);

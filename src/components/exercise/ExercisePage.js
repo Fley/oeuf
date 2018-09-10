@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faPlay, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Exercise from './Exercise';
+import { Link } from 'react-router-dom';
 
 const ExercisePage = ({
   exercise: { id, name, type, steps } = { steps: [] },
@@ -13,9 +14,9 @@ const ExercisePage = ({
 }) => (
   <div>
     <nav className="navbar sticky-top navbar-light shadow-sm bg-white">
-      <button className="btn btn-link text-dark">
+      <Link to="/" className="btn btn-link text-dark" aria-label="Back to exercises list">
         <FontAwesomeIcon icon={faTimes} />
-      </button>
+      </Link>
     </nav>
     <div className="col-sm-10 mx-auto mb-5 py-3 px-0 px-xs-2">
       <Exercise name={name} steps={steps} onAddStep={onAddStep} />
