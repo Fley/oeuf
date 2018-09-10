@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faBars from '@fortawesome/fontawesome-free-solid/faBars';
-import faDumbbell from '@fortawesome/fontawesome-free-solid/faDumbbell';
-import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
-import faHandPaper from '@fortawesome/fontawesome-free-solid/faHandPaper';
-import faStopwatch from '@fortawesome/fontawesome-free-solid/faStopwatch';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faDumbbell, faTimes, faHandPaper, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import SwipeableListItem, {
   SwipedItemAcknowledged,
   SwipedItemRemoved,

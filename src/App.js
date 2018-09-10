@@ -6,6 +6,7 @@ import ExerciseListPageContainer from './components/exercise-list/ExerciceListPa
 import ExercisePageContainer from './components/exercise/ExercisePage';
 import RootContainer from './redux/RootContainer';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Error404 from './components/empty-page/Error404';
 
 class App extends Component {
   render() {
@@ -16,8 +17,8 @@ class App extends Component {
             <Shell>
               <Switch>
                 <Route exact path="/" component={ExerciseListPageContainer} />
-                <Route path="/:id" component={({ match }) => <ExercisePageContainer id={match.params.id} />} />
-                <Route component={NoMatch} />
+                <Route exact path="/:id" component={({ match }) => <ExercisePageContainer id={match.params.id} />} />
+                <Route component={Error404} />
               </Switch>
             </Shell>
           </Theme>

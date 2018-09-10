@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { EXERCISE_TYPE } from '../../store/propTypes';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faAngleRight from '@fortawesome/fontawesome-free-solid/faAngleRight';
-import faListAlt from '@fortawesome/fontawesome-free-regular/faListAlt';
-import faSun from '@fortawesome/fontawesome-free-solid/faSun';
-import faPoo from '@fortawesome/fontawesome-free-solid/faPoo';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faListAlt } from '@fortawesome/free-regular-svg-icons';
+import { faAngleRight, faSun, faPoo } from '@fortawesome/free-solid-svg-icons';
 import EmptyPage from '../empty-page/EmptyPage';
 import SwipeableListItem, {
   SwipedItemAcknowledged,

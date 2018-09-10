@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ExerciseList from './ExerciseList';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faPlusSquare from '@fortawesome/fontawesome-free-solid/faPlusSquare';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { EXERCISE_TYPE } from '../../store/propTypes';
 
 const ExerciseListPage = ({

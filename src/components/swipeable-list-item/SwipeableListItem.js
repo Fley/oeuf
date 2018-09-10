@@ -1,9 +1,7 @@
 import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
-import faCheck from '@fortawesome/fontawesome-free-solid/faCheck';
-import faUndo from '@fortawesome/fontawesome-free-solid/faUndo';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 
 const SwipeableListItem = ({ className, children, onSwipeRight, onSwipeLeft, rightSwipeElement, leftSwipeElement }) => {
   let onTransitionEnd;
