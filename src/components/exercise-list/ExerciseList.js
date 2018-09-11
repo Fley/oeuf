@@ -30,7 +30,7 @@ const mapExerciceItem = (onAcknowledgeExercise, onCancelExercise, onDeleteExerci
       <div className="btn-toolbar list-toolbar-hover" role="toolbar" aria-label="Toolbar with actions on the exercise">
         <button
           type="button"
-          className={`btn btn-sm btn-outline-${done ? 'dark' : 'secondary'} rounded-circle border-0 mx-1`}
+          className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
           aria-label="Delete"
           onClick={e => {
             onDeleteExercise(id);
@@ -54,7 +54,7 @@ const mapExerciceItem = (onAcknowledgeExercise, onCancelExercise, onDeleteExerci
         ) : (
           <button
             type="button"
-            className="btn btn-sm btn-outline-secondary rounded-circle border-0 mx-1"
+            className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
             aria-label="Complete"
             onClick={e => {
               onAcknowledgeExercise(id);
