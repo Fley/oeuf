@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest, takeEvery } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import * as datastore from '../idb/datastore';
 import {
   TYPES,
@@ -11,7 +12,9 @@ import {
   acknowledgeExerciseFailure,
   acknowledgeExerciseSuccess,
   cancelExerciseSuccess,
-  cancelExerciseFailure
+  cancelExerciseFailure,
+  updateExerciseNameSuccess,
+  updateExerciseNameFailure
 } from './actions';
 
 function* fetchExercises(action) {
@@ -94,12 +97,36 @@ function* watchCancelExercise() {
   yield takeEvery(TYPES.CANCEL_EXERCISE.REQUEST, cancelExercise);
 }
 
+function* updateExerciseName(action) {
+  // Debounce
+  yield call(delay, 500);
+  let exercise = null;
+  try {
+    exercise = yield call(datastore.getExerciseById, action.id);
+    if (exercise) {
+      const modifiedExercise = yield call(datastore.putExercise, {
+        ...exercise,
+        name: action.name
+      });
+      yield put(updateExerciseNameSuccess(modifiedExercise));
+    } else {
+      yield put(updateExerciseNameFailure(exercise, new Error(`Exercise not foud id=${action.id}`)));
+    }
+  } catch (e) {
+    yield put(updateExerciseNameFailure(exercise, e));
+  }
+}
+function* watchUpdateExerciseName() {
+  yield takeLatest(TYPES.UPDATE_EXERCISE_NAME.REQUEST, updateExerciseName);
+}
+
 export default function* rootSaga() {
   yield all([
     watchFetchExercises(),
     watchAddNewExercise(),
     watchDeleteExercise(),
     watchAcknowledgeExercise(),
-    watchCancelExercise()
+    watchCancelExercise(),
+    watchUpdateExerciseName()
   ]);
 }

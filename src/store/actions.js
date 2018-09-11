@@ -31,6 +31,11 @@ export const TYPES = {
     SUCCESS: 'exercises/CANCEL_EXERCISE/SUCCESS',
     FAILURE: 'exercises/CANCEL_EXERCISE/FAILURE'
   },
+  UPDATE_EXERCISE_NAME: {
+    REQUEST: 'exercises/UPDATE_EXERCISE_NAME/REQUEST',
+    SUCCESS: 'exercises/UPDATE_EXERCISE_NAME/SUCCESS',
+    FAILURE: 'exercises/UPDATE_EXERCISE_NAME/FAILURE'
+  },
   ACKNOWLEDGE_EXERCISE_STEP: {
     REQUEST: 'exercises/ACKNOWLEDGE_EXERCISE_STEP/REQUEST',
     SUCCESS: 'exercises/ACKNOWLEDGE_EXERCISE_STEP/SUCCESS',
@@ -141,6 +146,22 @@ export const cancelExerciseSuccess = exercise => ({
 });
 export const cancelExerciseFailure = (exercise, error) => ({
   type: TYPES.CANCEL_EXERCISE.FAILURE,
+  exercise,
+  error
+});
+
+// UPDATE EXERCISE NAME
+export const updateExerciseNameRequest = (id, name) => ({
+  type: TYPES.UPDATE_EXERCISE_NAME.REQUEST,
+  id,
+  name
+});
+export const updateExerciseNameSuccess = exercise => ({
+  type: TYPES.UPDATE_EXERCISE_NAME.SUCCESS,
+  exercise
+});
+export const updateExerciseNameFailure = (exercise, error) => ({
+  type: TYPES.UPDATE_EXERCISE_NAME.FAILURE,
   exercise,
   error
 });

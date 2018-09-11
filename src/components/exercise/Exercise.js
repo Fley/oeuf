@@ -119,7 +119,7 @@ class Exercise extends Component {
 
   render() {
     const { name, steps } = this.state;
-    const { onAddStep } = this.props;
+    const { onAddStep, onExerciseNameChange } = this.props;
     return (
       <div className="card">
         <form onSubmit={e => e.preventDefault()}>
@@ -133,6 +133,8 @@ class Exercise extends Component {
               id="exerciseName"
               placeholder="Your exercise name"
               defaultValue={name}
+              onChange={e => onExerciseNameChange(e.target.value)}
+              autocomplete="off"
               required
             />
           </div>

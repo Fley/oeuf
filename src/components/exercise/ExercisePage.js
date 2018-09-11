@@ -28,7 +28,14 @@ const ExerciseNotFoundPage = () => (
     }
   />
 );
-const ExercisePage = ({ exercise, loading = false, errorLoading = false, onAddStep, onStartExercise }) => (
+const ExercisePage = ({
+  exercise,
+  loading = false,
+  errorLoading = false,
+  onAddStep,
+  onStartExercise,
+  onExerciseNameChange
+}) => (
   <div>
     <nav className="navbar sticky-top navbar-light shadow-sm bg-white">
       <Link to="/" className="btn btn-link text-dark" aria-label="Back to exercises list">
@@ -41,7 +48,7 @@ const ExercisePage = ({ exercise, loading = false, errorLoading = false, onAddSt
       ) : errorLoading ? (
         <ErrorLoadingPage />
       ) : exercise ? (
-        <Exercise name={exercise.name} steps={exercise.steps} onAddStep={onAddStep} />
+        <Exercise name={exercise.name} steps={exercise.steps} onAddStep={onAddStep} onExerciseNameChange={onExerciseNameChange} />
       ) : (
         <ExerciseNotFoundPage />
       )}

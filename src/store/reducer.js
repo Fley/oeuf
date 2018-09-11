@@ -42,6 +42,11 @@ export const exercises = (state = exsercisesInitialState, action) => {
       return setExerciseDone(state, action.id, true);
     case actions.CANCEL_EXERCISE.REQUEST:
       return setExerciseDone(state, action.id, false);
+    case actions.UPDATE_EXERCISE_NAME.REQUEST:
+      return {
+        ...state,
+        byId: { ...state.byId, [action.id]: { ...state.byId[action.id], name: action.name } }
+      };
     case actions.ACKNOWLEDGE_EXERCISE.FAILURE:
     case actions.ACKNOWLEDGE_EXERCISE.SUCCESS:
     case actions.CANCEL_EXERCISE.FAILURE:
@@ -50,6 +55,8 @@ export const exercises = (state = exsercisesInitialState, action) => {
     case actions.ACKNOWLEDGE_EXERCISE_STEP.SUCCESS:
     case actions.CANCEL_EXERCISE_STEP.FAILURE:
     case actions.CANCEL_EXERCISE_STEP.SUCCESS:
+    case actions.UPDATE_EXERCISE_NAME.FAILURE:
+    case actions.UPDATE_EXERCISE_NAME.SUCCESS:
       return { ...state, byId: { ...state.byId, [action.exercise.id]: { ...action.exercise } } };
     case actions.ACKNOWLEDGE_EXERCISE_STEP.REQUEST:
       return setExerciseStepDone(state, action.exerciseId, action.stepIndex, true);

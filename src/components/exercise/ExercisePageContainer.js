@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getExerciseById, areExercisesLoading, hasErrorLoadingExercises } from '../../store/selectors';
 import ExercisePage from './ExercisePage';
-import { fetchAllExercisesRequest } from '../../store/actions';
+import { fetchAllExercisesRequest, updateExerciseNameRequest } from '../../store/actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -16,7 +16,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     load: () => dispatch(fetchAllExercisesRequest()),
     onAddStep: () => {},
-    onStartExercise: () => {}
+    onStartExercise: () => {},
+    onExerciseNameChange: name => dispatch(updateExerciseNameRequest(ownProps.exerciseId, name))
   };
 };
 
