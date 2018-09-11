@@ -27,7 +27,7 @@ const mapExerciceItem = (onAcknowledgeExercise, onCancelExercise, onDeleteExerci
       className={`d-flex py-2 px-3 list-group-item-action ${done ? 'list-group-item-success' : ''} h-100`}
     >
       <span className="flex-grow-1 p-1">{name}</span>
-      <div class="btn-toolbar list-toolbar-hover" role="toolbar" aria-label="Toolbar with actions on the exercise">
+      <div className="btn-toolbar list-toolbar-hover" role="toolbar" aria-label="Toolbar with actions on the exercise">
         <button
           type="button"
           className={`btn btn-sm btn-outline-${done ? 'dark' : 'secondary'} rounded-circle border-0 mx-1`}
