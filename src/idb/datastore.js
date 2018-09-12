@@ -27,6 +27,21 @@ export const putExercise = async exercise => {
   return exercise;
 };
 
+export const patchExerciseById = id => async patchExercise => {
+  const db = await dbPromise;
+  const tx = db.transaction(EXERCISE_STORE, RW);
+  const store = tx.objectStore(EXERCISE_STORE);
+  const exercise = await store.get(id);
+  if (exercise) {
+    const newExercise = { ...exercise, ...patchExercise };
+    store.put(newExercise);
+    await tx.complete;
+    return newExercise;
+  } else {
+    throw new Error(`Exercise not found (id="${id}"")`);
+  }
+};
+
 export const deleteExercise = async id => {
   const db = await dbPromise;
   const tx = db.transaction(EXERCISE_STORE, RW);
