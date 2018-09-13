@@ -13,50 +13,57 @@ import SwipeableListItem, {
 } from '../swipeable-list-item/SwipeableListItem';
 import './ExerciseList.css';
 
-const mapExerciceItem = (onSwipeLeft, onSwipeRight) => ({ id, name, done }) => (
-  <SwipeableListItem
-    key={`exercise-${id}`}
-    className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
-    onSwipeLeft={() => onSwipeLeft(id)}
-    onSwipeRight={() => onSwipeRight(id)}
-    leftSwipeElement={done ? <SwipedItemCanceled /> : <SwipedItemAcknowledged />}
-    rightSwipeElement={<SwipedItemRemoved />}
-  >
-    <Link
-      to={`/${id}`}
-      className={`d-flex py-2 px-3 list-group-item-action ${done ? 'list-group-item-success' : ''} h-100`}
+const mapExerciceItem = (onSwipeLeft, onSwipeRight) => exercise => {
+  const { id, name, done } = exercise;
+  return (
+    <SwipeableListItem
+      key={`exercise-${id}`}
+      className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
+      onSwipeLeft={() => onSwipeLeft(exercise)}
+      onSwipeRight={() => onSwipeRight(exercise)}
+      leftSwipeElement={done ? <SwipedItemCanceled /> : <SwipedItemAcknowledged />}
+      rightSwipeElement={<SwipedItemRemoved />}
     >
-      <span className="flex-grow-1 p-1">{name}</span>
-      <div className="btn-toolbar list-toolbar-hover" role="toolbar" aria-label="Toolbar with actions on the exercise">
-        <button
-          type="button"
-          className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
-          aria-label="Delete"
-          onClick={e => {
-            onSwipeRight(id);
-            e.preventDefault();
-          }}
+      <Link
+        to={`/${id}`}
+        className={`d-flex py-2 px-3 list-group-item-action ${done ? 'list-group-item-success' : ''} h-100`}
+      >
+        <span className="flex-grow-1 p-1">{name}</span>
+        <div
+          className="btn-toolbar list-toolbar-hover"
+          role="toolbar"
+          aria-label="Toolbar with actions on the exercise"
         >
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
-        <button
-          type="button"
-          className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
-          aria-label="Complete"
-          onClick={e => {
-            onSwipeLeft(id);
-            e.preventDefault();
-          }}
-        >
-          {done ? <FontAwesomeIcon icon={faUndo} /> : <FontAwesomeIcon icon={faCheck} />}
-        </button>
-      </div>
-      <span className="p-1 ml-1">
-        <FontAwesomeIcon icon={faAngleRight} />
-      </span>
-    </Link>
-  </SwipeableListItem>
-);
+          <button
+            type="button"
+            className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
+            aria-label="Delete"
+            onClick={e => {
+              onSwipeRight(exercise);
+              e.preventDefault();
+            }}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+          <button
+            type="button"
+            className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
+            aria-label="Complete"
+            onClick={e => {
+              onSwipeLeft(exercise);
+              e.preventDefault();
+            }}
+          >
+            {done ? <FontAwesomeIcon icon={faUndo} /> : <FontAwesomeIcon icon={faCheck} />}
+          </button>
+        </div>
+        <span className="p-1 ml-1">
+          <FontAwesomeIcon icon={faAngleRight} />
+        </span>
+      </Link>
+    </SwipeableListItem>
+  );
+};
 
 const ExerciseList = ({
   exercises = [],

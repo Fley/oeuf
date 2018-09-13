@@ -8,6 +8,7 @@ import SwipeableListItem, {
   SwipedItemRemoved,
   SwipedItemCanceled
 } from '../swipeable-list-item/SwipeableListItem';
+import { EXERCISE_TYPE } from '../../store/propTypes';
 
 const DragHandle = SortableHandle(() => (
   <div className="list-group-item-drag-handle" style={{ width: '1em' }}>
@@ -88,7 +89,7 @@ const SortableStepList = SortableContainer(
 class Exercise extends Component {
   constructor(props) {
     super(props);
-    const { name, steps } = props;
+    const { name, steps } = props.exercise;
     this.state = {
       name: name,
       steps: steps
@@ -134,7 +135,7 @@ class Exercise extends Component {
               placeholder="Your exercise name"
               defaultValue={name}
               onChange={e => onExerciseNameChange(e.target.value)}
-              autocomplete="off"
+              autoComplete="off"
               required
             />
           </div>
@@ -195,8 +196,7 @@ class Exercise extends Component {
 }
 
 Exercise.propTypes = {
-  name: PropTypes.string,
-  steps: PropTypes.array.isRequired,
+  exercise: EXERCISE_TYPE.isRequired,
   onAddStep: PropTypes.func.isRequired
 };
 

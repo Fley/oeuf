@@ -41,32 +41,25 @@ function* watchAddNewExercise() {
   yield takeEvery(TYPES.ADD_EXERCISE.REQUEST, addNewExercise);
 }
 
-function* deleteExercise(action) {
+function* deleteExercise({ exercise }) {
   try {
-    yield call(datastore.deleteExercise, action.id);
-    yield put(deleteExerciseSuccess(action.id));
+    yield call(datastore.deleteExercise, exercise.id);
+    yield put(deleteExerciseSuccess(exercise));
   } catch (e) {
-    yield put(deleteExerciseFailure(action.id, e));
+    yield put(deleteExerciseFailure(exercise, e));
   }
 }
 function* watchDeleteExercise() {
   yield takeEvery(TYPES.DELETE_EXERCISE.REQUEST, deleteExercise);
 }
 
-function* acknowledgeExercise(action) {
-  let exercise = null;
+function* acknowledgeExercise({ exercise }) {
   try {
-    exercise = yield call(datastore.getExerciseById, action.id);
-    if (exercise) {
-      const modifiedExercise = yield call(datastore.putExercise, {
-        ...exercise,
-        done: true,
-        steps: exercise.steps.map(step => ({ ...step, done: true }))
-      });
-      yield put(acknowledgeExerciseSuccess(modifiedExercise));
-    } else {
-      yield put(acknowledgeExerciseFailure(exercise, new Error(`Exercise not foud id=${action.id}`)));
-    }
+    const patchedExercise = yield call(datastore.patchExerciseById, exercise.id, {
+      done: true,
+      steps: exercise.steps.map(step => ({ ...step, done: true }))
+    });
+    yield put(acknowledgeExerciseSuccess(patchedExercise));
   } catch (e) {
     yield put(acknowledgeExerciseFailure(exercise, e));
   }
@@ -75,20 +68,13 @@ function* watchAcknowledgeExercise() {
   yield takeEvery(TYPES.ACKNOWLEDGE_EXERCISE.REQUEST, acknowledgeExercise);
 }
 
-function* cancelExercise(action) {
-  let exercise = null;
+function* cancelExercise({ exercise }) {
   try {
-    exercise = yield call(datastore.getExerciseById, action.id);
-    if (exercise) {
-      const modifiedExercise = yield call(datastore.putExercise, {
-        ...exercise,
-        done: false,
-        steps: exercise.steps.map(step => ({ ...step, done: false }))
-      });
-      yield put(cancelExerciseSuccess(modifiedExercise));
-    } else {
-      yield put(cancelExerciseFailure(exercise, new Error(`Exercise not foud id=${action.id}`)));
-    }
+    const patchedExercise = yield call(datastore.patchExerciseById, exercise.id, {
+      done: false,
+      steps: exercise.steps.map(step => ({ ...step, done: false }))
+    });
+    yield put(cancelExerciseSuccess(patchedExercise));
   } catch (e) {
     yield put(cancelExerciseFailure(exercise, e));
   }
@@ -97,21 +83,12 @@ function* watchCancelExercise() {
   yield takeEvery(TYPES.CANCEL_EXERCISE.REQUEST, cancelExercise);
 }
 
-function* updateExerciseName(action) {
+function* updateExerciseName({ exercise, name }) {
   // Debounce
   yield call(delay, 500);
-  let exercise = null;
   try {
-    exercise = yield call(datastore.getExerciseById, action.id);
-    if (exercise) {
-      const modifiedExercise = yield call(datastore.putExercise, {
-        ...exercise,
-        name: action.name
-      });
-      yield put(updateExerciseNameSuccess(modifiedExercise));
-    } else {
-      yield put(updateExerciseNameFailure(exercise, new Error(`Exercise not foud id=${action.id}`)));
-    }
+    const patchedExercise = yield call(datastore.patchExerciseById, exercise.id, { name });
+    yield put(updateExerciseNameSuccess(patchedExercise));
   } catch (e) {
     yield put(updateExerciseNameFailure(exercise, e));
   }

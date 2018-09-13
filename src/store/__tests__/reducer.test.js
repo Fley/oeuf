@@ -101,22 +101,31 @@ describe('store/reducer', () => {
 
     it('should delete exercise', () => {
       const exerciseId = 1;
-      const stateRequest = exercises(existingState.exercises, actions.deleteExerciseRequest(exerciseId));
+      const stateRequest = exercises(
+        existingState.exercises,
+        actions.deleteExerciseRequest(existingState.exercises.byId[exerciseId])
+      );
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(stateRequest, actions.deleteExerciseSuccess(exerciseId));
+      const stateSuccess = exercises(
+        stateRequest,
+        actions.deleteExerciseSuccess(existingState.exercises.byId[exerciseId])
+      );
       expect(stateSuccess).toMatchSnapshot();
 
       const stateFailure = exercises(
         stateRequest,
-        actions.deleteExerciseFailure(exerciseId, { message: 'A failure message' })
+        actions.deleteExerciseFailure(existingState.exercises.byId[exerciseId], { message: 'A failure message' })
       );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should acknowledge an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(existingState.exercises, actions.acknowledgeExerciseRequest(exerciseId));
+      const stateRequest = exercises(
+        existingState.exercises,
+        actions.acknowledgeExerciseRequest(existingState.exercises.byId[exerciseId])
+      );
       expect(stateRequest).toMatchSnapshot();
 
       const stateSuccess = exercises(
@@ -141,7 +150,10 @@ describe('store/reducer', () => {
 
     it('should cancel an exercise', () => {
       const exerciseId = 1;
-      const stateRequest = exercises(existingState.exercises, actions.cancelExerciseRequest(exerciseId));
+      const stateRequest = exercises(
+        existingState.exercises,
+        actions.cancelExerciseRequest(existingState.exercises.byId[exerciseId])
+      );
       expect(stateRequest).toMatchSnapshot();
 
       const stateSuccess = exercises(
@@ -166,7 +178,7 @@ describe('store/reducer', () => {
       const stepIndex = 1;
       const stateRequest = exercises(
         existingState.exercises,
-        actions.acknowledgeExerciseStepRequest(exerciseId, stepIndex)
+        actions.acknowledgeExerciseStepRequest(existingState.exercises.byId[exerciseId], stepIndex)
       );
       expect(stateRequest).toMatchSnapshot();
 
@@ -194,7 +206,10 @@ describe('store/reducer', () => {
     it('should cancel an exercise step', () => {
       const exerciseId = 3;
       const stepIndex = 0;
-      const stateRequest = exercises(existingState.exercises, actions.cancelExerciseStepRequest(exerciseId, stepIndex));
+      const stateRequest = exercises(
+        existingState.exercises,
+        actions.cancelExerciseStepRequest(existingState.exercises.byId[exerciseId], stepIndex)
+      );
       expect(stateRequest).toMatchSnapshot();
 
       const stateSuccess = exercises(
@@ -220,19 +235,28 @@ describe('store/reducer', () => {
 
     it('should start an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(existingState.exercises, actions.startExercise(exerciseId));
+      const stateRequest = exercises(
+        existingState.exercises,
+        actions.startExercise(existingState.exercises.byId[exerciseId])
+      );
       expect(stateRequest).toMatchSnapshot();
     });
 
     it('should stop an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(existingState.exercises, actions.stopExercise(exerciseId));
+      const stateRequest = exercises(
+        existingState.exercises,
+        actions.stopExercise(existingState.exercises.byId[exerciseId])
+      );
       expect(stateRequest).toMatchSnapshot();
     });
 
     it('should pause an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(existingState.exercises, actions.pauseExercise(exerciseId));
+      const stateRequest = exercises(
+        existingState.exercises,
+        actions.pauseExercise(existingState.exercises.byId[exerciseId])
+      );
       expect(stateRequest).toMatchSnapshot();
     });
   });

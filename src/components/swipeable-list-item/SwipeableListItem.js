@@ -19,7 +19,6 @@ export default class SwipeableListItem extends Component {
     } else if (this.state.index === 2) {
       this.props.onSwipeRight();
     }
-    this.setState({ index: 1 });
   };
 
   render() {

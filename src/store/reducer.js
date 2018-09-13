@@ -29,23 +29,29 @@ export const exercises = (state = exsercisesInitialState, action) => {
       // In case of failure remove added exercise. TODO manage a stack of ALERTS for ERRORS
       return removeExerciseFromStateById(state, action.exercise.id);
     case actions.DELETE_EXERCISE.SUCCESS:
-      return removeExerciseFromStateById(state, action.id);
+      return removeExerciseFromStateById(state, action.exercise.id);
     case actions.DELETE_EXERCISE.REQUEST:
-      return state.byId[action.id]
-        ? { ...state, byId: { ...state.byId, [action.id]: { ...state.byId[action.id], deleting: true } } }
+      return state.byId[action.exercise.id]
+        ? {
+            ...state,
+            byId: { ...state.byId, [action.exercise.id]: { ...state.byId[action.exercise.id], deleting: true } }
+          }
         : state;
     case actions.DELETE_EXERCISE.FAILURE:
-      return state.byId[action.id]
-        ? { ...state, byId: { ...state.byId, [action.id]: { ...state.byId[action.id], deleting: false } } }
+      return state.byId[action.exercise.id]
+        ? {
+            ...state,
+            byId: { ...state.byId, [action.exercise.id]: { ...state.byId[action.exercise.id], deleting: false } }
+          }
         : state;
     case actions.ACKNOWLEDGE_EXERCISE.REQUEST:
-      return setExerciseDone(state, action.id, true);
+      return setExerciseDone(state, action.exercise.id, true);
     case actions.CANCEL_EXERCISE.REQUEST:
-      return setExerciseDone(state, action.id, false);
+      return setExerciseDone(state, action.exercise.id, false);
     case actions.UPDATE_EXERCISE_NAME.REQUEST:
       return {
         ...state,
-        byId: { ...state.byId, [action.id]: { ...state.byId[action.id], name: action.name } }
+        byId: { ...state.byId, [action.exercise.id]: { ...state.byId[action.exercise.id], name: action.name } }
       };
     case actions.ACKNOWLEDGE_EXERCISE.FAILURE:
     case actions.ACKNOWLEDGE_EXERCISE.SUCCESS:
@@ -59,44 +65,52 @@ export const exercises = (state = exsercisesInitialState, action) => {
     case actions.UPDATE_EXERCISE_NAME.SUCCESS:
       return { ...state, byId: { ...state.byId, [action.exercise.id]: { ...action.exercise } } };
     case actions.ACKNOWLEDGE_EXERCISE_STEP.REQUEST:
-      return setExerciseStepDone(state, action.exerciseId, action.stepIndex, true);
+      return setExerciseStepDone(state, action.exercise.id, action.stepIndex, true);
     case actions.CANCEL_EXERCISE_STEP.REQUEST:
-      return setExerciseStepDone(state, action.exerciseId, action.stepIndex, false);
+      return setExerciseStepDone(state, action.exercise.id, action.stepIndex, false);
     case actions.START_EXERCISE:
-      return state.byId[action.id]
+      return state.byId[action.exercise.id]
         ? {
             ...state,
             byId: {
               ...state.byId,
-              [action.id]: {
-                ...state.byId[action.id],
-                progress: { ...state.byId[action.id].progress, status: PROGRESS.STARTED, startedAt: new Date() }
+              [action.exercise.id]: {
+                ...state.byId[action.exercise.id],
+                progress: {
+                  ...state.byId[action.exercise.id].progress,
+                  status: PROGRESS.STARTED,
+                  startedAt: new Date()
+                }
               }
             }
           }
         : state;
     case actions.STOP_EXERCISE:
-      return state.byId[action.id]
+      return state.byId[action.exercise.id]
         ? {
             ...state,
             byId: {
               ...state.byId,
-              [action.id]: {
-                ...state.byId[action.id],
-                progress: { ...state.byId[action.id].progress, status: PROGRESS.STOPPED, stoppedAt: new Date() }
+              [action.exercise.id]: {
+                ...state.byId[action.exercise.id],
+                progress: {
+                  ...state.byId[action.exercise.id].progress,
+                  status: PROGRESS.STOPPED,
+                  stoppedAt: new Date()
+                }
               }
             }
           }
         : state;
     case actions.PAUSE_EXERCISE:
-      return state.byId[action.id]
+      return state.byId[action.exercise.id]
         ? {
             ...state,
             byId: {
               ...state.byId,
-              [action.id]: {
-                ...state.byId[action.id],
-                progress: { ...state.byId[action.id].progress, status: PROGRESS.PAUSED, pausedAt: new Date() }
+              [action.exercise.id]: {
+                ...state.byId[action.exercise.id],
+                progress: { ...state.byId[action.exercise.id].progress, status: PROGRESS.PAUSED, pausedAt: new Date() }
               }
             }
           }

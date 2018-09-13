@@ -12,12 +12,12 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     load: () => dispatch(fetchAllExercisesRequest()),
     onAddStep: () => {},
     onStartExercise: () => {},
-    onExerciseNameChange: name => dispatch(updateExerciseNameRequest(ownProps.exerciseId, name))
+    onExerciseNameChange: exercise => name => dispatch(updateExerciseNameRequest(exercise, name))
   };
 };
 

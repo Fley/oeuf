@@ -22,9 +22,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     load: () => dispatch(fetchAllExercisesRequest()),
     onAddExercise: () => dispatch(addExerciseRequest()),
-    onDeleteExercise: id => dispatch(deleteExerciseRequest(id)),
-    onAcknowledgeExercise: id => dispatch(acknowledgeExerciseRequest(id)),
-    onCancelExercise: id => dispatch(cancelExerciseRequest(id))
+    onDeleteExercise: exercise => dispatch(deleteExerciseRequest(exercise)),
+    onAcknowledgeExercise: exercise => dispatch(acknowledgeExerciseRequest(exercise)),
+    onCancelExercise: exercise => dispatch(cancelExerciseRequest(exercise))
   };
 };
 
