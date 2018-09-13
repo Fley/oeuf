@@ -12,7 +12,8 @@ export const STEP_REPETITION_TYPE = PropTypes.shape(STEP_REPETITION_PROPS);
 export const STEP_TIMED_PROPS = {
   id: PropTypes.string.isRequired,
   duration: PropTypes.number,
-  rest: PropTypes.number
+  rest: PropTypes.number,
+  done: PropTypes.bool
 };
 export const STEP_TIMED_TYPE = PropTypes.shape(STEP_TIMED_PROPS);
 

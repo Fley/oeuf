@@ -1,4 +1,5 @@
 import uuidv4 from 'uuid/v4';
+import { TYPE_TIMED, TYPE_REPETITION } from './propTypes';
 
 export const TYPES = {
   FETCH_EXERCISES: {
@@ -35,6 +36,11 @@ export const TYPES = {
     REQUEST: 'exercises/UPDATE_EXERCISE_NAME/REQUEST',
     SUCCESS: 'exercises/UPDATE_EXERCISE_NAME/SUCCESS',
     FAILURE: 'exercises/UPDATE_EXERCISE_NAME/FAILURE'
+  },
+  ADD_EXERCISE_STEP: {
+    REQUEST: 'exercises/ADD_EXERCISE_STEP/REQUEST',
+    SUCCESS: 'exercises/ADD_EXERCISE_STEP/SUCCESS',
+    FAILURE: 'exercises/ADD_EXERCISE_STEP/FAILURE'
   },
   ACKNOWLEDGE_EXERCISE_STEP: {
     REQUEST: 'exercises/ACKNOWLEDGE_EXERCISE_STEP/REQUEST',
@@ -181,6 +187,47 @@ export const acknowledgeExerciseStepFailure = (exercise, error) => ({
   exercise,
   error
 });
+
+// ADD_EXERCISE_STEP
+export const addExerciseStepRequest = (exercise, stepType) => {
+  const step = createExerciseStep(stepType);
+  return {
+    type: TYPES.ADD_EXERCISE_STEP.REQUEST,
+    exercise,
+    step
+  };
+};
+export const addExerciseStepSuccess = exercise => ({
+  type: TYPES.ADD_EXERCISE_STEP.SUCCESS,
+  exercise
+});
+export const addExerciseStepFailure = (exercise, error) => ({
+  type: TYPES.ADD_EXERCISE_STEP.FAILURE,
+  exercise,
+  error
+});
+
+const createExerciseStep = type => {
+  switch (type) {
+    case TYPE_TIMED:
+      return {
+        id: uuidv4(),
+        duration: 0,
+        rest: 0,
+        done: false
+      };
+    case TYPE_REPETITION:
+      return {
+        id: uuidv4(),
+        kg: 0,
+        repetition: 1,
+        rest: 0,
+        done: false
+      };
+    default:
+      throw new Error(`Unknown step type "${type}"`);
+  }
+};
 
 // CANCEL_EXERCISE_STEP
 export const cancelExerciseStepRequest = (exercise, stepIndex) => ({

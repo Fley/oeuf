@@ -48,7 +48,7 @@ const ExercisePage = ({
       ) : errorLoading ? (
         <ErrorLoadingPage />
       ) : exercise ? (
-        <Exercise exercise={exercise} onAddStep={onAddStep} onExerciseNameChange={onExerciseNameChange(exercise)} />
+        <Exercise exercise={exercise} onAddStep={onAddStep(exercise)} onExerciseNameChange={onExerciseNameChange(exercise)} />
       ) : (
         <ExerciseNotFoundPage />
       )}
@@ -70,7 +70,7 @@ const ExercisePage = ({
               <button
                 className="btn btn-link nav-link btn-block"
                 disabled={loading || errorLoading}
-                onClick={() => onAddStep(exercise.type)}
+                onClick={() => onAddStep(exercise)(exercise.type)}
               >
                 <FontAwesomeIcon icon={faPlusSquare} /> New step
               </button>
