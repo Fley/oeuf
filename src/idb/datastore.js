@@ -27,7 +27,7 @@ export const putExercise = async exercise => {
   return exercise;
 };
 
-export const patchExerciseById = id => async patchExercise => {
+export const patchExerciseById = async (id, patchExercise) => {
   const db = await dbPromise;
   const tx = db.transaction(EXERCISE_STORE, RW);
   const store = tx.objectStore(EXERCISE_STORE);

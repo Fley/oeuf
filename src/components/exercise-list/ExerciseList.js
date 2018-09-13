@@ -13,12 +13,12 @@ import SwipeableListItem, {
 } from '../swipeable-list-item/SwipeableListItem';
 import './ExerciseList.css';
 
-const mapExerciceItem = (onAcknowledgeExercise, onCancelExercise, onDeleteExercise) => ({ id, name, done }) => (
+const mapExerciceItem = (onSwipeLeft, onSwipeRight) => ({ id, name, done }) => (
   <SwipeableListItem
     key={`exercise-${id}`}
     className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
-    onSwipeLeft={done ? () => onCancelExercise(id) : () => onAcknowledgeExercise(id)}
-    onSwipeRight={() => onDeleteExercise(id)}
+    onSwipeLeft={() => onSwipeLeft(id)}
+    onSwipeRight={() => onSwipeRight(id)}
     leftSwipeElement={done ? <SwipedItemCanceled /> : <SwipedItemAcknowledged />}
     rightSwipeElement={<SwipedItemRemoved />}
   >
@@ -33,37 +33,23 @@ const mapExerciceItem = (onAcknowledgeExercise, onCancelExercise, onDeleteExerci
           className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
           aria-label="Delete"
           onClick={e => {
-            onDeleteExercise(id);
+            onSwipeRight(id);
             e.preventDefault();
           }}
         >
           <FontAwesomeIcon icon={faTrash} />
         </button>
-        {done ? (
-          <button
-            type="button"
-            className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
-            aria-label="Complete"
-            onClick={e => {
-              onCancelExercise(id);
-              e.preventDefault();
-            }}
-          >
-            <FontAwesomeIcon icon={faUndo} />
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
-            aria-label="Complete"
-            onClick={e => {
-              onAcknowledgeExercise(id);
-              e.preventDefault();
-            }}
-          >
-            <FontAwesomeIcon icon={faCheck} />
-          </button>
-        )}
+        <button
+          type="button"
+          className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
+          aria-label="Complete"
+          onClick={e => {
+            onSwipeLeft(id);
+            e.preventDefault();
+          }}
+        >
+          {done ? <FontAwesomeIcon icon={faUndo} /> : <FontAwesomeIcon icon={faCheck} />}
+        </button>
       </div>
       <span className="p-1 ml-1">
         <FontAwesomeIcon icon={faAngleRight} />
@@ -83,10 +69,8 @@ const ExerciseList = ({
 }) => {
   return exercises.length > 0 ? (
     <ul className="list-group shadow-y-sm">
-      {exercises &&
-        exercises
-          .sort((a, b) => ((a.done && b.done) || (!a.done && !b.done) ? 0 : a.done ? 1 : -1))
-          .map(mapExerciceItem(onAcknowledgeExercise, onCancelExercise, onDeleteExercise))}
+      {exercises && exercises.filter(e => !e.done).map(mapExerciceItem(onAcknowledgeExercise, onDeleteExercise))}
+      {exercises && exercises.filter(e => e.done).map(mapExerciceItem(onCancelExercise, onDeleteExercise))}
     </ul>
   ) : loading ? (
     <EmptyPage text="Loading ..." icon={faSun} action={<div>Your exercises are being loaded</div>} />
