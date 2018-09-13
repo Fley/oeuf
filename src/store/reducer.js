@@ -2,8 +2,6 @@ import { TYPES as actions } from './actions';
 import { combineReducers } from 'redux';
 import { PROGRESS } from './propTypes';
 
-//const removeExercise = (state, exercise) => {};
-
 export const exsercisesInitialState = { loading: false, error: null, ids: [], byId: {} };
 export const exercises = (state = exsercisesInitialState, action) => {
   switch (action.type) {
@@ -63,6 +61,8 @@ export const exercises = (state = exsercisesInitialState, action) => {
     case actions.CANCEL_EXERCISE_STEP.SUCCESS:
     case actions.UPDATE_EXERCISE_NAME.FAILURE:
     case actions.UPDATE_EXERCISE_NAME.SUCCESS:
+    case actions.ADD_EXERCISE_STEP.SUCCESS:
+    case actions.ADD_EXERCISE_STEP.FAILURE:
       return { ...state, byId: { ...state.byId, [action.exercise.id]: { ...action.exercise } } };
     case actions.ACKNOWLEDGE_EXERCISE_STEP.REQUEST:
       return setExerciseStepDone(state, action.exercise.id, action.stepIndex, true);

@@ -99,10 +99,10 @@ function* watchUpdateExerciseName() {
   yield takeLatest(TYPES.UPDATE_EXERCISE_NAME.REQUEST, updateExerciseName);
 }
 
-function* addNewExerciseStep({ exercise, step }) {
+function* addNewExerciseStep({ exercise, step, stepType }) {
   try {
-    const newExercise = yield call(datastore.patchedExercise, {
-      type: exercise.type,
+    const newExercise = yield call(datastore.patchExerciseById, exercise.id, {
+      type: stepType,
       steps: [...exercise.steps, step]
     });
     yield put(addExerciseStepSuccess(newExercise));

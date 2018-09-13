@@ -189,11 +189,13 @@ export const acknowledgeExerciseStepFailure = (exercise, error) => ({
 });
 
 // ADD_EXERCISE_STEP
-export const addExerciseStepRequest = (exercise, stepType) => {
+export const addExerciseStepRequest = (exercise, newStepType) => {
+  const stepType = exercise.steps.length > 0 ? exercise.type : newStepType;
   const step = createExerciseStep(stepType);
   return {
     type: TYPES.ADD_EXERCISE_STEP.REQUEST,
     exercise,
+    stepType,
     step
   };
 };
