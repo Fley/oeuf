@@ -37,6 +37,11 @@ export const TYPES = {
     SUCCESS: 'exercises/UPDATE_EXERCISE_NAME/SUCCESS',
     FAILURE: 'exercises/UPDATE_EXERCISE_NAME/FAILURE'
   },
+  ADD_EXERCISE_FIRST_STEP: {
+    REQUEST: 'exercises/ADD_EXERCISE_FIRST_STEP/REQUEST',
+    SUCCESS: 'exercises/ADD_EXERCISE_FIRST_STEP/SUCCESS',
+    FAILURE: 'exercises/ADD_EXERCISE_FIRST_STEP/FAILURE'
+  },
   ADD_EXERCISE_STEP: {
     REQUEST: 'exercises/ADD_EXERCISE_STEP/REQUEST',
     SUCCESS: 'exercises/ADD_EXERCISE_STEP/SUCCESS',
@@ -186,6 +191,27 @@ export const acknowledgeExerciseStepFailure = (id, stepIndex, error) => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.FAILURE,
   id,
   stepIndex,
+  error
+});
+
+// ADD_EXERCISE_FIRST_STEP
+export const addExerciseFirstStepRequest = (exercise, newStepType) => {
+  const stepType = exercise.steps.length > 0 ? exercise.type : newStepType;
+  const step = createExerciseStep(stepType);
+  return {
+    type: TYPES.ADD_EXERCISE_FIRST_STEP.REQUEST,
+    exercise,
+    stepType,
+    step
+  };
+};
+export const addExerciseFirstStepSuccess = exercise => ({
+  type: TYPES.ADD_EXERCISE_FIRST_STEP.SUCCESS,
+  exercise
+});
+export const addExerciseFirstStepFailure = (exercise, error) => ({
+  type: TYPES.ADD_EXERCISE_FIRST_STEP.FAILURE,
+  exercise,
   error
 });
 

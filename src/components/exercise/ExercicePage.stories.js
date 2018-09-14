@@ -20,10 +20,10 @@ storiesOf('exercise/ExercisePage', module)
         name: 'Chess press',
         type: 'repetition',
         steps: [
-          { id: '1', type: 'kg', content: { kg: 25, repetition: 15, rest: 30 } },
-          { id: '2', type: 'kg', content: { kg: 20, repetition: 10, rest: 30 } },
-          { id: '3', type: 'kg', content: { kg: 20, repetition: 10, rest: 30 } },
-          { id: '4', type: 'kg', content: { kg: 20, repetition: 10, rest: 30 } }
+          { id: '1', kg: 25, repetition: 15, rest: 30, done: true },
+          { id: '2', kg: 20, repetition: 10, rest: 30, done: false },
+          { id: '3', kg: 20, repetition: 10, rest: 30, done: false },
+          { id: '4', kg: 20, repetition: 10, rest: 30, done: false }
         ]
       }}
       onAddStep={action('onAddStep')}

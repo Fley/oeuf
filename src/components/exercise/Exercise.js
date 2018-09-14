@@ -45,17 +45,7 @@ const StepRepetition = ({ kg, repetition, rest }) => (
 );
 
 const SortableStep = SortableElement(
-  ({
-    step: {
-      type,
-      content: { kg, repetition, rest },
-      done
-    },
-    onSwipeLeft,
-    onSwipeRight,
-    leftSwipeElement,
-    rightSwipeElement
-  }) => (
+  ({ step: { kg, repetition, rest, done }, onSwipeLeft, onSwipeRight, leftSwipeElement, rightSwipeElement }) => (
     <SwipeableListItem
       className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
       onSwipeLeft={onSwipeLeft}
