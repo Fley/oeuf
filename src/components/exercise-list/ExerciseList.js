@@ -13,14 +13,13 @@ import SwipeableListItem, {
 } from '../swipeable-list-item/SwipeableListItem';
 import './ExerciseList.css';
 
-const mapExerciceItem = (onSwipeLeft, onSwipeRight) => exercise => {
-  const { id, name, done } = exercise;
+const mapExerciceItem = (onSwipeLeft, onSwipeRight) => ({ id, name, done }) => {
   return (
     <SwipeableListItem
       key={`exercise-${id}`}
       className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
-      onSwipeLeft={() => onSwipeLeft(exercise)}
-      onSwipeRight={() => onSwipeRight(exercise)}
+      onSwipeLeft={() => onSwipeLeft(id)}
+      onSwipeRight={() => onSwipeRight(id)}
       leftSwipeElement={done ? <SwipedItemCanceled /> : <SwipedItemAcknowledged />}
       rightSwipeElement={<SwipedItemRemoved />}
     >
@@ -39,7 +38,7 @@ const mapExerciceItem = (onSwipeLeft, onSwipeRight) => exercise => {
             className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
             aria-label="Delete"
             onClick={e => {
-              onSwipeRight(exercise);
+              onSwipeRight(id);
               e.preventDefault();
             }}
           >
@@ -50,7 +49,7 @@ const mapExerciceItem = (onSwipeLeft, onSwipeRight) => exercise => {
             className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
             aria-label="Complete"
             onClick={e => {
-              onSwipeLeft(exercise);
+              onSwipeLeft(id);
               e.preventDefault();
             }}
           >

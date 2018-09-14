@@ -48,7 +48,11 @@ const ExercisePage = ({
       ) : errorLoading ? (
         <ErrorLoadingPage />
       ) : exercise ? (
-        <Exercise exercise={exercise} onAddStep={onAddStep(exercise)} onExerciseNameChange={onExerciseNameChange(exercise)} />
+        <Exercise
+          exercise={exercise}
+          onAddStep={onAddStep(exercise)}
+          onExerciseNameChange={onExerciseNameChange(exercise.id)}
+        />
       ) : (
         <ExerciseNotFoundPage />
       )}

@@ -40,7 +40,6 @@ export const EXERCISE_PROPS = {
   type: PropTypes.oneOf([TYPE_TIMED, TYPE_REPETITION]),
   steps: PropTypes.arrayOf(STEP_TYPE),
   done: PropTypes.bool,
-  progress: PROGRESS_TYPE,
-  deleting: PropTypes.bool
+  progress: PROGRESS_TYPE
 };
 export const EXERCISE_TYPE = PropTypes.shape(EXERCISE_PROPS);

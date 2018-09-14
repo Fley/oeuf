@@ -18,13 +18,13 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     load: () => dispatch(fetchAllExercisesRequest()),
     onAddExercise: () => dispatch(addExerciseRequest()),
-    onDeleteExercise: exercise => dispatch(deleteExerciseRequest(exercise)),
-    onAcknowledgeExercise: exercise => dispatch(acknowledgeExerciseRequest(exercise)),
-    onCancelExercise: exercise => dispatch(cancelExerciseRequest(exercise))
+    onDeleteExercise: id => dispatch(deleteExerciseRequest(id)),
+    onAcknowledgeExercise: id => dispatch(acknowledgeExerciseRequest(id)),
+    onCancelExercise: id => dispatch(cancelExerciseRequest(id))
   };
 };
 

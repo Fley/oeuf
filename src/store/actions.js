@@ -112,24 +112,24 @@ export const addExerciseFailure = (exercise, error) => ({
 });
 
 // DELETE_EXERCISE
-export const deleteExerciseRequest = exercise => ({
+export const deleteExerciseRequest = id => ({
   type: TYPES.DELETE_EXERCISE.REQUEST,
-  exercise
+  id
 });
-export const deleteExerciseSuccess = exercise => ({
+export const deleteExerciseSuccess = id => ({
   type: TYPES.DELETE_EXERCISE.SUCCESS,
-  exercise
+  id
 });
-export const deleteExerciseFailure = (exercise, error) => ({
+export const deleteExerciseFailure = (id, error) => ({
   type: TYPES.DELETE_EXERCISE.FAILURE,
-  exercise,
+  id,
   error
 });
 
 // ACKNOWLEDGE_EXERCISE
-export const acknowledgeExerciseRequest = exercise => ({
+export const acknowledgeExerciseRequest = id => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE.REQUEST,
-  exercise
+  id
 });
 export const acknowledgeExerciseSuccess = exercise => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE.SUCCESS,
@@ -142,9 +142,9 @@ export const acknowledgeExerciseFailure = (exercise, error) => ({
 });
 
 // CANCEL_EXERCISE
-export const cancelExerciseRequest = exercise => ({
+export const cancelExerciseRequest = id => ({
   type: TYPES.CANCEL_EXERCISE.REQUEST,
-  exercise
+  id
 });
 export const cancelExerciseSuccess = exercise => ({
   type: TYPES.CANCEL_EXERCISE.SUCCESS,
@@ -157,34 +157,35 @@ export const cancelExerciseFailure = (exercise, error) => ({
 });
 
 // UPDATE EXERCISE NAME
-export const updateExerciseNameRequest = (exercise, name) => ({
+export const updateExerciseNameRequest = (id, name) => ({
   type: TYPES.UPDATE_EXERCISE_NAME.REQUEST,
-  exercise,
+  id,
   name
 });
 export const updateExerciseNameSuccess = exercise => ({
   type: TYPES.UPDATE_EXERCISE_NAME.SUCCESS,
   exercise
 });
-export const updateExerciseNameFailure = (exercise, error) => ({
+export const updateExerciseNameFailure = (id, error) => ({
   type: TYPES.UPDATE_EXERCISE_NAME.FAILURE,
-  exercise,
+  id,
   error
 });
 
 // ACKNOWLEDGE_EXERCISE_STEP
-export const acknowledgeExerciseStepRequest = (exercise, stepIndex) => ({
+export const acknowledgeExerciseStepRequest = (id, stepIndex) => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.REQUEST,
-  exercise,
+  id,
   stepIndex
 });
 export const acknowledgeExerciseStepSuccess = exercise => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.SUCCESS,
   exercise
 });
-export const acknowledgeExerciseStepFailure = (exercise, error) => ({
+export const acknowledgeExerciseStepFailure = (id, stepIndex, error) => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.FAILURE,
-  exercise,
+  id,
+  stepIndex,
   error
 });
 

@@ -103,19 +103,19 @@ describe('store/reducer', () => {
       const exerciseId = 1;
       const stateRequest = exercises(
         existingState.exercises,
-        actions.deleteExerciseRequest(existingState.exercises.byId[exerciseId])
+        actions.deleteExerciseRequest(exerciseId)
       );
       expect(stateRequest).toMatchSnapshot();
 
       const stateSuccess = exercises(
         stateRequest,
-        actions.deleteExerciseSuccess(existingState.exercises.byId[exerciseId])
+        actions.deleteExerciseSuccess(exerciseId)
       );
       expect(stateSuccess).toMatchSnapshot();
 
       const stateFailure = exercises(
         stateRequest,
-        actions.deleteExerciseFailure(existingState.exercises.byId[exerciseId], { message: 'A failure message' })
+        actions.deleteExerciseFailure(exerciseId, { message: 'A failure message' })
       );
       expect(stateFailure).toMatchSnapshot();
     });
@@ -124,7 +124,7 @@ describe('store/reducer', () => {
       const exerciseId = 2;
       const stateRequest = exercises(
         existingState.exercises,
-        actions.acknowledgeExerciseRequest(existingState.exercises.byId[exerciseId])
+        actions.acknowledgeExerciseRequest(exerciseId)
       );
       expect(stateRequest).toMatchSnapshot();
 

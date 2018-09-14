@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => {
     load: () => dispatch(fetchAllExercisesRequest()),
     onAddStep: exercise => stepType => dispatch(addExerciseStepRequest(exercise, stepType)),
     onStartExercise: () => {},
-    onExerciseNameChange: exercise => name => dispatch(updateExerciseNameRequest(exercise, name))
+    onExerciseNameChange: id => name => dispatch(updateExerciseNameRequest(id, name))
   };
 };
 

@@ -36,30 +36,30 @@ Object {
       "type": "repetition",
     },
     "2": Object {
-      "done": true,
+      "done": false,
       "id": 2,
       "name": "Leg press",
       "steps": Array [
         Object {
-          "done": true,
+          "done": false,
           "kg": 70,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": true,
+          "done": false,
           "kg": 70,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": true,
+          "done": false,
           "kg": 70,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": true,
+          "done": false,
           "kg": 70,
           "repetition": 10,
           "rest": 60,
@@ -396,7 +396,7 @@ Object {
           "rest": 60,
         },
         Object {
-          "done": true,
+          "done": false,
           "duration": 120,
           "rest": 60,
         },
@@ -702,30 +702,30 @@ exports[`store/reducer exercises should cancel an exercise 1`] = `
 Object {
   "byId": Object {
     "1": Object {
-      "done": false,
+      "done": true,
       "id": 1,
       "name": "Chess press",
       "steps": Array [
         Object {
-          "done": false,
+          "done": true,
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
+          "done": true,
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
+          "done": true,
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
+          "done": true,
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -1089,7 +1089,7 @@ Object {
       "name": "Abs",
       "steps": Array [
         Object {
-          "done": false,
+          "done": true,
           "duration": 120,
           "rest": 60,
         },
@@ -1338,7 +1338,6 @@ exports[`store/reducer exercises should delete exercise 1`] = `
 Object {
   "byId": Object {
     "1": Object {
-      "deleting": true,
       "done": true,
       "id": 1,
       "name": "Chess press",
@@ -1518,7 +1517,6 @@ exports[`store/reducer exercises should delete exercise 3`] = `
 Object {
   "byId": Object {
     "1": Object {
-      "deleting": false,
       "done": true,
       "id": 1,
       "name": "Chess press",
