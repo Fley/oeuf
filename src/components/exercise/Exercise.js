@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { SortableContainer, SortableElement, SortableHandle, arrayMove } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faDumbbell, faTimes, faHandPaper, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import SwipeableListItem, {
@@ -79,38 +79,41 @@ const SortableStepList = SortableContainer(
 class Exercise extends Component {
   constructor(props) {
     super(props);
-    const { name, steps } = props.exercise;
+    const { name } = props.exercise;
     this.state = {
-      name: name,
-      steps: steps
+      name: name
     };
   }
 
   onSortStepsEnd = ({ oldIndex, newIndex }) => {
-    this.setState({ ...this.state, steps: arrayMove(this.state.steps, oldIndex, newIndex) });
+    // this.setState({ ...this.state, steps: arrayMove(this.state.steps, oldIndex, newIndex) });
   };
 
   onStepRemoved = step => {
-    const newSteps = [...this.state.steps];
-    newSteps.splice(newSteps.findIndex(s => s.id === step.id), 1);
-    this.setState({ ...this.state, steps: newSteps });
+    // const newSteps = [...this.state.steps];
+    // newSteps.splice(newSteps.findIndex(s => s.id === step.id), 1);
+    // this.setState({ ...this.state, steps: newSteps });
   };
 
   onStepAknowledged = step => {
-    const newSteps = [...this.state.steps];
-    newSteps.find(s => s.id === step.id).done = true;
-    this.setState({ ...this.state, steps: newSteps });
+    // const newSteps = [...this.state.steps];
+    // newSteps.find(s => s.id === step.id).done = true;
+    // this.setState({ ...this.state, steps: newSteps });
   };
 
   onStepCanceled = step => {
-    const newSteps = [...this.state.steps];
-    newSteps.find(s => s.id === step.id).done = false;
-    this.setState({ ...this.state, steps: newSteps });
+    // const newSteps = [...this.state.steps];
+    // newSteps.find(s => s.id === step.id).done = false;
+    // this.setState({ ...this.state, steps: newSteps });
   };
 
   render() {
-    const { name, steps } = this.state;
-    const { onAddStep, onExerciseNameChange } = this.props;
+    const { name } = this.state;
+    const {
+      onAddFirstStep,
+      onExerciseNameChange,
+      exercise: { steps }
+    } = this.props;
     return (
       <div className="card">
         <form onSubmit={e => e.preventDefault()}>
@@ -170,10 +173,14 @@ class Exercise extends Component {
             ) : (
               <div className="card-body text-center">
                 <p className="card-text lead">Choose your exercise type:</p>
-                <button type="button" className="btn btn-outline-primary m-1" onClick={() => onAddStep('time')}>
+                <button type="button" className="btn btn-outline-primary m-1" onClick={() => onAddFirstStep('time')()}>
                   <FontAwesomeIcon icon={faStopwatch} /> Time serie
                 </button>
-                <button type="button" className="btn btn-outline-primary m-1" onClick={() => onAddStep('repetition')}>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary m-1"
+                  onClick={() => onAddFirstStep('repetition')()}
+                >
                   <FontAwesomeIcon icon={faDumbbell} /> Repetition serie
                 </button>
               </div>
@@ -187,7 +194,7 @@ class Exercise extends Component {
 
 Exercise.propTypes = {
   exercise: EXERCISE_TYPE.isRequired,
-  onAddStep: PropTypes.func.isRequired
+  onAddFirstStep: PropTypes.func.isRequired
 };
 
 export default Exercise;

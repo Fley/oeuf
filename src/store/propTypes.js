@@ -17,7 +17,7 @@ export const STEP_TIMED_PROPS = {
 };
 export const STEP_TIMED_TYPE = PropTypes.shape(STEP_TIMED_PROPS);
 
-export const STEP_TYPE = PropTypes.oneOf([STEP_TIMED_TYPE, STEP_REPETITION_TYPE]);
+export const STEP_TYPE = PropTypes.oneOfType([STEP_TIMED_TYPE, STEP_REPETITION_TYPE]);
 
 export const TYPE_TIMED = 'timed';
 export const TYPE_REPETITION = 'repetition';

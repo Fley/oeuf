@@ -50,7 +50,7 @@ const ExercisePage = ({
       ) : exercise ? (
         <Exercise
           exercise={exercise}
-          onAddStep={onAddStep(exercise)}
+          onAddFirstStep={onAddStep(exercise.id)}
           onExerciseNameChange={onExerciseNameChange(exercise.id)}
         />
       ) : (
@@ -74,7 +74,7 @@ const ExercisePage = ({
               <button
                 className="btn btn-link nav-link btn-block"
                 disabled={loading || errorLoading}
-                onClick={() => onAddStep(exercise)(exercise.type)}
+                onClick={() => onAddStep(exercise.id)(exercise.type)(exercise.steps[exercise.steps.length - 1])}
               >
                 <FontAwesomeIcon icon={faPlusSquare} /> New step
               </button>

@@ -15,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     load: () => dispatch(fetchAllExercisesRequest()),
-    onAddStep: exercise => stepType => dispatch(addExerciseStepRequest(exercise, stepType)),
+    onAddStep: exerciseId => stepType => stepContent =>
+      dispatch(addExerciseStepRequest(exerciseId, stepType, stepContent)),
     onStartExercise: () => {},
     onExerciseNameChange: id => name => dispatch(updateExerciseNameRequest(id, name))
   };

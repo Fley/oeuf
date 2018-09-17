@@ -103,9 +103,9 @@ function* watchUpdateExerciseName() {
   yield takeLatest(TYPES.UPDATE_EXERCISE_NAME.REQUEST, updateExerciseName);
 }
 
-function* addNewExerciseStep({ id, step, stepType }) {
+function* addFirstExerciseStep({ exerciseId, stepType, step }) {
   try {
-    const exercise = yield call(datastore.getExerciseById, id);
+    const exercise = yield call(datastore.getExerciseById, exerciseId);
     const patchedExercise = yield call(datastore.putExercise, {
       ...exercise,
       type: stepType,
@@ -113,11 +113,11 @@ function* addNewExerciseStep({ id, step, stepType }) {
     });
     yield put(addExerciseStepSuccess(patchedExercise));
   } catch (e) {
-    yield put(addExerciseStepFailure(id, e));
+    yield put(addExerciseStepFailure(exerciseId, e));
   }
 }
-function* watchAddNewExerciseStep() {
-  yield takeEvery(TYPES.ADD_EXERCISE_STEP.REQUEST, addNewExerciseStep);
+function* watchAddFirstExerciseStep() {
+  yield takeLatest(TYPES.ADD_EXERCISE_STEP.REQUEST, addFirstExerciseStep);
 }
 
 export default function* rootSaga() {
@@ -128,6 +128,6 @@ export default function* rootSaga() {
     watchAcknowledgeExercise(),
     watchCancelExercise(),
     watchUpdateExerciseName(),
-    watchAddNewExerciseStep()
+    watchAddFirstExerciseStep()
   ]);
 }

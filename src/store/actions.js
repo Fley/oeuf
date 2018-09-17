@@ -37,11 +37,6 @@ export const TYPES = {
     SUCCESS: 'exercises/UPDATE_EXERCISE_NAME/SUCCESS',
     FAILURE: 'exercises/UPDATE_EXERCISE_NAME/FAILURE'
   },
-  ADD_EXERCISE_FIRST_STEP: {
-    REQUEST: 'exercises/ADD_EXERCISE_FIRST_STEP/REQUEST',
-    SUCCESS: 'exercises/ADD_EXERCISE_FIRST_STEP/SUCCESS',
-    FAILURE: 'exercises/ADD_EXERCISE_FIRST_STEP/FAILURE'
-  },
   ADD_EXERCISE_STEP: {
     REQUEST: 'exercises/ADD_EXERCISE_STEP/REQUEST',
     SUCCESS: 'exercises/ADD_EXERCISE_STEP/SUCCESS',
@@ -178,50 +173,28 @@ export const updateExerciseNameFailure = (id, error) => ({
 });
 
 // ACKNOWLEDGE_EXERCISE_STEP
-export const acknowledgeExerciseStepRequest = (id, stepIndex) => ({
+export const acknowledgeExerciseStepRequest = (exerciseId, stepIndex) => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.REQUEST,
-  id,
+  exerciseId,
   stepIndex
 });
 export const acknowledgeExerciseStepSuccess = exercise => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.SUCCESS,
   exercise
 });
-export const acknowledgeExerciseStepFailure = (id, stepIndex, error) => ({
+export const acknowledgeExerciseStepFailure = (exerciseId, stepIndex, error) => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.FAILURE,
-  id,
+  exerciseId,
   stepIndex,
   error
 });
 
-// ADD_EXERCISE_FIRST_STEP
-export const addExerciseFirstStepRequest = (exercise, newStepType) => {
-  const stepType = exercise.steps.length > 0 ? exercise.type : newStepType;
-  const step = createExerciseStep(stepType);
-  return {
-    type: TYPES.ADD_EXERCISE_FIRST_STEP.REQUEST,
-    exercise,
-    stepType,
-    step
-  };
-};
-export const addExerciseFirstStepSuccess = exercise => ({
-  type: TYPES.ADD_EXERCISE_FIRST_STEP.SUCCESS,
-  exercise
-});
-export const addExerciseFirstStepFailure = (exercise, error) => ({
-  type: TYPES.ADD_EXERCISE_FIRST_STEP.FAILURE,
-  exercise,
-  error
-});
-
 // ADD_EXERCISE_STEP
-export const addExerciseStepRequest = (exercise, newStepType) => {
-  const stepType = exercise.steps.length > 0 ? exercise.type : newStepType;
-  const step = createExerciseStep(stepType);
+export const addExerciseStepRequest = (exerciseId, stepType, stepContent) => {
+  const step = createExerciseStep(stepType, stepContent);
   return {
     type: TYPES.ADD_EXERCISE_STEP.REQUEST,
-    exercise,
+    exerciseId,
     stepType,
     step
   };
@@ -230,27 +203,29 @@ export const addExerciseStepSuccess = exercise => ({
   type: TYPES.ADD_EXERCISE_STEP.SUCCESS,
   exercise
 });
-export const addExerciseStepFailure = (exercise, error) => ({
+export const addExerciseStepFailure = (exerciseId, error) => ({
   type: TYPES.ADD_EXERCISE_STEP.FAILURE,
-  exercise,
+  exerciseId,
   error
 });
 
-const createExerciseStep = type => {
+const createExerciseStep = (type, stepContent = {}) => {
   switch (type) {
     case TYPE_TIMED:
       return {
-        id: uuidv4(),
         duration: 0,
         rest: 0,
+        ...stepContent,
+        id: uuidv4(),
         done: false
       };
     case TYPE_REPETITION:
       return {
-        id: uuidv4(),
         kg: 0,
         repetition: 1,
         rest: 0,
+        ...stepContent,
+        id: uuidv4(),
         done: false
       };
     default:
