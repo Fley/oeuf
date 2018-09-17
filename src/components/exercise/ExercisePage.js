@@ -33,6 +33,7 @@ const ExercisePage = ({
   loading = false,
   errorLoading = false,
   onAddStep,
+  onDeleteStep,
   onStartExercise,
   onExerciseNameChange
 }) => (
@@ -51,6 +52,7 @@ const ExercisePage = ({
         <Exercise
           exercise={exercise}
           onAddFirstStep={onAddStep(exercise.id)}
+          onDeleteStep={onDeleteStep(exercise.id)}
           onExerciseNameChange={onExerciseNameChange(exercise.id)}
         />
       ) : (

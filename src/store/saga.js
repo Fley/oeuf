@@ -16,7 +16,9 @@ import {
   updateExerciseNameSuccess,
   updateExerciseNameFailure,
   addExerciseStepSuccess,
-  addExerciseStepFailure
+  addExerciseStepFailure,
+  deleteExerciseStepSuccess,
+  deleteExerciseStepFailure
 } from './actions';
 
 function* fetchExercises() {
@@ -103,7 +105,7 @@ function* watchUpdateExerciseName() {
   yield takeLatest(TYPES.UPDATE_EXERCISE_NAME.REQUEST, updateExerciseName);
 }
 
-function* addFirstExerciseStep({ exerciseId, stepType, step }) {
+function* addExerciseStep({ exerciseId, stepType, step }) {
   try {
     const exercise = yield call(datastore.getExerciseById, exerciseId);
     const patchedExercise = yield call(datastore.putExercise, {
@@ -116,8 +118,24 @@ function* addFirstExerciseStep({ exerciseId, stepType, step }) {
     yield put(addExerciseStepFailure(exerciseId, e));
   }
 }
-function* watchAddFirstExerciseStep() {
-  yield takeLatest(TYPES.ADD_EXERCISE_STEP.REQUEST, addFirstExerciseStep);
+function* watchAddExerciseStep() {
+  yield takeLatest(TYPES.ADD_EXERCISE_STEP.REQUEST, addExerciseStep);
+}
+
+function* deleteExerciseStep({ exerciseId, stepId }) {
+  try {
+    const exercise = yield call(datastore.getExerciseById, exerciseId);
+    const patchedExercise = yield call(datastore.putExercise, {
+      ...exercise,
+      steps: [...exercise.steps.filter(s => s.id !== stepId)]
+    });
+    yield put(deleteExerciseStepSuccess(patchedExercise));
+  } catch (e) {
+    yield put(deleteExerciseStepFailure(exerciseId, stepId, e));
+  }
+}
+function* watchDeleteExerciseStep() {
+  yield takeEvery(TYPES.DELETE_EXERCISE_STEP.REQUEST, deleteExerciseStep);
 }
 
 export default function* rootSaga() {
@@ -128,6 +146,7 @@ export default function* rootSaga() {
     watchAcknowledgeExercise(),
     watchCancelExercise(),
     watchUpdateExerciseName(),
-    watchAddFirstExerciseStep()
+    watchAddExerciseStep(),
+    watchDeleteExerciseStep()
   ]);
 }

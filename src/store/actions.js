@@ -42,6 +42,11 @@ export const TYPES = {
     SUCCESS: 'exercises/ADD_EXERCISE_STEP/SUCCESS',
     FAILURE: 'exercises/ADD_EXERCISE_STEP/FAILURE'
   },
+  DELETE_EXERCISE_STEP: {
+    REQUEST: 'exercises/DELETE_EXERCISE_STEP/REQUEST',
+    SUCCESS: 'exercises/DELETE_EXERCISE_STEP/SUCCESS',
+    FAILURE: 'exercises/DELETE_EXERCISE_STEP/FAILURE'
+  },
   ACKNOWLEDGE_EXERCISE_STEP: {
     REQUEST: 'exercises/ACKNOWLEDGE_EXERCISE_STEP/REQUEST',
     SUCCESS: 'exercises/ACKNOWLEDGE_EXERCISE_STEP/SUCCESS',
@@ -93,8 +98,7 @@ export const addExerciseRequest = () => {
     type: null,
     steps: [],
     done: false,
-    progress: null,
-    deleteting: false
+    progress: null
   };
   return {
     type: TYPES.ADD_EXERCISE.REQUEST,
@@ -206,6 +210,25 @@ export const addExerciseStepSuccess = exercise => ({
 export const addExerciseStepFailure = (exerciseId, error) => ({
   type: TYPES.ADD_EXERCISE_STEP.FAILURE,
   exerciseId,
+  error
+});
+
+// DELETE_EXERCISE_STEP
+export const deleteExerciseStepRequest = (exerciseId, stepId) => {
+  return {
+    type: TYPES.DELETE_EXERCISE_STEP.REQUEST,
+    exerciseId,
+    stepId
+  };
+};
+export const deleteExerciseStepSuccess = exercise => ({
+  type: TYPES.DELETE_EXERCISE_STEP.SUCCESS,
+  exercise
+});
+export const deleteExerciseStepFailure = (exerciseId, stepId, error) => ({
+  type: TYPES.DELETE_EXERCISE_STEP.FAILURE,
+  exerciseId,
+  stepId,
   error
 });
 

@@ -89,12 +89,6 @@ class Exercise extends Component {
     // this.setState({ ...this.state, steps: arrayMove(this.state.steps, oldIndex, newIndex) });
   };
 
-  onStepRemoved = step => {
-    // const newSteps = [...this.state.steps];
-    // newSteps.splice(newSteps.findIndex(s => s.id === step.id), 1);
-    // this.setState({ ...this.state, steps: newSteps });
-  };
-
   onStepAknowledged = step => {
     // const newSteps = [...this.state.steps];
     // newSteps.find(s => s.id === step.id).done = true;
@@ -111,6 +105,7 @@ class Exercise extends Component {
     const { name } = this.state;
     const {
       onAddFirstStep,
+      onDeleteStep,
       onExerciseNameChange,
       exercise: { steps }
     } = this.props;
@@ -151,7 +146,7 @@ class Exercise extends Component {
                   steps={steps.filter(step => !step.done)}
                   onSortEnd={this.onSortStepsEnd}
                   onSwipeLeft={this.onStepAknowledged}
-                  onSwipeRight={this.onStepRemoved}
+                  onSwipeRight={step => onDeleteStep(step.id)}
                   leftSwipeElement={<SwipedItemAcknowledged />}
                   rightSwipeElement={<SwipedItemRemoved />}
                   lockAxis="y"
@@ -162,7 +157,7 @@ class Exercise extends Component {
                   steps={steps.filter(step => step.done)}
                   onSortEnd={this.onSortStepsEnd}
                   onSwipeLeft={this.onStepCanceled}
-                  onSwipeRight={this.onStepRemoved}
+                  onSwipeRight={step => onDeleteStep(step.id)}
                   leftSwipeElement={<SwipedItemCanceled />}
                   rightSwipeElement={<SwipedItemRemoved />}
                   lockAxis="y"

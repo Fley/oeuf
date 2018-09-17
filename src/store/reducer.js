@@ -31,6 +31,7 @@ export const exercises = (state = exsercisesInitialState, action) => {
     case actions.CANCEL_EXERCISE_STEP.SUCCESS:
     case actions.UPDATE_EXERCISE_NAME.SUCCESS:
     case actions.ADD_EXERCISE_STEP.SUCCESS:
+    case actions.DELETE_EXERCISE_STEP.SUCCESS:
       return { ...state, byId: { ...state.byId, [action.exercise.id]: { ...action.exercise } } };
     case actions.START_EXERCISE:
       return state.byId[action.exercise.id]
