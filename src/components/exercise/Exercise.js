@@ -8,7 +8,7 @@ import SwipeableListItem, {
   SwipedItemRemoved,
   SwipedItemCanceled
 } from '../swipeable-list-item/SwipeableListItem';
-import { EXERCISE_TYPE } from '../../store/propTypes';
+import { EXERCISE_TYPE, TYPE_TIMED, TYPE_REPETITION } from '../../store/propTypes';
 
 const DragHandle = SortableHandle(() => (
   <div className="list-group-item-drag-handle" style={{ width: '1em' }}>
@@ -173,13 +173,17 @@ class Exercise extends Component {
             ) : (
               <div className="card-body text-center">
                 <p className="card-text lead">Choose your exercise type:</p>
-                <button type="button" className="btn btn-outline-primary m-1" onClick={() => onAddFirstStep('time')()}>
+                <button
+                  type="button"
+                  className="btn btn-outline-primary m-1"
+                  onClick={() => onAddFirstStep(TYPE_TIMED)()}
+                >
                   <FontAwesomeIcon icon={faStopwatch} /> Time serie
                 </button>
                 <button
                   type="button"
                   className="btn btn-outline-primary m-1"
-                  onClick={() => onAddFirstStep('repetition')()}
+                  onClick={() => onAddFirstStep(TYPE_REPETITION)()}
                 >
                   <FontAwesomeIcon icon={faDumbbell} /> Repetition serie
                 </button>
