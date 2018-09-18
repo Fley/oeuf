@@ -177,19 +177,19 @@ export const updateExerciseNameFailure = (id, error) => ({
 });
 
 // ACKNOWLEDGE_EXERCISE_STEP
-export const acknowledgeExerciseStepRequest = (exerciseId, stepIndex) => ({
+export const acknowledgeExerciseStepRequest = (exerciseId, stepId) => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.REQUEST,
   exerciseId,
-  stepIndex
+  stepId
 });
 export const acknowledgeExerciseStepSuccess = exercise => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.SUCCESS,
   exercise
 });
-export const acknowledgeExerciseStepFailure = (exerciseId, stepIndex, error) => ({
+export const acknowledgeExerciseStepFailure = (exerciseId, stepId, error) => ({
   type: TYPES.ACKNOWLEDGE_EXERCISE_STEP.FAILURE,
   exerciseId,
-  stepIndex,
+  stepId,
   error
 });
 

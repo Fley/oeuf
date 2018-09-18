@@ -106,6 +106,7 @@ class Exercise extends Component {
     const {
       onAddFirstStep,
       onDeleteStep,
+      onAcknowledgeStep,
       onExerciseNameChange,
       exercise: { steps }
     } = this.props;
@@ -145,7 +146,7 @@ class Exercise extends Component {
                 <SortableStepList
                   steps={steps.filter(step => !step.done)}
                   onSortEnd={this.onSortStepsEnd}
-                  onSwipeLeft={this.onStepAknowledged}
+                  onSwipeLeft={step => onAcknowledgeStep(step.id)}
                   onSwipeRight={step => onDeleteStep(step.id)}
                   leftSwipeElement={<SwipedItemAcknowledged />}
                   rightSwipeElement={<SwipedItemRemoved />}
