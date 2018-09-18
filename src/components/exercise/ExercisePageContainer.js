@@ -7,7 +7,8 @@ import {
   updateExerciseNameRequest,
   addExerciseStepRequest,
   deleteExerciseStepRequest,
-  acknowledgeExerciseStepRequest
+  acknowledgeExerciseStepRequest,
+  cancelExerciseStepRequest
 } from '../../store/actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -25,6 +26,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(addExerciseStepRequest(exerciseId, stepType, stepContent)),
     onDeleteStep: exerciseId => stepId => dispatch(deleteExerciseStepRequest(exerciseId, stepId)),
     onAcknowledgeStep: exerciseId => stepId => dispatch(acknowledgeExerciseStepRequest(exerciseId, stepId)),
+    onCancelStep: exerciseId => stepId => dispatch(cancelExerciseStepRequest(exerciseId, stepId)),
     onStartExercise: () => {},
     onExerciseNameChange: id => name => dispatch(updateExerciseNameRequest(id, name))
   };

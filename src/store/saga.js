@@ -21,7 +21,9 @@ import {
   deleteExerciseStepFailure,
   acknowledgeExerciseStepSuccess,
   acknowledgeExerciseStepFailure,
-  acknowledgeExerciseRequest
+  acknowledgeExerciseRequest,
+  cancelExerciseStepSuccess,
+  cancelExerciseStepFailure
 } from './actions';
 
 function* fetchExercises() {
@@ -162,6 +164,25 @@ function* watchAcknowledgeExerciseStep() {
   yield takeEvery(TYPES.ACKNOWLEDGE_EXERCISE_STEP.REQUEST, acknowledgeExerciseStep);
 }
 
+function* cancelExerciseStep({ exerciseId, stepId }) {
+  try {
+    const exercise = yield call(datastore.getExerciseById, exerciseId);
+    const steps = [...exercise.steps];
+    steps.find(s => s.id === stepId).done = false;
+    const patchedExercise = yield call(datastore.putExercise, {
+      ...exercise,
+      done: false,
+      steps
+    });
+    yield put(cancelExerciseStepSuccess(patchedExercise));
+  } catch (e) {
+    yield put(cancelExerciseStepFailure(exerciseId, stepId, e));
+  }
+}
+function* watchCancelExerciseStep() {
+  yield takeEvery(TYPES.CANCEL_EXERCISE_STEP.REQUEST, cancelExerciseStep);
+}
+
 export default function* rootSaga() {
   yield all([
     watchFetchExercises(),
@@ -172,6 +193,7 @@ export default function* rootSaga() {
     watchUpdateExerciseName(),
     watchAddExerciseStep(),
     watchDeleteExerciseStep(),
-    watchAcknowledgeExerciseStep()
+    watchAcknowledgeExerciseStep(),
+    watchCancelExerciseStep()
   ]);
 }

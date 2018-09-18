@@ -193,6 +193,23 @@ export const acknowledgeExerciseStepFailure = (exerciseId, stepId, error) => ({
   error
 });
 
+// CANCEL_EXERCISE_STEP
+export const cancelExerciseStepRequest = (exerciseId, stepId) => ({
+  type: TYPES.CANCEL_EXERCISE_STEP.REQUEST,
+  exerciseId,
+  stepId
+});
+export const cancelExerciseStepSuccess = exercise => ({
+  type: TYPES.CANCEL_EXERCISE_STEP.SUCCESS,
+  exercise
+});
+export const cancelExerciseStepFailure = (exerciseId, stepId, error) => ({
+  type: TYPES.CANCEL_EXERCISE_STEP.FAILURE,
+  exerciseId,
+  stepId,
+  error
+});
+
 // ADD_EXERCISE_STEP
 export const addExerciseStepRequest = (exerciseId, stepType, stepContent) => {
   const step = createExerciseStep(stepType, stepContent);
@@ -255,22 +272,6 @@ const createExerciseStep = (type, stepContent = {}) => {
       throw new Error(`Unknown step type "${type}"`);
   }
 };
-
-// CANCEL_EXERCISE_STEP
-export const cancelExerciseStepRequest = (exercise, stepIndex) => ({
-  type: TYPES.CANCEL_EXERCISE_STEP.REQUEST,
-  exercise,
-  stepIndex
-});
-export const cancelExerciseStepSuccess = exercise => ({
-  type: TYPES.CANCEL_EXERCISE_STEP.SUCCESS,
-  exercise
-});
-export const cancelExerciseStepFailure = (exercise, error) => ({
-  type: TYPES.CANCEL_EXERCISE_STEP.FAILURE,
-  exercise,
-  error
-});
 
 // START_EXERCISE
 export const startExercise = exercise => ({
