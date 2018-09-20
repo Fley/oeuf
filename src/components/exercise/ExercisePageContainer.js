@@ -8,7 +8,8 @@ import {
   addExerciseStepRequest,
   deleteExerciseStepRequest,
   acknowledgeExerciseStepRequest,
-  cancelExerciseStepRequest
+  cancelExerciseStepRequest,
+  updateExerciseStepRequest
 } from '../../store/actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -27,6 +28,8 @@ const mapDispatchToProps = dispatch => {
     onDeleteStep: exerciseId => stepId => dispatch(deleteExerciseStepRequest(exerciseId, stepId)),
     onAcknowledgeStep: exerciseId => stepId => dispatch(acknowledgeExerciseStepRequest(exerciseId, stepId)),
     onCancelStep: exerciseId => stepId => dispatch(cancelExerciseStepRequest(exerciseId, stepId)),
+    onUpdateStep: exerciseId => stepId => contentPatch =>
+      dispatch(updateExerciseStepRequest(exerciseId, stepId, contentPatch)),
     onStartExercise: () => {},
     onExerciseNameChange: id => name => dispatch(updateExerciseNameRequest(id, name))
   };

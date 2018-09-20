@@ -16,12 +16,13 @@ const DragHandle = SortableHandle(() => (
   </div>
 ));
 
-const InputNumber = ({ defaultValue, placeholder }) => (
+const InputNumber = ({ defaultValue, placeholder, onChange }) => (
   <input
     type="number"
     className="form-control form-control-sm mx-auto"
     placeholder={placeholder}
     defaultValue={defaultValue}
+    onChange={onChange}
     min="0"
     max="999"
     style={{ width: '4em' }}
@@ -29,23 +30,34 @@ const InputNumber = ({ defaultValue, placeholder }) => (
   />
 );
 
-const StepRepetition = ({ kg, repetition, rest }) => (
+const StepRepetition = ({ kg, repetition, rest, onContentChange }) => (
   <div className="d-flex justify-content-between p-3">
     <div>
-      <InputNumber defaultValue={kg} placeholder="Kg" />
+      <InputNumber defaultValue={kg} placeholder="Kg" onChange={e => onContentChange({ kg: e.target.value })} />
     </div>
     <div>
-      <InputNumber defaultValue={repetition} placeholder="Repetition" />
+      <InputNumber
+        defaultValue={repetition}
+        placeholder="Repetition"
+        onChange={e => onContentChange({ repetition: e.target.value })}
+      />
     </div>
     <div>
-      <InputNumber defaultValue={rest} placeholder="Rest" />
+      <InputNumber defaultValue={rest} placeholder="Rest" onChange={e => onContentChange({ rest: e.target.value })} />
     </div>
     <DragHandle />
   </div>
 );
 
 const SortableStep = SortableElement(
-  ({ step: { kg, repetition, rest, done }, onSwipeLeft, onSwipeRight, leftSwipeElement, rightSwipeElement }) => (
+  ({
+    step: { kg, repetition, rest, done },
+    onSwipeLeft,
+    onSwipeRight,
+    leftSwipeElement,
+    rightSwipeElement,
+    onContentChange
+  }) => (
     <SwipeableListItem
       className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
       onSwipeLeft={onSwipeLeft}
@@ -53,13 +65,13 @@ const SortableStep = SortableElement(
       leftSwipeElement={leftSwipeElement}
       rightSwipeElement={rightSwipeElement}
     >
-      <StepRepetition done={done} kg={kg} repetition={repetition} rest={rest} />
+      <StepRepetition done={done} kg={kg} repetition={repetition} rest={rest} onContentChange={onContentChange} />
     </SwipeableListItem>
   )
 );
 
 const SortableStepList = SortableContainer(
-  ({ steps, onSwipeLeft, onSwipeRight, leftSwipeElement, rightSwipeElement }) => (
+  ({ steps, onSwipeLeft, onSwipeRight, leftSwipeElement, rightSwipeElement, onUpdateStep }) => (
     <ul className="list-group list-group-flush">
       {steps.map((step, index) => (
         <SortableStep
@@ -70,6 +82,7 @@ const SortableStepList = SortableContainer(
           onSwipeLeft={() => onSwipeLeft(step)}
           leftSwipeElement={leftSwipeElement}
           rightSwipeElement={rightSwipeElement}
+          onContentChange={onUpdateStep(step.id)}
         />
       ))}
     </ul>
@@ -89,18 +102,6 @@ class Exercise extends Component {
     // this.setState({ ...this.state, steps: arrayMove(this.state.steps, oldIndex, newIndex) });
   };
 
-  onStepAknowledged = step => {
-    // const newSteps = [...this.state.steps];
-    // newSteps.find(s => s.id === step.id).done = true;
-    // this.setState({ ...this.state, steps: newSteps });
-  };
-
-  onStepCanceled = step => {
-    // const newSteps = [...this.state.steps];
-    // newSteps.find(s => s.id === step.id).done = false;
-    // this.setState({ ...this.state, steps: newSteps });
-  };
-
   render() {
     const { name } = this.state;
     const {
@@ -108,6 +109,7 @@ class Exercise extends Component {
       onDeleteStep,
       onAcknowledgeStep,
       onCancelStep,
+      onUpdateStep,
       onExerciseNameChange,
       exercise: { steps }
     } = this.props;
@@ -151,6 +153,7 @@ class Exercise extends Component {
                   onSwipeRight={step => onDeleteStep(step.id)}
                   leftSwipeElement={<SwipedItemAcknowledged />}
                   rightSwipeElement={<SwipedItemRemoved />}
+                  onUpdateStep={onUpdateStep}
                   lockAxis="y"
                   useDragHandle={true}
                   helperClass="list-group-item-sortable-helper"
@@ -162,6 +165,7 @@ class Exercise extends Component {
                   onSwipeRight={step => onDeleteStep(step.id)}
                   leftSwipeElement={<SwipedItemCanceled />}
                   rightSwipeElement={<SwipedItemRemoved />}
+                  onUpdateStep={onUpdateStep}
                   lockAxis="y"
                   useDragHandle={true}
                   helperClass="list-group-item-sortable-helper"

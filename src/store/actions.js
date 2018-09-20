@@ -57,6 +57,11 @@ export const TYPES = {
     SUCCESS: 'exercises/CANCEL_EXERCISE_STEP/SUCCESS',
     FAILURE: 'exercises/CANCEL_EXERCISE_STEP/FAILURE'
   },
+  UPDATE_EXERCISE_STEP: {
+    REQUEST: 'exercises/UPDATE_EXERCISE_STEP/REQUEST',
+    SUCCESS: 'exercises/UPDATE_EXERCISE_STEP/SUCCESS',
+    FAILURE: 'exercises/UPDATE_EXERCISE_STEP/FAILURE'
+  },
   START_EXERCISE: 'exercises/START',
   STOP_EXERCISE: 'exercises/STOP',
   PAUSE_EXERCISE: 'exercises/PAUSE'
@@ -230,25 +235,6 @@ export const addExerciseStepFailure = (exerciseId, error) => ({
   error
 });
 
-// DELETE_EXERCISE_STEP
-export const deleteExerciseStepRequest = (exerciseId, stepId) => {
-  return {
-    type: TYPES.DELETE_EXERCISE_STEP.REQUEST,
-    exerciseId,
-    stepId
-  };
-};
-export const deleteExerciseStepSuccess = exercise => ({
-  type: TYPES.DELETE_EXERCISE_STEP.SUCCESS,
-  exercise
-});
-export const deleteExerciseStepFailure = (exerciseId, stepId, error) => ({
-  type: TYPES.DELETE_EXERCISE_STEP.FAILURE,
-  exerciseId,
-  stepId,
-  error
-});
-
 const createExerciseStep = (type, stepContent = {}) => {
   switch (type) {
     case TYPE_TIMED:
@@ -272,6 +258,46 @@ const createExerciseStep = (type, stepContent = {}) => {
       throw new Error(`Unknown step type "${type}"`);
   }
 };
+
+// DELETE_EXERCISE_STEP
+export const deleteExerciseStepRequest = (exerciseId, stepId) => {
+  return {
+    type: TYPES.DELETE_EXERCISE_STEP.REQUEST,
+    exerciseId,
+    stepId
+  };
+};
+export const deleteExerciseStepSuccess = exercise => ({
+  type: TYPES.DELETE_EXERCISE_STEP.SUCCESS,
+  exercise
+});
+export const deleteExerciseStepFailure = (exerciseId, stepId, error) => ({
+  type: TYPES.DELETE_EXERCISE_STEP.FAILURE,
+  exerciseId,
+  stepId,
+  error
+});
+
+// UPDATE_EXERCISE_STEP
+export const updateExerciseStepRequest = (exerciseId, stepId, contentPatch) => {
+  return {
+    type: TYPES.UPDATE_EXERCISE_STEP.REQUEST,
+    exerciseId,
+    stepId,
+    contentPatch
+  };
+};
+export const updateExerciseStepSuccess = exercise => ({
+  type: TYPES.UPDATE_EXERCISE_STEP.SUCCESS,
+  exercise
+});
+export const updateExerciseStepFailure = (exerciseId, stepId, contentPatch, error) => ({
+  type: TYPES.DELETE_EXERCISE_STEP.FAILURE,
+  exerciseId,
+  stepId,
+  contentPatch,
+  error
+});
 
 // START_EXERCISE
 export const startExercise = exercise => ({
