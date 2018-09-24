@@ -62,6 +62,11 @@ export const TYPES = {
     SUCCESS: 'exercises/UPDATE_EXERCISE_STEP/SUCCESS',
     FAILURE: 'exercises/UPDATE_EXERCISE_STEP/FAILURE'
   },
+  MOVE_EXERCISE_STEP: {
+    REQUEST: 'exercises/MOVE_EXERCISE_STEP/REQUEST',
+    SUCCESS: 'exercises/MOVE_EXERCISE_STEP/SUCCESS',
+    FAILURE: 'exercises/MOVE_EXERCISE_STEP/FAILURE'
+  },
   START_EXERCISE: 'exercises/START',
   STOP_EXERCISE: 'exercises/STOP',
   PAUSE_EXERCISE: 'exercises/PAUSE'
@@ -296,6 +301,27 @@ export const updateExerciseStepFailure = (exerciseId, stepId, contentPatch, erro
   exerciseId,
   stepId,
   contentPatch,
+  error
+});
+
+// MOVE_EXERCISE_STEP
+export const moveExerciseStepRequest = (exerciseId, oldIndex, newIndex) => {
+  return {
+    type: TYPES.MOVE_EXERCISE_STEP.REQUEST,
+    exerciseId,
+    oldIndex,
+    newIndex
+  };
+};
+export const moveExerciseStepSuccess = exercise => ({
+  type: TYPES.MOVE_EXERCISE_STEP.SUCCESS,
+  exercise
+});
+export const moveExerciseStepFailure = (exerciseId, oldIndex, newIndex, error) => ({
+  type: TYPES.MOVE_EXERCISE_STEP.FAILURE,
+  exerciseId,
+  oldIndex,
+  newIndex,
   error
 });
 

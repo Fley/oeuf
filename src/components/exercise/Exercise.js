@@ -98,10 +98,6 @@ class Exercise extends Component {
     };
   }
 
-  onSortStepsEnd = ({ oldIndex, newIndex }) => {
-    // this.setState({ ...this.state, steps: arrayMove(this.state.steps, oldIndex, newIndex) });
-  };
-
   render() {
     const { name } = this.state;
     const {
@@ -110,6 +106,7 @@ class Exercise extends Component {
       onAcknowledgeStep,
       onCancelStep,
       onUpdateStep,
+      onMoveStep,
       onExerciseNameChange,
       exercise: { steps }
     } = this.props;
@@ -148,7 +145,7 @@ class Exercise extends Component {
                 </div>
                 <SortableStepList
                   steps={steps.filter(step => !step.done)}
-                  onSortEnd={this.onSortStepsEnd}
+                  onSortEnd={({ oldIndex, newIndex }) => onMoveStep({ oldIndex, newIndex })}
                   onSwipeLeft={step => onAcknowledgeStep(step.id)}
                   onSwipeRight={step => onDeleteStep(step.id)}
                   leftSwipeElement={<SwipedItemAcknowledged />}
@@ -160,7 +157,7 @@ class Exercise extends Component {
                 />
                 <SortableStepList
                   steps={steps.filter(step => step.done)}
-                  onSortEnd={this.onSortStepsEnd}
+                  onSortEnd={({ oldIndex, newIndex }) => onMoveStep({ oldIndex, newIndex })}
                   onSwipeLeft={step => onCancelStep(step.id)}
                   onSwipeRight={step => onDeleteStep(step.id)}
                   leftSwipeElement={<SwipedItemCanceled />}

@@ -38,6 +38,7 @@ const ExercisePage = ({
   onCancelStep,
   onStartExercise,
   onUpdateStep,
+  onMoveStep,
   onExerciseNameChange
 }) => (
   <div>
@@ -59,6 +60,7 @@ const ExercisePage = ({
           onAcknowledgeStep={onAcknowledgeStep(exercise.id)}
           onCancelStep={onCancelStep(exercise.id)}
           onUpdateStep={onUpdateStep(exercise.id)}
+          onMoveStep={onMoveStep(exercise.id)}
           onExerciseNameChange={onExerciseNameChange(exercise.id)}
         />
       ) : (

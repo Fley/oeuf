@@ -1,5 +1,6 @@
 import { all, call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+import { arrayMove } from 'react-sortable-hoc';
 import * as datastore from '../idb/datastore';
 import {
   TYPES,
@@ -25,7 +26,9 @@ import {
   cancelExerciseStepSuccess,
   cancelExerciseStepFailure,
   updateExerciseStepSuccess,
-  updateExerciseStepFailure
+  updateExerciseStepFailure,
+  moveExerciseStepSuccess,
+  moveExerciseStepFailure
 } from './actions';
 
 function* fetchExercises() {
@@ -185,6 +188,24 @@ function* watchCancelExerciseStep() {
   yield takeEvery(TYPES.CANCEL_EXERCISE_STEP.REQUEST, cancelExerciseStep);
 }
 
+function* moveExerciseStep({ exerciseId, oldIndex, newIndex }) {
+  try {
+    const exercise = yield call(datastore.getExerciseById, exerciseId);
+    const steps = arrayMove([...exercise.steps], oldIndex, newIndex);
+    const patchedExercise = yield call(datastore.putExercise, {
+      ...exercise,
+      done: false,
+      steps
+    });
+    yield put(moveExerciseStepSuccess(patchedExercise));
+  } catch (e) {
+    yield put(moveExerciseStepFailure(exerciseId, oldIndex, newIndex, e));
+  }
+}
+function* watchMoveExerciseStep() {
+  yield takeEvery(TYPES.MOVE_EXERCISE_STEP.REQUEST, moveExerciseStep);
+}
+
 function* updateExerciseStep({ exerciseId, stepId, contentPatch }) {
   // Debounce
   yield call(delay, 500);
@@ -219,6 +240,7 @@ export default function* rootSaga() {
     watchDeleteExerciseStep(),
     watchAcknowledgeExerciseStep(),
     watchCancelExerciseStep(),
+    watchMoveExerciseStep(),
     watchUpdateExerciseStep()
   ]);
 }
