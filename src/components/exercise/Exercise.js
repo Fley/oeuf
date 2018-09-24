@@ -1,57 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faDumbbell, faTimes, faHandPaper, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faDumbbell, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import SwipeableListItem, {
   SwipedItemAcknowledged,
   SwipedItemRemoved,
   SwipedItemCanceled
 } from '../swipeable-list-item/SwipeableListItem';
 import { EXERCISE_TYPE, TYPE_TIMED, TYPE_REPETITION } from '../../store/propTypes';
-
-const DragHandle = SortableHandle(() => (
-  <div className="list-group-item-drag-handle" style={{ width: '1em' }}>
-    <FontAwesomeIcon icon={faBars} />
-  </div>
-));
-
-const InputNumber = ({ defaultValue, placeholder, onChange }) => (
-  <input
-    type="number"
-    className="form-control form-control-sm mx-auto"
-    placeholder={placeholder}
-    defaultValue={defaultValue}
-    onChange={onChange}
-    min="0"
-    max="999"
-    style={{ width: '4em' }}
-    required
-  />
-);
-
-const StepRepetition = ({ kg, repetition, rest, onContentChange }) => (
-  <div className="d-flex justify-content-between p-3">
-    <div>
-      <InputNumber defaultValue={kg} placeholder="Kg" onChange={e => onContentChange({ kg: e.target.value })} />
-    </div>
-    <div>
-      <InputNumber
-        defaultValue={repetition}
-        placeholder="Repetition"
-        onChange={e => onContentChange({ repetition: e.target.value })}
-      />
-    </div>
-    <div>
-      <InputNumber defaultValue={rest} placeholder="Rest" onChange={e => onContentChange({ rest: e.target.value })} />
-    </div>
-    <DragHandle />
-  </div>
-);
+import { StepRepetition, HeaderStepRepetition, HeaderStepTimed, StepTimed } from './ExerciseStep';
 
 const SortableStep = SortableElement(
   ({
-    step: { kg, repetition, rest, done },
+    type,
+    step: { done, ...content },
     onSwipeLeft,
     onSwipeRight,
     leftSwipeElement,
@@ -65,18 +28,29 @@ const SortableStep = SortableElement(
       leftSwipeElement={leftSwipeElement}
       rightSwipeElement={rightSwipeElement}
     >
-      <StepRepetition done={done} kg={kg} repetition={repetition} rest={rest} onContentChange={onContentChange} />
+      {type === TYPE_TIMED ? (
+        <StepTimed done={done} duration={content.duration} rest={content.rest} onContentChange={onContentChange} />
+      ) : (
+        <StepRepetition
+          done={done}
+          kg={content.kg}
+          repetition={content.repetition}
+          rest={content.rest}
+          onContentChange={onContentChange}
+        />
+      )}
     </SwipeableListItem>
   )
 );
 
 const SortableStepList = SortableContainer(
-  ({ steps, onSwipeLeft, onSwipeRight, leftSwipeElement, rightSwipeElement, onUpdateStep }) => (
+  ({ type, steps, onSwipeLeft, onSwipeRight, leftSwipeElement, rightSwipeElement, onUpdateStep }) => (
     <ul className="list-group list-group-flush">
       {steps.map((step, index) => (
         <SortableStep
           key={`item-${step.id}`}
           index={index}
+          type={type}
           step={step}
           onSwipeRight={() => onSwipeRight(step)}
           onSwipeLeft={() => onSwipeLeft(step)}
@@ -108,7 +82,7 @@ class Exercise extends Component {
       onUpdateStep,
       onMoveStep,
       onExerciseNameChange,
-      exercise: { steps }
+      exercise: { type, steps }
     } = this.props;
     return (
       <div className="card">
@@ -131,19 +105,9 @@ class Exercise extends Component {
           <div>
             {steps && steps.length > 0 ? (
               <div>
-                <div className="list-group-item-header border-top-0 border-left-0 border-right-0 d-flex justify-content-between text-dark text-center">
-                  <div style={{ width: '4em' }}>
-                    <FontAwesomeIcon icon={faDumbbell} size="lg" />
-                  </div>
-                  <div style={{ width: '4em' }}>
-                    <FontAwesomeIcon icon={faTimes} size="lg" />
-                  </div>
-                  <div style={{ width: '4em' }}>
-                    <FontAwesomeIcon icon={faHandPaper} size="lg" />
-                  </div>
-                  <div style={{ width: '1em' }} />
-                </div>
+                {type === TYPE_TIMED ? <HeaderStepTimed /> : <HeaderStepRepetition />}
                 <SortableStepList
+                  type={type}
                   steps={steps.filter(step => !step.done)}
                   onSortEnd={({ oldIndex, newIndex }) => onMoveStep({ oldIndex, newIndex })}
                   onSwipeLeft={step => onAcknowledgeStep(step.id)}
