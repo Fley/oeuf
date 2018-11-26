@@ -120,6 +120,7 @@ class Exercise extends Component {
                   helperClass="list-group-item-sortable-helper"
                 />
                 <SortableStepList
+                  type={type}
                   steps={steps.filter(step => step.done)}
                   onSortEnd={({ oldIndex, newIndex }) => onMoveStep({ oldIndex, newIndex })}
                   onSwipeLeft={step => onCancelStep(step.id)}
