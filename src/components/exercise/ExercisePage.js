@@ -6,6 +6,7 @@ import Exercise from './Exercise';
 import { Link } from 'react-router-dom';
 import { EXERCISE_TYPE } from '../../store/propTypes';
 import EmptyPage from '../empty-page/EmptyPage';
+import Layout from '../layout/Layout';
 
 const LoadingPage = () => (
   <EmptyPage text="Loading ..." icon={faSun} action={<div>Your exercise is being loaded</div>} />
@@ -28,6 +29,7 @@ const ExerciseNotFoundPage = () => (
     }
   />
 );
+
 const ExercisePage = ({
   exercise,
   loading = false,
@@ -40,14 +42,35 @@ const ExercisePage = ({
   onUpdateStep,
   onMoveStep,
   onExerciseNameChange
-}) => (
-  <div>
-    <nav className="navbar sticky-top navbar-light shadow-sm bg-white">
-      <Link to="/" className="btn btn-link text-dark" aria-label="Back to exercises list">
-        <FontAwesomeIcon icon={faTimes} />
-      </Link>
-    </nav>
-    <div className="col-sm-10 mx-auto mb-5 py-3 px-0 px-xs-2">
+}) => {
+  const header = (
+    <Link to="/" className="btn btn-link text-dark" aria-label="Back to exercises list">
+      <FontAwesomeIcon icon={faTimes} />
+    </Link>
+  );
+  let navItems = [
+    <button
+      className="btn btn-link nav-link btn-block"
+      disabled={loading || errorLoading}
+      onClick={() => onStartExercise()}
+    >
+      <FontAwesomeIcon icon={faPlay} /> Start
+    </button>
+  ];
+  if (exercise && exercise.type) {
+    navItems = [
+      ...navItems,
+      <button
+        className="btn btn-link nav-link btn-block"
+        disabled={loading || errorLoading}
+        onClick={() => onAddStep(exercise.id)(exercise.type)(exercise.steps[exercise.steps.length - 1])}
+      >
+        <FontAwesomeIcon icon={faPlusSquare} /> New step
+      </button>
+    ];
+  }
+  return (
+    <Layout header={header} navItems={navItems}>
       {loading ? (
         <LoadingPage />
       ) : errorLoading ? (
@@ -66,34 +89,9 @@ const ExercisePage = ({
       ) : (
         <ExerciseNotFoundPage />
       )}
-    </div>
-    <nav className="navbar fixed-bottom navbar-light bg-white p-0 navbar-expand shadow-up-sm">
-      <ul className="navbar-nav nav-justified w-100">
-        <li className="nav-item">
-          <button
-            className="btn btn-link nav-link btn-block"
-            disabled={loading || errorLoading}
-            onClick={() => onStartExercise()}
-          >
-            <FontAwesomeIcon icon={faPlay} /> Start
-          </button>
-        </li>
-        {exercise &&
-          exercise.type && (
-            <li className="nav-item">
-              <button
-                className="btn btn-link nav-link btn-block"
-                disabled={loading || errorLoading}
-                onClick={() => onAddStep(exercise.id)(exercise.type)(exercise.steps[exercise.steps.length - 1])}
-              >
-                <FontAwesomeIcon icon={faPlusSquare} /> New step
-              </button>
-            </li>
-          )}
-      </ul>
-    </nav>
-  </div>
-);
+    </Layout>
+  );
+};
 
 ExercisePage.propTypes = {
   exercise: EXERCISE_TYPE,
