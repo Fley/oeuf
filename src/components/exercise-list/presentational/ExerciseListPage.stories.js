@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import ExerciseListPage from './ExerciseListPage';
-import Shell from '../../components/shell/Shell';
+import Shell from 'components/shell/Shell';
 
 storiesOf('exercise-list/ExerciseListPage', module)
   .addDecorator((story, context) => withInfo()(story)(context))

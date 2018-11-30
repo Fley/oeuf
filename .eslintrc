@@ -1,5 +1,5 @@
 {
-  "extends": "react-app",
+  "extends": ["react-app", "plugin:import/errors", "plugin:import/warnings"],
   "rules": {
     "comma-dangle": ["error", "never"],
     "semi": ["warn", "always"],
@@ -15,5 +15,12 @@
     ],
     "quotes": ["warn", "single"],
     "no-return-await": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./src"]
+      }
+    }
   }
 }

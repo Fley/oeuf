@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getExerciseById, areExercisesLoading, hasErrorLoadingExercises } from '../../store/selectors';
-import ExercisePage from './ExercisePage';
+import { getExerciseById, areExercisesLoading, hasErrorLoadingExercises } from 'store/selectors';
+import ExercisePage from '../presentational/ExercisePage';
 import {
   fetchAllExercisesRequest,
   updateExerciseNameRequest,
@@ -11,7 +11,7 @@ import {
   cancelExerciseStepRequest,
   updateExerciseStepRequest,
   moveExerciseStepRequest
-} from '../../store/actions';
+} from 'store/actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -50,4 +50,7 @@ class ExercicePageContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExercicePageContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExercicePageContainer);

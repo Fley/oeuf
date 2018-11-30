@@ -1,7 +1,7 @@
 import { all, call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { arrayMove } from 'react-sortable-hoc';
-import * as datastore from '../idb/datastore';
+import * as datastore from 'idb/datastore';
 import {
   TYPES,
   fetchAllExercisesSuccess,

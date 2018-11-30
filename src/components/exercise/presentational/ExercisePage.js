@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faPlay, faTimes, faPoo, faSun, faQuidditch } from '@fortawesome/free-solid-svg-icons';
 import Exercise from './Exercise';
 import { Link } from 'react-router-dom';
-import { EXERCISE_TYPE } from '../../store/propTypes';
-import EmptyPage from '../empty-page/EmptyPage';
-import Layout from '../layout/Layout';
+import { EXERCISE_TYPE } from 'store/propTypes';
+import EmptyPage from 'components/empty-page/EmptyPage';
+import Layout from 'components/layout/Layout';
 
 const LoadingPage = () => (
   <EmptyPage text="Loading ..." icon={faSun} action={<div>Your exercise is being loaded</div>} />

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getExerciseList, areExercisesLoading, hasErrorLoadingExercises } from '../../store/selectors';
-import ExerciseListPage from './ExerciseListPage';
+import { getExerciseList, areExercisesLoading, hasErrorLoadingExercises } from 'store/selectors';
+import ExerciseListPage from '../presentational/ExerciseListPage';
 import {
   fetchAllExercisesRequest,
   deleteExerciseRequest,
   acknowledgeExerciseRequest,
   cancelExerciseRequest,
   addExerciseRequest
-} from '../../store/actions';
+} from 'store/actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     load: () => dispatch(fetchAllExercisesRequest()),
     onAddExercise: () => dispatch(addExerciseRequest()),
@@ -38,4 +38,7 @@ class ExerciceListPageContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExerciceListPageContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExerciceListPageContainer);

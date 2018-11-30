@@ -7,8 +7,8 @@ import SwipeableListItem, {
   SwipedItemAcknowledged,
   SwipedItemRemoved,
   SwipedItemCanceled
-} from '../swipeable-list-item/SwipeableListItem';
-import { EXERCISE_TYPE, TYPE_TIMED, TYPE_REPETITION } from '../../store/propTypes';
+} from 'components/swipeable-list-item/SwipeableListItem';
+import { EXERCISE_TYPE, TYPE_TIMED, TYPE_REPETITION } from 'store/propTypes';
 import { StepRepetition, HeaderStepRepetition, HeaderStepTimed, StepTimed } from './ExerciseStep';
 
 const SortableStep = SortableElement(

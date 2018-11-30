@@ -101,16 +101,10 @@ describe('store/reducer', () => {
 
     it('should delete exercise', () => {
       const exerciseId = 1;
-      const stateRequest = exercises(
-        existingState.exercises,
-        actions.deleteExerciseRequest(exerciseId)
-      );
+      const stateRequest = exercises(existingState.exercises, actions.deleteExerciseRequest(exerciseId));
       expect(stateRequest).toMatchSnapshot();
 
-      const stateSuccess = exercises(
-        stateRequest,
-        actions.deleteExerciseSuccess(exerciseId)
-      );
+      const stateSuccess = exercises(stateRequest, actions.deleteExerciseSuccess(exerciseId));
       expect(stateSuccess).toMatchSnapshot();
 
       const stateFailure = exercises(
@@ -122,10 +116,7 @@ describe('store/reducer', () => {
 
     it('should acknowledge an exercise', () => {
       const exerciseId = 2;
-      const stateRequest = exercises(
-        existingState.exercises,
-        actions.acknowledgeExerciseRequest(exerciseId)
-      );
+      const stateRequest = exercises(existingState.exercises, actions.acknowledgeExerciseRequest(exerciseId));
       expect(stateRequest).toMatchSnapshot();
 
       const stateSuccess = exercises(
@@ -186,8 +177,8 @@ describe('store/reducer', () => {
         stateRequest,
         actions.acknowledgeExerciseStepSuccess({
           ...existingState.exercises.byId[exerciseId],
-          steps: existingState.exercises.byId[exerciseId].steps.map(
-            (step, index) => (index === stepIndex ? { ...step, done: true } : step)
+          steps: existingState.exercises.byId[exerciseId].steps.map((step, index) =>
+            index === stepIndex ? { ...step, done: true } : step
           )
         })
       );
@@ -216,8 +207,8 @@ describe('store/reducer', () => {
         stateRequest,
         actions.cancelExerciseStepSuccess({
           ...existingState.exercises.byId[exerciseId],
-          steps: existingState.exercises.byId[exerciseId].steps.map(
-            (step, index) => (index === stepIndex ? { ...step, done: false } : step)
+          steps: existingState.exercises.byId[exerciseId].steps.map((step, index) =>
+            index === stepIndex ? { ...step, done: false } : step
           )
         })
       );

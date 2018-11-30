@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { EXERCISE_TYPE } from '../../store/propTypes';
+import { EXERCISE_TYPE } from 'store/propTypes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListAlt } from '@fortawesome/free-regular-svg-icons';
 import { faAngleRight, faSun, faPoo, faTrash, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
-import EmptyPage from '../empty-page/EmptyPage';
+import EmptyPage from 'components/empty-page/EmptyPage';
 import SwipeableListItem, {
   SwipedItemAcknowledged,
   SwipedItemRemoved,
   SwipedItemCanceled
-} from '../swipeable-list-item/SwipeableListItem';
+} from 'components/swipeable-list-item/SwipeableListItem';
 import './ExerciseList.css';
 
 const mapExerciceItem = (onSwipeLeft, onSwipeRight) => ({ id, name, done }) => {

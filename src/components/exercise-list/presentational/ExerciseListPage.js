@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ExerciseList from './ExerciseList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import { EXERCISE_TYPE } from '../../store/propTypes';
-import Layout from '../layout/Layout';
+import { EXERCISE_TYPE } from 'store/propTypes';
+import Layout from 'components/layout/Layout';
 
 const ExerciseListPage = ({
   exercises,

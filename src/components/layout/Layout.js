@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+// TODO: convert to HOC ?
+
 const Layout = ({ header, children, navItems = [], headerBackground = { className: 'bg-white', isLight: true } }) => (
   <div>
     <nav
