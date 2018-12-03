@@ -1,0 +1,19 @@
+@import '../../theme/bootstrap-custom.scss';
+
+.timer-container {
+  position: relative;
+  cursor: pointer;
+  .timer-info {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .timer-svg circle {
+    stroke: $primary;
+    stroke-width: 1em;
+  }
+  .timer-svg .bar {
+    stroke: $secondary;
+  }
+}
