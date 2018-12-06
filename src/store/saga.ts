@@ -1,11 +1,11 @@
+import { Exercise, StepType, Step } from './types';
 import { all, call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { arrayMove } from 'react-sortable-hoc';
-import * as datastore from 'idb/datastore';
+import * as datastore from '../idb/datastore';
 import {
   TYPES,
   fetchAllExercisesSuccess,
-  fetchExerciseFailure,
   addExerciseSuccess,
   addExerciseFailure,
   deleteExerciseSuccess,
@@ -28,34 +28,45 @@ import {
   updateExerciseStepSuccess,
   updateExerciseStepFailure,
   moveExerciseStepSuccess,
-  moveExerciseStepFailure
+  moveExerciseStepFailure,
+  fetchAllExercisesFailure,
+  addExerciseRequest,
+  deleteExerciseRequest,
+  cancelExerciseRequest,
+  updateExerciseNameRequest,
+  addExerciseStepRequest,
+  deleteExerciseStepRequest,
+  acknowledgeExerciseStepRequest,
+  cancelExerciseStepRequest,
+  moveExerciseStepRequest,
+  updateExerciseStepRequest
 } from './actions';
 
 function* fetchExercises() {
   try {
-    const exercises = yield call(datastore.getAllExercises);
+    const exercises: Exercise[] = yield call(datastore.getAllExercises);
     yield put(fetchAllExercisesSuccess(exercises));
   } catch (e) {
-    yield put(fetchExerciseFailure(e));
+    yield put(fetchAllExercisesFailure(e));
   }
 }
 function* watchFetchExercises() {
   yield takeLatest(TYPES.FETCH_EXERCISES.REQUEST, fetchExercises);
 }
 
-function* addNewExercise({ exercise }) {
+function* addNewExercise({ exercise }: ReturnType<typeof addExerciseRequest>) {
   try {
-    const newExercise = yield call(datastore.putExercise, exercise);
+    const newExercise: Exercise = yield call(datastore.putExercise, exercise);
     yield put(addExerciseSuccess(newExercise));
   } catch (e) {
-    yield put(addExerciseFailure(e));
+    yield put(addExerciseFailure(exercise, e));
   }
 }
 function* watchAddNewExercise() {
   yield takeEvery(TYPES.ADD_EXERCISE.REQUEST, addNewExercise);
 }
 
-function* deleteExercise({ id }) {
+function* deleteExercise({ id }: ReturnType<typeof deleteExerciseRequest>) {
   try {
     yield call(datastore.deleteExercise, id);
     yield put(deleteExerciseSuccess(id));
@@ -67,10 +78,10 @@ function* watchDeleteExercise() {
   yield takeEvery(TYPES.DELETE_EXERCISE.REQUEST, deleteExercise);
 }
 
-function* acknowledgeExercise({ id }) {
+function* acknowledgeExercise({ id }: ReturnType<typeof acknowledgeExerciseRequest>) {
   try {
-    const exercise = yield call(datastore.getExerciseById, id);
-    const patchedExercise = yield call(datastore.putExercise, {
+    const exercise: Exercise = yield call(datastore.getExerciseById, id);
+    const patchedExercise: Exercise = yield call(datastore.putExercise, {
       ...exercise,
       done: true,
       steps: exercise.steps.map(step => ({ ...step, done: true }))
@@ -84,10 +95,10 @@ function* watchAcknowledgeExercise() {
   yield takeEvery(TYPES.ACKNOWLEDGE_EXERCISE.REQUEST, acknowledgeExercise);
 }
 
-function* cancelExercise({ id }) {
+function* cancelExercise({ id }: ReturnType<typeof cancelExerciseRequest>) {
   try {
-    const exercise = yield call(datastore.getExerciseById, id);
-    const patchedExercise = yield call(datastore.putExercise, {
+    const exercise: Exercise = yield call(datastore.getExerciseById, id);
+    const patchedExercise: Exercise = yield call(datastore.putExercise, {
       ...exercise,
       done: false,
       steps: exercise.steps.map(step => ({ ...step, done: false }))
@@ -101,11 +112,11 @@ function* watchCancelExercise() {
   yield takeEvery(TYPES.CANCEL_EXERCISE.REQUEST, cancelExercise);
 }
 
-function* updateExerciseName({ id, name }) {
+function* updateExerciseName({ id, name }: ReturnType<typeof updateExerciseNameRequest>) {
   // Debounce
   yield call(delay, 500);
   try {
-    const patchedExercise = yield call(datastore.patchExerciseById, id, { name });
+    const patchedExercise: Exercise = yield call(datastore.patchExerciseById, id, { name });
     yield put(updateExerciseNameSuccess(patchedExercise));
   } catch (e) {
     yield put(updateExerciseNameFailure(id, e));
@@ -115,10 +126,10 @@ function* watchUpdateExerciseName() {
   yield takeLatest(TYPES.UPDATE_EXERCISE_NAME.REQUEST, updateExerciseName);
 }
 
-function* addExerciseStep({ exerciseId, stepType, step }) {
+function* addExerciseStep({ exerciseId, stepType, step }: ReturnType<typeof addExerciseStepRequest>) {
   try {
-    const exercise = yield call(datastore.getExerciseById, exerciseId);
-    const patchedExercise = yield call(datastore.putExercise, {
+    const exercise: Exercise = yield call(datastore.getExerciseById, exerciseId);
+    const patchedExercise: Exercise = yield call(datastore.putExercise, {
       ...exercise,
       type: stepType,
       steps: [...exercise.steps, step]
@@ -132,10 +143,10 @@ function* watchAddExerciseStep() {
   yield takeLatest(TYPES.ADD_EXERCISE_STEP.REQUEST, addExerciseStep);
 }
 
-function* deleteExerciseStep({ exerciseId, stepId }) {
+function* deleteExerciseStep({ exerciseId, stepId }: ReturnType<typeof deleteExerciseStepRequest>) {
   try {
-    const exercise = yield call(datastore.getExerciseById, exerciseId);
-    const patchedExercise = yield call(datastore.putExercise, {
+    const exercise: Exercise = yield call(datastore.getExerciseById, exerciseId);
+    const patchedExercise: Exercise = yield call(datastore.putExercise, {
       ...exercise,
       steps: [...exercise.steps.filter(s => s.id !== stepId)]
     });
@@ -148,12 +159,12 @@ function* watchDeleteExerciseStep() {
   yield takeEvery(TYPES.DELETE_EXERCISE_STEP.REQUEST, deleteExerciseStep);
 }
 
-function* acknowledgeExerciseStep({ exerciseId, stepId }) {
+function* acknowledgeExerciseStep({ exerciseId, stepId }: ReturnType<typeof acknowledgeExerciseStepRequest>) {
   try {
-    const exercise = yield call(datastore.getExerciseById, exerciseId);
+    const exercise: Exercise = yield call(datastore.getExerciseById, exerciseId);
     const steps = [...exercise.steps];
-    steps.find(s => s.id === stepId).done = true;
-    const patchedExercise = yield call(datastore.putExercise, {
+    steps.find(s => s.id === stepId)!.done = true;
+    const patchedExercise: Exercise = yield call(datastore.putExercise, {
       ...exercise,
       steps
     });
@@ -169,12 +180,12 @@ function* watchAcknowledgeExerciseStep() {
   yield takeEvery(TYPES.ACKNOWLEDGE_EXERCISE_STEP.REQUEST, acknowledgeExerciseStep);
 }
 
-function* cancelExerciseStep({ exerciseId, stepId }) {
+function* cancelExerciseStep({ exerciseId, stepId }: ReturnType<typeof cancelExerciseStepRequest>) {
   try {
-    const exercise = yield call(datastore.getExerciseById, exerciseId);
+    const exercise: Exercise = yield call(datastore.getExerciseById, exerciseId);
     const steps = [...exercise.steps];
-    steps.find(s => s.id === stepId).done = false;
-    const patchedExercise = yield call(datastore.putExercise, {
+    steps.find(s => s.id === stepId)!.done = false;
+    const patchedExercise: Exercise = yield call(datastore.putExercise, {
       ...exercise,
       done: false,
       steps
@@ -188,11 +199,11 @@ function* watchCancelExerciseStep() {
   yield takeEvery(TYPES.CANCEL_EXERCISE_STEP.REQUEST, cancelExerciseStep);
 }
 
-function* moveExerciseStep({ exerciseId, oldIndex, newIndex }) {
+function* moveExerciseStep({ exerciseId, oldIndex, newIndex }: ReturnType<typeof moveExerciseStepRequest>) {
   try {
-    const exercise = yield call(datastore.getExerciseById, exerciseId);
+    const exercise: Exercise = yield call(datastore.getExerciseById, exerciseId);
     const steps = arrayMove([...exercise.steps], oldIndex, newIndex);
-    const patchedExercise = yield call(datastore.putExercise, {
+    const patchedExercise: Exercise = yield call(datastore.putExercise, {
       ...exercise,
       done: false,
       steps
@@ -206,15 +217,15 @@ function* watchMoveExerciseStep() {
   yield takeEvery(TYPES.MOVE_EXERCISE_STEP.REQUEST, moveExerciseStep);
 }
 
-function* updateExerciseStep({ exerciseId, stepId, contentPatch }) {
+function* updateExerciseStep({ exerciseId, stepId, contentPatch }: ReturnType<typeof updateExerciseStepRequest>) {
   // Debounce
   yield call(delay, 500);
   try {
-    const exercise = yield call(datastore.getExerciseById, exerciseId);
+    const exercise: Exercise = yield call(datastore.getExerciseById, exerciseId);
     const steps = [...exercise.steps];
     const stepIndex = steps.findIndex(s => s.id === stepId);
     steps[stepIndex] = { ...steps[stepIndex], ...contentPatch };
-    const patchedExercise = yield call(datastore.putExercise, {
+    const patchedExercise: Exercise = yield call(datastore.putExercise, {
       ...exercise,
       done: false,
       steps

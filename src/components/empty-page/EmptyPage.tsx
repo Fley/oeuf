@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { SFC, ReactNode } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import PropTypes from 'prop-types';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-const EmptyPage = ({ icon, text, action }) => {
+export type EmptyPageProps = {
+  icon: IconProp;
+  text: string | ReactNode;
+  action: ReactNode;
+};
+
+const EmptyPage: SFC<EmptyPageProps> = ({ icon, text, action }) => {
   return (
     <div
       className="d-flex align-items-center w-100 text-center bg-light text-dark"
@@ -20,12 +26,6 @@ const EmptyPage = ({ icon, text, action }) => {
       </div>
     </div>
   );
-};
-
-EmptyPage.propTypes = {
-  icon: PropTypes.object.isRequired,
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
-  action: PropTypes.element
 };
 
 export default EmptyPage;

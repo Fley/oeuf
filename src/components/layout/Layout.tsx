@@ -1,10 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, SFC } from 'react';
 import classNames from 'classnames';
 
-// TODO: convert to HOC ?
+export interface LayoutProps {
+  header?: ReactNode;
+  navItems?: ReactNode[];
+  headerBackground?: {
+    className: string;
+    isLight?: boolean;
+  };
+}
 
-const Layout = ({ header, children, navItems = [], headerBackground = { className: 'bg-white', isLight: true } }) => (
+const Layout: SFC<LayoutProps> = ({
+  header,
+  children,
+  navItems = [],
+  headerBackground = { className: 'bg-white', isLight: true }
+}) => (
   <div>
     <nav
       className={classNames('navbar sticky-top shadow-sm', headerBackground.className, {
@@ -24,15 +35,5 @@ const Layout = ({ header, children, navItems = [], headerBackground = { classNam
     </nav>
   </div>
 );
-
-Layout.propTypes = {
-  header: PropTypes.node,
-  navItems: PropTypes.arrayOf(PropTypes.node),
-  children: PropTypes.node,
-  headerBackground: PropTypes.shape({
-    className: PropTypes.string,
-    isLight: PropTypes.bool
-  })
-};
 
 export default Layout;

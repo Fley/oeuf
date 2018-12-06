@@ -1,9 +1,63 @@
-import { TYPES as actions } from './actions';
-import { combineReducers } from 'redux';
-import { PROGRESS } from './propTypes';
+import { Exercise } from './types';
+import {
+  TYPES as actions, Action
+  // fetchAllExercisesRequest,
+  // fetchAllExercisesSuccess,
+  // fetchAllExercisesFailure,
+  // fetchExerciseRequest,
+  // fetchExerciseSuccess,
+  // fetchExerciseFailure,
+  // addExerciseRequest,
+  // addExerciseSuccess,
+  // addExerciseFailure,
+  // deleteExerciseRequest,
+  // deleteExerciseStepSuccess,
+  // deleteExerciseFailure,
+  // deleteExerciseSuccess,
+  // acknowledgeExerciseRequest,
+  // acknowledgeExerciseSuccess,
+  // acknowledgeExerciseFailure,
+  // cancelExerciseRequest,
+  // cancelExerciseSuccess,
+  // cancelExerciseFailure,
+  // updateExerciseNameRequest,
+  // updateExerciseNameSuccess,
+  // updateExerciseNameFailure,
+  // acknowledgeExerciseStepRequest,
+  // acknowledgeExerciseStepSuccess,
+  // cancelExerciseStepRequest,
+  // acknowledgeExerciseStepFailure,
+  // cancelExerciseStepSuccess,
+  // cancelExerciseStepFailure,
+  // addExerciseStepRequest,
+  // addExerciseStepSuccess,
+  // addExerciseStepFailure,
+  // deleteExerciseStepRequest,
+  // deleteExerciseStepFailure,
+  // updateExerciseStepRequest,
+  // updateExerciseStepFailure,
+  // updateExerciseStepSuccess,
+  // moveExerciseStepRequest,
+  // moveExerciseStepSuccess,
+  // moveExerciseStepFailure,
+  // startExercise,
+  // stopExercise,
+  // pauseExercise
+} from './actions';
+import { combineReducers, Reducer } from 'redux';
 
-export const exsercisesInitialState = { loading: false, error: null, ids: [], byId: {} };
-export const exercises = (state = exsercisesInitialState, action) => {
+export type ExerciseStore = {
+  loading: boolean;
+  error: any;
+  ids: string[];
+  byId: {
+    [id: string]: Exercise;
+  };
+};
+
+export const exsercisesInitialState: ExerciseStore = { loading: false, error: null, ids: [], byId: {} };
+
+export const exercises: Reducer<ExerciseStore, Action> = (state = exsercisesInitialState, action) => {
   switch (action.type) {
     case actions.FETCH_EXERCISES.REQUEST:
       return { ...state, loading: true, error: null };
@@ -11,8 +65,8 @@ export const exercises = (state = exsercisesInitialState, action) => {
       return {
         ...state,
         loading: false,
-        ids: action.exercises.map(e => e.id),
-        byId: action.exercises.reduce((byId, e) => ({ ...byId, [e.id]: e }), {})
+        ids: action.exercises.map((e: Exercise) => e.id),
+        byId: action.exercises.reduce((byId: ExerciseStore['byId'], e: Exercise) => ({ ...byId, [e.id]: e }), {})
       };
     case actions.FETCH_EXERCISES.FAILURE:
       return { ...state, loading: false, error: action.error };
@@ -45,7 +99,7 @@ export const exercises = (state = exsercisesInitialState, action) => {
                 ...state.byId[action.exercise.id],
                 progress: {
                   ...state.byId[action.exercise.id].progress,
-                  status: PROGRESS.STARTED,
+                  status: 'running',
                   startedAt: new Date()
                 }
               }
@@ -62,7 +116,7 @@ export const exercises = (state = exsercisesInitialState, action) => {
                 ...state.byId[action.exercise.id],
                 progress: {
                   ...state.byId[action.exercise.id].progress,
-                  status: PROGRESS.STOPPED,
+                  status: 'stopped',
                   stoppedAt: new Date()
                 }
               }
@@ -77,7 +131,7 @@ export const exercises = (state = exsercisesInitialState, action) => {
               ...state.byId,
               [action.exercise.id]: {
                 ...state.byId[action.exercise.id],
-                progress: { ...state.byId[action.exercise.id].progress, status: PROGRESS.PAUSED, pausedAt: new Date() }
+                progress: { ...state.byId[action.exercise.id].progress, status: 'paused', pausedAt: new Date() }
               }
             }
           }
@@ -87,12 +141,16 @@ export const exercises = (state = exsercisesInitialState, action) => {
   }
 };
 
-const removeExerciseFromStateById = (state, exerciseId) => {
+const removeExerciseFromStateById = (state: ExerciseStore, exerciseId: string) => {
   const restIds = state.ids.filter(id => id !== exerciseId);
   const restById = restIds.reduce((byId, id) => ({ ...byId, [id]: state.byId[id] }), {});
   return { ...state, ids: restIds, byId: restById };
 };
 
-export default combineReducers({
+const reducer = combineReducers({
   exercises
 });
+
+export type AppStore = ReturnType<typeof reducer>;
+
+export default reducer;

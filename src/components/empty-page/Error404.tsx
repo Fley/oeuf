@@ -1,8 +1,9 @@
 import React from 'react';
 import EmptyPage from './EmptyPage';
 import { faKiwiBird } from '@fortawesome/free-solid-svg-icons';
+import { RouteComponentProps } from 'react-router';
 
-export default ({ history }) => {
+export default ({ history }: RouteComponentProps) => {
   const goBackButton = (
     <button className="btn btn-sm btn-primary" onClick={() => history.goBack()}>
       Go back
