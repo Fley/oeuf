@@ -66,7 +66,7 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
   tick = () => {
     this.setState(state => {
       const newTime = state.time - this.props.tick_ms! / 1000;
-      return newTime >= 0 ? { time: newTime, ...state } : { ...state };
+      return newTime >= 0 ? { time: newTime } : { time: 0 };
     });
   };
 
