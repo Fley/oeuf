@@ -1,6 +1,7 @@
 import { Exercise } from './types';
 import {
-  TYPES as actions, Action
+  TYPES as actions,
+  Action
   // fetchAllExercisesRequest,
   // fetchAllExercisesSuccess,
   // fetchAllExercisesFailure,

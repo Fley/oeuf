@@ -28,7 +28,7 @@ export type Progress = {
 export type Exercise = {
   id: string;
   name: string;
-  type: StepType | null;
+  type: StepType | null;
   steps: Step[];
   done: boolean;
   progress: Progress | null;

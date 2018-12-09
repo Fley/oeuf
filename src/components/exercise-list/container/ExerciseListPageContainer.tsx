@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getExerciseList, areExercisesLoading, hasErrorLoadingExercises } from 'store/selectors';
+import { connect, MapStateToProps, MapDispatchToProps } from 'react-redux';
+import { getExerciseList, areExercisesLoading, hasErrorLoadingExercises } from '../../../store/selectors';
 import ExerciseListPage from '../presentational/ExerciseListPage';
 import {
   fetchAllExercisesRequest,
@@ -8,27 +8,52 @@ import {
   acknowledgeExerciseRequest,
   cancelExerciseRequest,
   addExerciseRequest
-} from 'store/actions';
+} from '../../../store/actions';
+import { AppStore } from '../../../store/reducer';
+import { Exercise } from '../../../store/types';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    exercises: getExerciseList(state),
-    loading: areExercisesLoading(state),
-    errorLoading: hasErrorLoadingExercises(state)
-  };
+type ExerciceListPageContainerStateProps = {
+  exercises: Exercise[];
+  loading: boolean;
+  errorLoading: boolean;
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    load: () => dispatch(fetchAllExercisesRequest()),
-    onAddExercise: () => dispatch(addExerciseRequest()),
-    onDeleteExercise: id => dispatch(deleteExerciseRequest(id)),
-    onAcknowledgeExercise: id => dispatch(acknowledgeExerciseRequest(id)),
-    onCancelExercise: id => dispatch(cancelExerciseRequest(id))
-  };
+type ExerciceListPageContainerDispatchProps = {
+  load: () => void;
+  onAddExercise: () => void;
+  onDeleteExercise: (id: string) => void;
+  onAcknowledgeExercise: (id: string) => void;
+  onCancelExercise: (id: string) => void;
 };
 
-class ExerciceListPageContainer extends Component {
+export type ExerciceListPageContainerOwnProps = {};
+
+type ExerciceListPageContainerProps = ExerciceListPageContainerStateProps &
+  ExerciceListPageContainerDispatchProps &
+  ExerciceListPageContainerOwnProps;
+
+const mapStateToProps: MapStateToProps<
+  ExerciceListPageContainerStateProps,
+  ExerciceListPageContainerOwnProps,
+  AppStore
+> = state => ({
+  exercises: getExerciseList(state),
+  loading: areExercisesLoading(state),
+  errorLoading: hasErrorLoadingExercises(state)
+});
+
+const mapDispatchToProps: MapDispatchToProps<
+  ExerciceListPageContainerDispatchProps,
+  ExerciceListPageContainerOwnProps
+> = dispatch => ({
+  load: () => dispatch(fetchAllExercisesRequest()),
+  onAddExercise: () => dispatch(addExerciseRequest()),
+  onDeleteExercise: (id: string) => dispatch(deleteExerciseRequest(id)),
+  onAcknowledgeExercise: (id: string) => dispatch(acknowledgeExerciseRequest(id)),
+  onCancelExercise: (id: string) => dispatch(cancelExerciseRequest(id))
+});
+
+class ExerciceListPageContainer extends Component<ExerciceListPageContainerProps> {
   componentDidMount() {
     this.props.load();
   }

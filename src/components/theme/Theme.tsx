@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import './Theme.css';
 
-const Theme = ({ children }) => {
+const Theme: SFC = ({ children }) => {
   React.Children.only(children);
-  return children;
+  return <>{children}</>;
 };
 
 export default Theme;

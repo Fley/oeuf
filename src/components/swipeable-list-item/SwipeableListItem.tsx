@@ -1,15 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 
-export default class SwipeableListItem extends Component {
-  constructor(props) {
+export type SwipeableListItemProps = {
+  className: string;
+  rightSwipeElement: ReactNode;
+  leftSwipeElement: ReactNode;
+  onSwipeRight: () => void;
+  onSwipeLeft: () => void;
+};
+
+export type SwipeableListItemState = {
+  index: number;
+};
+
+export default class SwipeableListItem extends Component<SwipeableListItemProps, SwipeableListItemState> {
+  constructor(props: SwipeableListItemProps) {
     super(props);
     this.state = { index: 1 };
   }
 
-  onChangeIndex = (index, indexLatest, meta) => {
+  onChangeIndex = (index: number) => {
     this.setState({ index });
   };
 

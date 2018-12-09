@@ -32,34 +32,37 @@ const InputNumber = ({
   />
 );
 
-export const StepRepetition = ({
-  kg,
-  repetition,
-  rest,
-  onContentChange
-}: {
+export type StepRepetitionProps = {
   kg: StepRepetitionType['kg'];
   repetition: StepRepetitionType['repetition'];
   rest: StepRepetitionType['rest'];
   onContentChange: (content: Partial<StepRepetitionType>) => void;
-}) => (
+};
+
+export const StepRepetition = ({ kg, repetition, rest, onContentChange }: StepRepetitionProps) => (
   <div className="d-flex justify-content-between p-3">
     <div>
       <InputNumber
         defaultValue={kg}
         placeholder="Kg"
-        onChange={(e: React.SyntheticEvent<HTMLInputElement>) => onContentChange({ kg: e.currentTarget.value })}
+        onChange={(e: React.SyntheticEvent<HTMLInputElement>) =>
+          onContentChange({ kg: parseFloat(e.currentTarget.value) })
+        }
       />
     </div>
     <div>
       <InputNumber
         defaultValue={repetition}
         placeholder="Repetition"
-        onChange={e => onContentChange({ repetition: e.currentTarget.value })}
+        onChange={e => onContentChange({ repetition: parseFloat(e.currentTarget.value) })}
       />
     </div>
     <div>
-      <InputNumber defaultValue={rest} placeholder="Rest" onChange={e => onContentChange({ rest: e.currentTarget.value })} />
+      <InputNumber
+        defaultValue={rest}
+        placeholder="Rest"
+        onChange={e => onContentChange({ rest: parseFloat(e.currentTarget.value) })}
+      />
     </div>
     <DragHandle />
   </div>
@@ -92,25 +95,27 @@ export const HeaderStepTimed = () => (
   </div>
 );
 
-export const StepTimed = ({
-  duration,
-  rest,
-  onContentChange
-}: {
+export type StepTimedProps = {
   duration: StepTimedType['duration'];
   rest: StepTimedType['rest'];
   onContentChange: (content: Partial<StepTimedType>) => void;
-}) => (
+};
+
+export const StepTimed = ({ duration, rest, onContentChange }: StepTimedProps) => (
   <div className="d-flex justify-content-between p-3">
     <div>
       <InputNumber
         defaultValue={duration}
         placeholder="Duration"
-        onChange={e => onContentChange({ duration: e.currentTarget.value })}
+        onChange={e => onContentChange({ duration: parseFloat(e.currentTarget.value) })}
       />
     </div>
     <div>
-      <InputNumber defaultValue={rest} placeholder="Rest" onChange={e => onContentChange({ rest: e.currentTarget.value })} />
+      <InputNumber
+        defaultValue={rest}
+        placeholder="Rest"
+        onChange={e => onContentChange({ rest: parseFloat(e.currentTarget.value) })}
+      />
     </div>
     <DragHandle />
   </div>

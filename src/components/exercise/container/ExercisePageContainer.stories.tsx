@@ -10,4 +10,4 @@ const rootContainerDecorator: StoryDecorator = storyFn => <RootContainer>{storyF
 storiesOf('exercise/ExercisePageContainer', module)
   .addDecorator((story, context) => withInfo()(story)(context))
   .addDecorator(rootContainerDecorator)
-  .add('Default', () => <ExercisePageContainer />);
+  .add('Default', () => <ExercisePageContainer exerciseId="myExerciseId" />);

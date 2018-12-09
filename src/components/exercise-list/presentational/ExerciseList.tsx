@@ -1,19 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { EXERCISE_TYPE } from 'store/propTypes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListAlt } from '@fortawesome/free-regular-svg-icons';
 import { faAngleRight, faSun, faPoo, faTrash, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
-import EmptyPage from 'components/empty-page/EmptyPage';
+import EmptyPage from '../../../components/empty-page/EmptyPage';
 import SwipeableListItem, {
   SwipedItemAcknowledged,
   SwipedItemRemoved,
   SwipedItemCanceled
-} from 'components/swipeable-list-item/SwipeableListItem';
+} from '../../../components/swipeable-list-item/SwipeableListItem';
 import './ExerciseList.css';
+import { Exercise } from '../../../store/types';
 
-const mapExerciceItem = (onSwipeLeft, onSwipeRight) => ({ id, name, done }) => {
+const mapExerciceItem = (onSwipeLeft: (id: string) => void, onSwipeRight: (id: string) => void) => ({
+  id,
+  name,
+  done
+}: Pick<Exercise, 'id' | 'done' | 'name'>) => {
   return (
     <SwipeableListItem
       key={`exercise-${id}`}
@@ -64,6 +67,16 @@ const mapExerciceItem = (onSwipeLeft, onSwipeRight) => ({ id, name, done }) => {
   );
 };
 
+export type ExerciseListProps = {
+  exercises: Exercise[];
+  onAddExercise: () => void;
+  onAcknowledgeExercise: (id: string) => void;
+  onDeleteExercise: (id: string) => void;
+  onCancelExercise: (id: string) => void;
+  loading?: boolean;
+  errorLoading?: boolean;
+};
+
 const ExerciseList = ({
   exercises = [],
   onAddExercise,
@@ -72,7 +85,7 @@ const ExerciseList = ({
   onCancelExercise,
   loading = false,
   errorLoading = false
-}) => {
+}: ExerciseListProps) => {
   return exercises.length > 0 ? (
     <ul className="list-group shadow-y-sm">
       {exercises && exercises.filter(e => !e.done).map(mapExerciceItem(onAcknowledgeExercise, onDeleteExercise))}
@@ -100,16 +113,6 @@ const ExerciseList = ({
       }
     />
   );
-};
-
-ExerciseList.propTypes = {
-  exercises: PropTypes.arrayOf(EXERCISE_TYPE),
-  onAddExercise: PropTypes.func.isRequired,
-  onAcknowledgeExercise: PropTypes.func.isRequired,
-  onDeleteExercise: PropTypes.func.isRequired,
-  onCancelExercise: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  errorLoading: PropTypes.bool
 };
 
 export default ExerciseList;

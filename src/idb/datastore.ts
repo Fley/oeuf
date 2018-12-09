@@ -34,7 +34,7 @@ export const patchExerciseById = async (id: string, patchExercise: Partial<Exerc
   const store = tx.objectStore<Exercise, string>(EXERCISE_STORE);
   const exercise = await store.get(id);
   if (exercise) {
-    const newExercise = { ...exercise, ...patchExercise } as Exercise;
+    const newExercise = { ...exercise, ...patchExercise };
     store.put(newExercise);
     await tx.complete;
     return newExercise;

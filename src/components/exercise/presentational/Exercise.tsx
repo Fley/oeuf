@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode } from 'react';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell, faStopwatch } from '@fortawesome/free-solid-svg-icons';
@@ -8,8 +7,24 @@ import SwipeableListItem, {
   SwipedItemRemoved,
   SwipedItemCanceled
 } from '../../../components/swipeable-list-item/SwipeableListItem';
-import { EXERCISE_TYPE, TYPE_TIMED, TYPE_REPETITION } from '../../../store/propTypes';
 import { StepRepetition, HeaderStepRepetition, HeaderStepTimed, StepTimed } from './ExerciseStep';
+import {
+  Exercise as ExerciseType,
+  StepType,
+  Step,
+  StepTimed as StepTimedType,
+  StepRepetition as StepRepetitionType
+} from '../../../store/types';
+
+type SortableStepProps = {
+  type: StepType;
+  step: Step;
+  onSwipeLeft: () => void;
+  onSwipeRight: () => void;
+  leftSwipeElement: ReactNode;
+  rightSwipeElement: ReactNode;
+  onContentChange: (content: Partial<StepRepetitionType>) => void;
+};
 
 const SortableStep = SortableElement(
   ({
@@ -20,7 +35,7 @@ const SortableStep = SortableElement(
     leftSwipeElement,
     rightSwipeElement,
     onContentChange
-  }) => (
+  }: SortableStepProps) => (
     <SwipeableListItem
       className={'list-group-item p-0 ' + (done ? 'list-group-item-success' : '')}
       onSwipeLeft={onSwipeLeft}
@@ -28,13 +43,16 @@ const SortableStep = SortableElement(
       leftSwipeElement={leftSwipeElement}
       rightSwipeElement={rightSwipeElement}
     >
-      {type === TYPE_TIMED ? (
-        <StepTimed done={done} duration={content.duration} rest={content.rest} onContentChange={onContentChange} />
+      {type === 'timed' ? (
+        <StepTimed
+          duration={(content as StepTimedType).duration}
+          rest={content.rest}
+          onContentChange={onContentChange}
+        />
       ) : (
         <StepRepetition
-          done={done}
-          kg={content.kg}
-          repetition={content.repetition}
+          kg={(content as StepRepetitionType).kg}
+          repetition={(content as StepRepetitionType).repetition}
           rest={content.rest}
           onContentChange={onContentChange}
         />
@@ -43,8 +61,26 @@ const SortableStep = SortableElement(
   )
 );
 
+type SortableStepListProps = {
+  type: StepType;
+  onSwipeLeft: (step: Step) => void;
+  onSwipeRight: (step: Step) => void;
+  leftSwipeElement: ReactNode;
+  rightSwipeElement: ReactNode;
+  steps: Step[];
+  onUpdateStep: (stepId: string) => (content: Partial<StepRepetitionType>) => void;
+};
+
 const SortableStepList = SortableContainer(
-  ({ type, steps, onSwipeLeft, onSwipeRight, leftSwipeElement, rightSwipeElement, onUpdateStep }) => (
+  ({
+    type,
+    onSwipeLeft,
+    onSwipeRight,
+    leftSwipeElement,
+    rightSwipeElement,
+    steps,
+    onUpdateStep
+  }: SortableStepListProps) => (
     <ul className="list-group list-group-flush">
       {steps.map((step, index) => (
         <SortableStep
@@ -63,8 +99,24 @@ const SortableStepList = SortableContainer(
   )
 );
 
-class Exercise extends Component {
-  constructor(props) {
+export type ExerciseProps = {
+  exercise: ExerciseType;
+  onAddFirstStep: (stepType: StepType) => (stepContent?: Step) => void;
+  onDeleteStep: (stepId: string) => void;
+  onAcknowledgeStep: (stepId: string) => void;
+  onCancelStep: (stepId: string) => void;
+  onUpdateStep: (stepId: string) => (contentPatch: Partial<Step>) => void;
+  onMoveStep: (p: { oldIndex: number; newIndex: number }) => void;
+  onStartExercise: () => void;
+  onExerciseNameChange: (name: string) => void;
+};
+
+export type ExerciseState = {
+  name: string;
+};
+
+class Exercise extends Component<ExerciseProps, ExerciseState> {
+  constructor(props: ExerciseProps) {
     super(props);
     const { name } = props.exercise;
     this.state = {
@@ -97,15 +149,15 @@ class Exercise extends Component {
               id="exerciseName"
               placeholder="Your exercise name"
               defaultValue={name}
-              onChange={e => onExerciseNameChange(e.target.value)}
+              onChange={e => onExerciseNameChange(e.currentTarget.value)}
               autoComplete="off"
               required
             />
           </div>
           <div>
-            {steps && steps.length > 0 ? (
+            {type && steps && steps.length > 0 ? (
               <div>
-                {type === TYPE_TIMED ? <HeaderStepTimed /> : <HeaderStepRepetition />}
+                {type === 'timed' ? <HeaderStepTimed /> : <HeaderStepRepetition />}
                 <SortableStepList
                   type={type}
                   steps={steps.filter(step => !step.done)}
@@ -136,17 +188,13 @@ class Exercise extends Component {
             ) : (
               <div className="card-body text-center">
                 <p className="card-text lead">Choose your exercise type:</p>
-                <button
-                  type="button"
-                  className="btn btn-outline-primary m-1"
-                  onClick={() => onAddFirstStep(TYPE_TIMED)()}
-                >
+                <button type="button" className="btn btn-outline-primary m-1" onClick={() => onAddFirstStep('timed')()}>
                   <FontAwesomeIcon icon={faStopwatch} /> Time serie
                 </button>
                 <button
                   type="button"
                   className="btn btn-outline-primary m-1"
-                  onClick={() => onAddFirstStep(TYPE_REPETITION)()}
+                  onClick={() => onAddFirstStep('repetition')()}
                 >
                   <FontAwesomeIcon icon={faDumbbell} /> Repetition serie
                 </button>
@@ -158,10 +206,5 @@ class Exercise extends Component {
     );
   }
 }
-
-Exercise.propTypes = {
-  exercise: EXERCISE_TYPE.isRequired,
-  onAddFirstStep: PropTypes.func.isRequired
-};
 
 export default Exercise;

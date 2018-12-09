@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(loggerMiddleware);
 }
 
-export default function configureStore(preloadedState: AppStore) {
+export default function configureStore(preloadedState?: AppStore) {
   const store = createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(...middlewares)));
   sagaMiddleware.run(saga);
   return store;

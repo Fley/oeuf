@@ -16,7 +16,7 @@ storiesOf('EmptyPage', module)
     <Layout
       header={'Exercises'}
       navItems={[
-        <button className="btn btn-link nav-link">
+        <button key="nav-new-exercise" className="btn btn-link nav-link">
           <FontAwesomeIcon icon={faPlusSquare} /> NEW EXERCISE
         </button>
       ]}

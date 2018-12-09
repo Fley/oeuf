@@ -226,7 +226,7 @@ export const cancelExerciseStepFailure = (exerciseId: string, stepId: string, er
 });
 
 // ADD_EXERCISE_STEP
-export const addExerciseStepRequest = (exerciseId: string, stepType: StepType, stepContent: Step) => {
+export const addExerciseStepRequest = (exerciseId: string, stepType: StepType, stepContent?: Step) => {
   const step = createExerciseStep(stepType, stepContent);
   return {
     type: TYPES.ADD_EXERCISE_STEP.REQUEST,

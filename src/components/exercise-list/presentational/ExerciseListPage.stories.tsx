@@ -3,7 +3,14 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import ExerciseListPage from './ExerciseListPage';
-import Shell from 'components/shell/Shell';
+import Shell from '../../../components/shell/Shell';
+
+const exerciseListActions = {
+  onAddExercise: action('onAddExercise'),
+  onAcknowledgeExercise: action('onAcknowledgeExercise'),
+  onCancelExercise: action('onCancelExercise'),
+  onDeleteExercise: action('onDeleteExercise')
+};
 
 storiesOf('exercise-list/ExerciseListPage', module)
   .addDecorator((story, context) => withInfo()(story)(context))
@@ -11,14 +18,11 @@ storiesOf('exercise-list/ExerciseListPage', module)
     <Shell>
       <ExerciseListPage
         exercises={[
-          { id: '1', name: 'Chess press' },
-          { id: '2', name: 'Leg press' },
-          { id: '3', name: 'Running 40 minutes', done: true }
+          { id: '1', name: 'Chess press', type: 'timed', done: false, steps: [], progress: null },
+          { id: '2', name: 'Leg press', type: 'timed', done: false, steps: [], progress: null },
+          { id: '3', name: 'Running 40 minutes', type: 'timed', done: true, steps: [], progress: null }
         ]}
-        onAddExercise={action('onAddExercise')}
-        onAcknowledgeExercise={action('onAcknowledgeExercise')}
-        onCancelExercise={action('onCancelExercise')}
-        onDeleteExercise={action('onDeleteExercise')}
+        {...exerciseListActions}
       />
     </Shell>
   ))
@@ -26,57 +30,37 @@ storiesOf('exercise-list/ExerciseListPage', module)
     <Shell>
       <ExerciseListPage
         exercises={[
-          { id: '21', name: 'Chess press' },
-          { id: '22', name: 'Leg press' },
-          { name: 'Lorem ipsum', id: '1' },
-          { name: 'Lorem ipsum', id: '2' },
-          { name: 'Lorem ipsum', id: '3' },
-          { name: 'Lorem ipsum', id: '4' },
-          { name: 'Lorem ipsum', id: '5' },
-          { name: 'Lorem ipsum', id: '6' },
-          { name: 'Lorem ipsum', id: '7' },
-          { name: 'Lorem ipsum', id: '8' },
-          { name: 'Lorem ipsum', id: '9' },
-          { name: 'Lorem ipsum', id: '10' },
-          { name: 'Lorem ipsum', id: '11' },
-          { id: '23', name: 'Running 40 minutes', done: true }
+          { id: '21', name: 'Chess press', type: 'timed', done: false, steps: [], progress: null },
+          { id: '22', name: 'Leg press', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '1', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '2', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '3', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '4', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '5', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '6', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '7', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '8', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '9', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '10', type: 'timed', done: false, steps: [], progress: null },
+          { name: 'Lorem ipsum', id: '11', type: 'timed', done: false, steps: [], progress: null },
+          { id: '23', name: 'Running 40 minutes', type: 'timed', done: true, steps: [], progress: null }
         ]}
-        onAddExercise={action('onAddExercise')}
-        onAcknowledgeExercise={action('onAcknowledgeExercise')}
-        onCancelExercise={action('onCancelExercise')}
-        onDeleteExercise={action('onDeleteExercise')}
+        {...exerciseListActions}
       />
     </Shell>
   ))
   .add('with empty exercise list', () => (
     <Shell>
-      <ExerciseListPage
-        onAddExercise={action('onAddExercise')}
-        onAcknowledgeExercise={action('onAcknowledgeExercise')}
-        onCancelExercise={action('onCancelExercise')}
-        onDeleteExercise={action('onDeleteExercise')}
-      />
+      <ExerciseListPage exercises={[]} {...exerciseListActions} />
     </Shell>
   ))
   .add('loading', () => (
     <Shell>
-      <ExerciseListPage
-        onAddExercise={action('onAddExercise')}
-        onAcknowledgeExercise={action('onAcknowledgeExercise')}
-        onCancelExercise={action('onCancelExercise')}
-        onDeleteExercise={action('onDeleteExercise')}
-        loading
-      />
+      <ExerciseListPage exercises={[]} {...exerciseListActions} loading />
     </Shell>
   ))
   .add('error loading', () => (
     <Shell>
-      <ExerciseListPage
-        onAddExercise={action('onAddExercise')}
-        onAcknowledgeExercise={action('onAcknowledgeExercise')}
-        onCancelExercise={action('onCancelExercise')}
-        onDeleteExercise={action('onDeleteExercise')}
-        errorLoading
-      />
+      <ExerciseListPage exercises={[]} {...exerciseListActions} errorLoading />
     </Shell>
   ));

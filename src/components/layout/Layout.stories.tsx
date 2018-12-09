@@ -10,8 +10,12 @@ storiesOf('layout/Layout', module)
     <Layout
       header={'My header'}
       navItems={[
-        <button className="btn btn-link nav-link btn-block">Start</button>,
-        <button className="btn btn-link nav-link btn-block">Stop</button>
+        <button key="nav-start" className="btn btn-link nav-link btn-block">
+          Start
+        </button>,
+        <button key="nav-stop" className="btn btn-link nav-link btn-block">
+          Stop
+        </button>
       ]}
     >
       Hello

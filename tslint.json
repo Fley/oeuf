@@ -1,0 +1,21 @@
+{
+  "extends": ["tslint-react", "tslint-config-prettier"],
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "rules": {
+    "prettier": true,
+    "comma-dangle": ["error", "never"],
+    "semi": ["warn", "always"],
+    "no-empty": true,
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false,
+    "max-len": [
+      "warn",
+      {
+        "code": 120,
+        "tabWidth": 2
+      }
+    ],
+    "quotes": ["warn", "single"],
+    "no-return-await": true
+  }
+}

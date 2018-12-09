@@ -1,8 +1,18 @@
 import React, { PureComponent } from 'react';
 import './styles.css';
 
-export class TimedProgress extends PureComponent {
-  constructor(props) {
+export type TimedProgressProps = {
+  time: number;
+  tick_ms?: number;
+  onFinished: () => void;
+};
+export type TimedProgressState = {
+  time: number;
+  status: 'STOPPED' | 'RUNNING' | 'FINISHED';
+};
+
+export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgressState> {
+  constructor(props: TimedProgressProps) {
     super(props);
     this.state = {
       time: this.props.time,
@@ -17,20 +27,20 @@ export class TimedProgress extends PureComponent {
     }
   };
 
-  intervalId = null;
-  timeoutId = null;
+  intervalId?: number;
+  timeoutId?: number;
 
   clearTimers = () => {
-    clearInterval(this.intervalId);
-    this.intervalId = null;
-    clearTimeout(this.timeoutId);
-    this.timeoutId = null;
+    this.intervalId && clearInterval(this.intervalId);
+    this.intervalId = undefined;
+    this.timeoutId && clearTimeout(this.timeoutId);
+    this.timeoutId = undefined;
   };
   startTimers = () => {
     this.tick();
     this.clearTimers();
-    this.intervalId = setInterval(this.tick, this.props.tick_ms);
-    this.timeoutId = setTimeout(this.finish, this.state.time * 1000);
+    this.intervalId = window.setInterval(this.tick, this.props.tick_ms);
+    this.timeoutId = window.setTimeout(this.finish, this.state.time * 1000);
   };
 
   start = () => {
@@ -55,8 +65,8 @@ export class TimedProgress extends PureComponent {
   };
   tick = () => {
     this.setState(state => {
-      const newTime = state.time - this.props.tick_ms / 1000;
-      return newTime >= 0 ? { time: newTime } : {};
+      const newTime = state.time - this.props.tick_ms! / 1000;
+      return newTime >= 0 ? { time: newTime, ...state } : { ...state };
     });
   };
 
@@ -120,7 +130,7 @@ export class TimedProgress extends PureComponent {
                 fill="transparent"
                 strokeDasharray="565.48"
                 strokeDashoffset={this.getStrokeDashoffset(time / this.props.time)}
-                style={{ transition: `stroke-dashoffset ${this.props.tick_ms / 1000}s linear` }}
+                style={{ transition: `stroke-dashoffset ${this.props.tick_ms! / 1000}s linear` }}
               />
             </svg>
             <div className="timer-info d-flex">

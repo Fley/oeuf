@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faPlay, faTimes, faPoo, faSun, faQuidditch } from '@fortawesome/free-solid-svg-icons';
-import Exercise from './Exercise';
 import { Link } from 'react-router-dom';
-import { EXERCISE_TYPE } from '../../../store/propTypes';
 import EmptyPage from '../../../components/empty-page/EmptyPage';
 import Layout from '../../../components/layout/Layout';
+import { StepType, Step, Exercise as ExerciseType } from '../../../store/types';
+import Exercise from './Exercise';
 
 const LoadingPage = () => (
   <EmptyPage text="Loading ..." icon={faSun} action={<div>Your exercise is being loaded</div>} />
@@ -30,10 +29,24 @@ const ExerciseNotFoundPage = () => (
   />
 );
 
+export type ExercisePageProps = {
+  loading?: boolean;
+  exercise?: ExerciseType;
+  errorLoading?: boolean;
+  onAddStep: (exerciseId: string) => (stepType: StepType) => (stepContent?: Step) => void;
+  onDeleteStep: (exerciseId: string) => (stepId: string) => void;
+  onAcknowledgeStep: (exerciseId: string) => (stepId: string) => void;
+  onCancelStep: (exerciseId: string) => (stepId: string) => void;
+  onUpdateStep: (exerciseId: string) => (stepId: string) => (contentPatch: Partial<Step>) => void;
+  onMoveStep: (exerciseId: string) => (p: { oldIndex: number; newIndex: number }) => void;
+  onStartExercise: () => void;
+  onExerciseNameChange: (exerciseId: string) => (name: string) => void;
+};
+
 const ExercisePage = ({
-  exercise,
   loading = false,
   errorLoading = false,
+  exercise,
   onAddStep,
   onDeleteStep,
   onAcknowledgeStep,
@@ -42,7 +55,7 @@ const ExercisePage = ({
   onUpdateStep,
   onMoveStep,
   onExerciseNameChange
-}) => {
+}: ExercisePageProps) => {
   const header = (
     <Link to="/" className="btn btn-link text-dark" aria-label="Back to exercises list">
       <FontAwesomeIcon icon={faTimes} />
@@ -50,6 +63,7 @@ const ExercisePage = ({
   );
   let navItems = [
     <button
+      key="nav-start"
       className="btn btn-link nav-link btn-block"
       disabled={loading || errorLoading}
       onClick={() => onStartExercise()}
@@ -61,9 +75,10 @@ const ExercisePage = ({
     navItems = [
       ...navItems,
       <button
+        key="nav-new-step"
         className="btn btn-link nav-link btn-block"
         disabled={loading || errorLoading}
-        onClick={() => onAddStep(exercise.id)(exercise.type)(exercise.steps[exercise.steps.length - 1])}
+        onClick={() => onAddStep(exercise.id)(exercise.type!)(exercise.steps[exercise.steps.length - 1])}
       >
         <FontAwesomeIcon icon={faPlusSquare} /> New step
       </button>
@@ -85,6 +100,9 @@ const ExercisePage = ({
           onUpdateStep={onUpdateStep(exercise.id)}
           onMoveStep={onMoveStep(exercise.id)}
           onExerciseNameChange={onExerciseNameChange(exercise.id)}
+          onStartExercise={() => {
+            return;
+          }}
         />
       ) : (
         <ExerciseNotFoundPage />

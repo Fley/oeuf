@@ -1,4 +1,4 @@
-import { Exercise, StepType, Step } from './types';
+import { Exercise } from './types';
 import { all, call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { arrayMove } from 'react-sortable-hoc';

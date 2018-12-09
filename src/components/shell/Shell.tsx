@@ -1,11 +1,7 @@
-import React from 'react';
+import React, { SFC } from 'react';
 
-const Shell = ({ children }) => {
-  return (
-    <div>
-      {children}
-    </div>
-  );
+const Shell: SFC = ({ children }) => {
+  return <div>{children}</div>;
 };
 
 export default Shell;
