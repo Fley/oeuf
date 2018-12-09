@@ -1,1 +1,1 @@
-export { TimedProgress } from './containers/TimedProgress';
+export { TimedProgress } from './presentational/TimedProgress';

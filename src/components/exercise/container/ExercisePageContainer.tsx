@@ -1,4 +1,4 @@
-import React, { Component, Dispatch } from 'react';
+import React, { Component } from 'react';
 import { connect, MapStateToProps, MapDispatchToProps } from 'react-redux';
 import { getExerciseById, areExercisesLoading, hasErrorLoadingExercises } from '../../../store/selectors';
 import ExercisePage from '../presentational/ExercisePage';
@@ -10,8 +10,7 @@ import {
   acknowledgeExerciseStepRequest,
   cancelExerciseStepRequest,
   updateExerciseStepRequest,
-  moveExerciseStepRequest,
-  Action
+  moveExerciseStepRequest
 } from '../../../store/actions';
 import { AppStore } from '../../../store/reducer';
 import { StepType, Step, Exercise } from '../../../store/types';
@@ -47,9 +46,10 @@ const mapStateToProps: MapStateToProps<ExercicePageContainerStateProps, Exercice
   errorLoading: hasErrorLoadingExercises(state)
 });
 
-const mapDispatchToProps: MapDispatchToProps<ExercicePageContainerDispatchProps, ExercicePageContainerOwnProps> = (
-  dispatch: Dispatch<Action>
-) => {
+const mapDispatchToProps: MapDispatchToProps<
+  ExercicePageContainerDispatchProps,
+  ExercicePageContainerOwnProps
+> = dispatch => {
   return {
     load: () => dispatch(fetchAllExercisesRequest()),
     onAddStep: (exerciseId: string) => (stepType: StepType) => (stepContent?: Step) =>

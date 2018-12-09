@@ -1,13 +1,10 @@
 import React from 'react';
-import { storiesOf, StoryDecorator } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import RootContainer from '../../../redux/RootContainer';
 import ExercisePageContainer from './ExercisePageContainer';
-
-// TODO: move to common space
-const rootContainerDecorator: StoryDecorator = storyFn => <RootContainer>{storyFn()}</RootContainer>;
+import { ReduxDecorator } from 'story-decorators';
 
 storiesOf('exercise/ExercisePageContainer', module)
   .addDecorator((story, context) => withInfo()(story)(context))
-  .addDecorator(rootContainerDecorator)
+  .addDecorator(ReduxDecorator)
   .add('Default', () => <ExercisePageContainer exerciseId="myExerciseId" />);
