@@ -7,7 +7,7 @@ import { StoryDecorator } from '@storybook/react';
 export const ReduxDecorator: StoryDecorator = storyFn => <RootContainer>{storyFn()}</RootContainer>;
 
 export const StoryWrapper: StoryDecorator = storyFn => (
-  <Router initialEntries={['/']}>
+  <Router>
     <Theme>{storyFn()}</Theme>
   </Router>
 );
