@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import './styles.css';
 
 export type TimedProgressProps = {
-  time: number;
+  totalTime: number;
   tick_ms?: number;
   onFinished: () => void;
 };
 export type TimedProgressState = {
-  time: number;
+  remainingTime: number;
   status: 'STOPPED' | 'RUNNING' | 'FINISHED';
 };
 
@@ -15,7 +15,7 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
   constructor(props: TimedProgressProps) {
     super(props);
     this.state = {
-      time: this.props.time,
+      remainingTime: this.props.totalTime,
       status: 'STOPPED'
     };
   }
@@ -40,11 +40,11 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
     this.tick();
     this.clearTimers();
     this.intervalId = window.setInterval(this.tick, this.props.tick_ms);
-    this.timeoutId = window.setTimeout(this.finish, this.state.time * 1000);
+    this.timeoutId = window.setTimeout(this.finish, this.state.remainingTime * 1000);
   };
 
   start = () => {
-    if (this.state.status !== 'RUNNING' && this.state.time > 0) {
+    if (this.state.status !== 'RUNNING' && this.state.remainingTime > 0) {
       this.setState({ status: 'RUNNING' }, () => {
         this.startTimers();
       });
@@ -56,17 +56,17 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
   };
   finish = () => {
     this.clearTimers();
-    this.setState({ status: 'FINISHED', time: 0 });
+    this.setState({ status: 'FINISHED', remainingTime: 0 });
   };
   reset = () => {
-    this.setState({ time: this.props.time }, () => {
+    this.setState({ remainingTime: this.props.totalTime }, () => {
       if (this.state.status === 'RUNNING') this.startTimers();
     });
   };
   tick = () => {
     this.setState(state => {
-      const newTime = state.time - this.props.tick_ms! / 1000;
-      return newTime >= 0 ? { time: newTime } : { time: 0 };
+      const newTime = state.remainingTime - this.props.tick_ms! / 1000;
+      return newTime >= 0 ? { remainingTime: newTime } : { remainingTime: 0 };
     });
   };
 
@@ -80,7 +80,7 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
   };
 
   render() {
-    const { status, time } = this.state;
+    const { status, remainingTime } = this.state;
     return (
       <div
         className="d-flex align-items-center w-100 text-center bg-light text-dark"
@@ -129,12 +129,12 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
                 cy="100"
                 fill="transparent"
                 strokeDasharray="565.48"
-                strokeDashoffset={this.getStrokeDashoffset(time / this.props.time)}
+                strokeDashoffset={this.getStrokeDashoffset(remainingTime / this.props.totalTime)}
                 style={{ transition: `stroke-dashoffset ${this.props.tick_ms! / 1000}s linear` }}
               />
             </svg>
             <div className="timer-info d-flex">
-              <div className="m-auto display-2">{Math.ceil(time)}</div>
+              <div className="m-auto display-2">{Math.ceil(remainingTime)}</div>
             </div>
           </div>
           {

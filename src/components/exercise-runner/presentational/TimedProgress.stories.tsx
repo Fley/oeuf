@@ -8,4 +8,4 @@ import { action } from '@storybook/addon-actions';
 storiesOf('exercise/runner/TimedProgress', module)
   .addDecorator(ReduxDecorator)
   .addDecorator((story, context) => withInfo()(story)(context))
-  .add('Empty', () => <TimedProgress time={5} onFinished={action('onFinished')} />);
+  .add('Empty', () => <TimedProgress totalTime={5} onFinished={action('onFinished')} />);
