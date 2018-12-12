@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { TimedProgress } from './TimedProgress';
+import { RepetitionProgress } from './RepetitionProgress';
 import { action } from '@storybook/addon-actions';
 
-storiesOf('exercise/runner/TimedProgress', module)
+storiesOf('exercise/runner/RepetitionProgress', module)
   .addDecorator((story, context) => withInfo()(story)(context))
-  .add('with time', () => <TimedProgress totalTime={5} onFinished={action('onFinished')} />);
+  .add('with repetition', () => <RepetitionProgress kg={25} repetition={12} onFinished={action('onFinished')} />);

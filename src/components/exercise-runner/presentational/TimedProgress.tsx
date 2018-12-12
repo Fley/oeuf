@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import './styles.css';
+import { faRedo } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type TimedProgressProps = {
   totalTime: number;
@@ -79,6 +81,10 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
     return percentage * c;
   };
 
+  componentWillUnmount() {
+    this.clearTimers();
+  }
+
   render() {
     const { status, remainingTime } = this.state;
     return (
@@ -137,13 +143,11 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
               <div className="m-auto display-2">{Math.ceil(remainingTime)}</div>
             </div>
           </div>
-          {
-            <div className="m-5">
-              <button className="btn btn-sm btn-primary m-1" onClick={this.reset}>
-                Reset
-              </button>
-            </div>
-          }
+          <div className="m-5">
+            <button className="btn btn-sm btn-primary m-1" onClick={this.reset}>
+              <FontAwesomeIcon flip="horizontal" icon={faRedo} /> Reset
+            </button>
+          </div>
         </div>
       </div>
     );

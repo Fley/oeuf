@@ -18,7 +18,7 @@ const Layout: SFC<LayoutProps> = ({
 }) => (
   <div>
     <nav
-      className={classNames('navbar sticky-top shadow-sm', headerBackground.className, {
+      className={classNames('navbar justify-content-start sticky-top shadow-sm', headerBackground.className, {
         'navbar-light': headerBackground.isLight,
         'navbar-dark': !headerBackground.isLight
       })}
