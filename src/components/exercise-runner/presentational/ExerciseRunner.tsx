@@ -1,4 +1,5 @@
-import React, { SFC, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import classNames from 'classnames';
 import { Exercise, Step, StepTimed, StepRepetition } from 'store/types';
 import { Layout, CenteredPageLayout } from 'components/layout';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,7 @@ import { TimedProgress } from './TimedProgress';
 import { RepetitionProgress } from './RepetitionProgress';
 import { RouterChildContext } from 'react-router';
 
-type ExerciseRunnerProps = {
+export type ExerciseRunnerProps = {
   exerciseId: Exercise['id'];
   exerciseName: Exercise['name'];
   type: Exercise['type'];
@@ -22,16 +23,20 @@ type ExerciseRunnerLayoutState = {
   rest: boolean;
 };
 
-class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseRunnerLayoutState> {
+export class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseRunnerLayoutState> {
   constructor(props: ExerciseRunnerProps) {
     super(props);
     this.state = { rest: false };
   }
 
+  static defaultProps: { currentStepIndex: number } = {
+    currentStepIndex: 0
+  };
+
   context!: RouterChildContext;
   goToNextStep = () => {
     this.context.router.history.push(
-      `/${this.props.exerciseId}/runner/${this.props.steps[(this.props.currentStepIndex || 0) + 1].id}`
+      `/${this.props.exerciseId}/runner/${this.props.steps[this.props.currentStepIndex + 1].id}`
     );
   };
 
@@ -62,7 +67,7 @@ class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseRunnerLa
             <Link to={`/${exerciseId}`} className="btn btn-link text-dark" aria-label="Back to exercises list">
               <FontAwesomeIcon icon={faTimes} />
             </Link>
-            {exerciseName}
+            {`${exerciseName} - Step ${currentStepIndex + 1}`}
           </>
         }
         navItems={[
@@ -98,7 +103,7 @@ class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseRunnerLa
           </>
         ]}
       >
-        <CenteredPageLayout>
+        <CenteredPageLayout className={classNames({ success: steps[currentStepIndex].done })}>
           {this.state.rest ? (
             <TimedProgress
               key="rest-timed-progress"
@@ -108,7 +113,7 @@ class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseRunnerLa
             />
           ) : (
             <>
-              {this.renderProgress}
+              {this.renderProgress(steps[currentStepIndex])}
               <div className="d-flex">
                 <button className="btn btn-outline-info btn-block m-1" onClick={this.rest}>
                   <FontAwesomeIcon icon={faSmileBeam} /> Rest
@@ -121,27 +126,3 @@ class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseRunnerLa
     );
   }
 }
-
-export type TimedRunnerProps = {
-  exerciseId: Exercise['id'];
-  exerciseName: Exercise['name'];
-  steps: StepTimed[];
-  currentStepIndex?: number;
-  onStepFinished: (stepId: string) => void;
-};
-
-export const TimedRunner: SFC<TimedRunnerProps> = ({ currentStepIndex = 0, ...props }) => (
-  <ExerciseRunner type="timed" {...props} currentStepIndex={currentStepIndex} />
-);
-
-export type RepetitionRunnerProps = {
-  exerciseId: Exercise['id'];
-  exerciseName: Exercise['name'];
-  steps: StepRepetition[];
-  currentStepIndex?: number;
-  onStepFinished: (stepId: string) => void;
-};
-
-export const RepetitionRunner: SFC<RepetitionRunnerProps> = ({ currentStepIndex = 0, ...props }) => (
-  <ExerciseRunner type="repetition" {...props} currentStepIndex={currentStepIndex} />
-);

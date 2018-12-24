@@ -1,10 +1,8 @@
 import React from 'react';
-import { storiesOf, StoryDecorator } from '@storybook/react';
-import RootContainer from '../../../redux/RootContainer';
+import { storiesOf } from '@storybook/react';
 import ExerciseListPageContainer from './ExerciseListPageContainer';
-
-const rootContainerDecorator: StoryDecorator = storyFn => <RootContainer>{storyFn()}</RootContainer>;
+import { ReduxDecorator } from 'story-decorators';
 
 storiesOf('exercise-list/ExerciseListPageContainer', module)
-  .addDecorator(rootContainerDecorator)
+  .addDecorator(ReduxDecorator())
   .add('Default', () => <ExerciseListPageContainer />);

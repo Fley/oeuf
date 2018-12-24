@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type TimedProgressProps = {
   totalTime: number;
-  tick_ms?: number;
-  theme?: 'rest' | 'exercise';
+  tick_ms: number;
+  theme: 'rest' | 'exercise';
   onFinished: () => void;
 };
 export type TimedProgressState = {
@@ -24,7 +24,7 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
     };
   }
 
-  static defaultProps = {
+  static defaultProps: Pick<TimedProgressProps, 'onFinished' | 'tick_ms' | 'theme'> = {
     tick_ms: 1000,
     theme: 'exercise',
     onFinished: () => {
@@ -62,6 +62,7 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
   finish = () => {
     this.clearTimers();
     this.setState({ status: 'FINISHED', remainingTime: 0 });
+    this.props.onFinished();
   };
   reset = () => {
     this.setState({ remainingTime: this.props.totalTime }, () => {

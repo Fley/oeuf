@@ -7,6 +7,7 @@ import ExercisePageContainer from './components/exercise/container/ExercisePageC
 import RootContainer from './redux/RootContainer';
 import { BrowserRouter as Router, Switch, Route, RouteComponentProps } from 'react-router-dom';
 import Error404 from './components/empty-page/Error404';
+import { ExerciseRunnerContainer } from 'components/exercise-runner';
 
 class App extends Component {
   render() {
@@ -22,6 +23,13 @@ class App extends Component {
                   path="/:id"
                   component={({ match }: RouteComponentProps<{ id: string }>) => (
                     <ExercisePageContainer exerciseId={match.params.id} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/:exerciseId/runner/:stepId"
+                  component={({ match }: RouteComponentProps<{ exerciseId: string; stepId: string }>) => (
+                    <ExerciseRunnerContainer exerciseId={match.params.exerciseId} stepId={match.params.stepId} />
                   )}
                 />
                 <Route component={Error404} />

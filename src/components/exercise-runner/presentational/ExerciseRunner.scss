@@ -1,0 +1,5 @@
+@import '../../theme/bootstrap-variables.scss';
+
+.success {
+  background: $success linear-gradient(180deg, lighten($success, 60%), lighten($success, 45%)) repeat-x;
+}

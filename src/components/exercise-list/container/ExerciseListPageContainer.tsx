@@ -55,7 +55,9 @@ const mapDispatchToProps: MapDispatchToProps<
 
 class ExerciceListPageContainer extends Component<ExerciceListPageContainerProps> {
   componentDidMount() {
-    this.props.load();
+    if (this.props.exercises.length === 0) {
+      this.props.load();
+    }
   }
   render() {
     const { load, ...restProps } = this.props;

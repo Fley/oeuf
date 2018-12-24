@@ -1,39 +1,41 @@
 import React from 'react';
+import './ExerciseRunner.css';
 import { storiesOf } from '@storybook/react';
-import { ReduxDecorator } from '../../../story-decorators';
-import { TimedRunner, TimedRunnerProps, RepetitionRunnerProps, RepetitionRunner } from './ExerciseRunner';
+import { ExerciseRunner, ExerciseRunnerProps } from './ExerciseRunner';
 import { action } from '@storybook/addon-actions';
 
-const timerRunnerProps: TimedRunnerProps = {
+const timerRunnerProps: ExerciseRunnerProps = {
   exerciseId: 'an-id',
   exerciseName: 'Run',
+  type: 'timed',
   steps: [
-    { id: 'first-step-id', duration: 45, rest: 20, done: false },
+    { id: 'first-step-id', duration: 45, rest: 20, done: true },
     { id: 'second-step-id', duration: 50, rest: 30, done: false },
     { id: 'third-step-id', duration: 60, rest: 40, done: false }
   ],
-  onStepFinished: action('onStepFinished')
+  onStepFinished: action('onStepFinished'),
+  currentStepIndex: 0
 };
 
 storiesOf('exercise/runner/TimerRunner', module)
-  .addDecorator(ReduxDecorator)
-  .add('First step', () => <TimedRunner {...timerRunnerProps} />)
-  .add('Second step', () => <TimedRunner currentStepIndex={1} {...timerRunnerProps} />)
-  .add('Last step', () => <TimedRunner currentStepIndex={2} {...timerRunnerProps} />);
+  .add('First step', () => <ExerciseRunner {...timerRunnerProps} />)
+  .add('Second step', () => <ExerciseRunner {...timerRunnerProps} currentStepIndex={1} />)
+  .add('Last step', () => <ExerciseRunner {...timerRunnerProps} currentStepIndex={2} />);
 
-const repetitionRunnerProps: RepetitionRunnerProps = {
+const repetitionRunnerProps: ExerciseRunnerProps = {
   exerciseId: 'an-id',
   exerciseName: 'Run',
+  type: 'repetition',
   steps: [
-    { id: 'first-step-id', kg: 45, repetition: 5, rest: 20, done: false },
+    { id: 'first-step-id', kg: 45, repetition: 5, rest: 20, done: true },
     { id: 'second-step-id', kg: 50, repetition: 5, rest: 30, done: false },
     { id: 'third-step-id', kg: 60, repetition: 5, rest: 40, done: false }
   ],
-  onStepFinished: action('onStepFinished')
+  onStepFinished: action('onStepFinished'),
+  currentStepIndex: 0
 };
 
 storiesOf('exercise/runner/RepetitionRunner', module)
-  .addDecorator(ReduxDecorator)
-  .add('First step', () => <RepetitionRunner {...repetitionRunnerProps} />)
-  .add('Second step', () => <RepetitionRunner currentStepIndex={1} {...repetitionRunnerProps} />)
-  .add('Last step', () => <RepetitionRunner currentStepIndex={2} {...repetitionRunnerProps} />);
+  .add('First step', () => <ExerciseRunner {...repetitionRunnerProps} />)
+  .add('Second step', () => <ExerciseRunner {...repetitionRunnerProps} currentStepIndex={1} />)
+  .add('Last step', () => <ExerciseRunner {...repetitionRunnerProps} currentStepIndex={2} />);

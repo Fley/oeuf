@@ -29,6 +29,11 @@ const ExerciseNotFoundPage = () => (
   />
 );
 
+const firstStepIdToRun = (steps: Step[]) => {
+  const stepNotDone = steps.filter(step => !step.done);
+  return stepNotDone.length > 0 ? stepNotDone[0].id : steps.length > 0 ? steps[0].id : undefined;
+};
+
 export type ExercisePageProps = {
   loading?: boolean;
   exercise?: ExerciseType;
@@ -62,14 +67,19 @@ const ExercisePage = ({
     </Link>
   );
   let navItems = [
-    <button
-      key="nav-start"
-      className="btn btn-link nav-link btn-block"
-      disabled={loading || errorLoading}
-      onClick={() => onStartExercise()}
-    >
-      <FontAwesomeIcon icon={faPlay} /> Start
-    </button>
+    loading || errorLoading || !exercise || exercise.steps.length === 0 ? (
+      <button key="nav-start" className="btn btn-link nav-link btn-block" disabled>
+        <FontAwesomeIcon icon={faPlay} /> Start
+      </button>
+    ) : (
+      <Link
+        to={`/${exercise!.id}/runner/${firstStepIdToRun(exercise.steps)}`}
+        key="nav-start"
+        className="btn btn-link nav-link btn-block"
+      >
+        <FontAwesomeIcon icon={faPlay} /> Start
+      </Link>
+    )
   ];
   if (exercise && exercise.type) {
     navItems = [

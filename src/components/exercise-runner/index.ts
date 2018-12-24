@@ -1,1 +1,1 @@
-export { RepetitionRunner, TimedRunner } from './presentational/ExerciseRunner';
+export { ExerciseRunnerContainer } from './container/ExerciseRunnerContainer';
