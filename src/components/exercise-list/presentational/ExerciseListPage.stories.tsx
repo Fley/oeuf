@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import ExerciseListPage from './ExerciseListPage';
 import Shell from '../../../components/shell/Shell';
@@ -13,7 +12,6 @@ const exerciseListActions = {
 };
 
 storiesOf('exercise-list/ExerciseListPage', module)
-  .addDecorator((story, context) => withInfo()(story)(context))
   .add('with exercises list', () => (
     <Shell>
       <ExerciseListPage

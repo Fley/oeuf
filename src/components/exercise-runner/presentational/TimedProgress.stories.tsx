@@ -1,9 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
 import { TimedProgress } from './TimedProgress';
 import { action } from '@storybook/addon-actions';
+import { CenteredPageLayout } from 'components/layout';
 
 storiesOf('exercise/runner/TimedProgress', module)
-  .addDecorator((story, context) => withInfo()(story)(context))
-  .add('with time', () => <TimedProgress totalTime={5} onFinished={action('onFinished')} />);
+  .add('with time', () => (
+    <CenteredPageLayout>
+      <TimedProgress totalTime={5} onFinished={action('onFinished')} />
+    </CenteredPageLayout>
+  ))
+  .add('rest theme', () => (
+    <CenteredPageLayout>
+      <TimedProgress totalTime={5} onFinished={action('onFinished')} theme="rest" />
+    </CenteredPageLayout>
+  ));

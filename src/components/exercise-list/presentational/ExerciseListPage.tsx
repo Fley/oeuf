@@ -2,7 +2,7 @@ import React from 'react';
 import ExerciseList, { ExerciseListProps } from './ExerciseList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import Layout from '../../../components/layout/Layout';
+import { Layout } from '../../../components/layout';
 
 const ExerciseListPage = ({
   loading = false,

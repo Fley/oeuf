@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import ExerciseList from './ExerciseList';
-import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 
 const exerciseListActions = {
@@ -12,7 +11,6 @@ const exerciseListActions = {
 };
 
 storiesOf('exercise-list/ExerciseList', module)
-  .addDecorator((story, context) => withInfo()(story)(context))
   .add('with empty exercise list', () => <ExerciseList exercises={[]} {...exerciseListActions} />)
   .add('with exercises list', () => (
     <ExerciseList

@@ -1,1 +1,1 @@
-export { TimedProgress } from './presentational/TimedProgress';
+export { RepetitionRunner, TimedRunner } from './presentational/ExerciseRunner';

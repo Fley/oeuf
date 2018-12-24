@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import ExercisePage from './ExercisePage';
 
@@ -16,7 +15,6 @@ const actionProps = {
 };
 
 storiesOf('exercise/ExercisePage', module)
-  .addDecorator((story, context) => withInfo()(story)(context))
   .add('Empty', () => (
     <ExercisePage
       exercise={{ id: '1', name: 'New exercise', steps: [], type: null, done: false, progress: null }}

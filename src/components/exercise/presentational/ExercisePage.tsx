@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faPlay, faTimes, faPoo, faSun, faQuidditch } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import EmptyPage from '../../../components/empty-page/EmptyPage';
-import Layout from '../../../components/layout/Layout';
+import { Layout } from '../../../components/layout';
 import { StepType, Step, Exercise as ExerciseType } from '../../../store/types';
 import Exercise from './Exercise';
 

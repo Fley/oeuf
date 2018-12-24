@@ -1,10 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
-import Layout from './Layout';
+import { Layout } from './Layout';
+import { CenteredPageLayout } from './CenteredPageLayout';
 
 storiesOf('layout/Layout', module)
-  .addDecorator((story, context) => withInfo()(story)(context))
   .add('Empty', () => <Layout />)
   .add('Complete', () => (
     <Layout
@@ -21,3 +20,5 @@ storiesOf('layout/Layout', module)
       Hello
     </Layout>
   ));
+
+storiesOf('layout/CenteredPageLayout', module).add('With child', () => <CenteredPageLayout>Hello</CenteredPageLayout>);

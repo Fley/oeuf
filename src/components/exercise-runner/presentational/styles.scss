@@ -1,4 +1,4 @@
-@import '../../theme/bootstrap-custom.scss';
+@import '../../theme/bootstrap-variables.scss';
 
 .timer-container {
   position: relative;
@@ -9,11 +9,22 @@
     width: 100%;
     height: 100%;
   }
-  .timer-svg circle {
-    stroke: $primary;
+  .timer-svg {
     stroke-width: 1em;
+    circle.progress-bar {
+      stroke: $primary;
+      stroke-width: 1em;
+    }
+    circle.bar {
+      stroke: $secondary;
+    }
   }
-  .timer-svg .bar {
-    stroke: $secondary;
+  &.rest {
+    .timer-svg circle.progress-bar {
+      stroke: $info;
+    }
+    .timer-info {
+      color: $info;
+    }
   }
 }

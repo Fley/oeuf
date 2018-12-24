@@ -10,7 +10,7 @@ export interface LayoutProps {
   };
 }
 
-const Layout: SFC<LayoutProps> = ({
+export const Layout: SFC<LayoutProps> = ({
   header,
   children,
   navItems = [],
@@ -35,5 +35,3 @@ const Layout: SFC<LayoutProps> = ({
     </nav>
   </div>
 );
-
-export default Layout;

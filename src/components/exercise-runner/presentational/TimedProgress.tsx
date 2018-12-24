@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import classNames from 'classnames';
 import './styles.css';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export type TimedProgressProps = {
   totalTime: number;
   tick_ms?: number;
+  theme?: 'rest' | 'exercise';
   onFinished: () => void;
 };
 export type TimedProgressState = {
@@ -24,6 +26,7 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
 
   static defaultProps = {
     tick_ms: 1000,
+    theme: 'exercise',
     onFinished: () => {
       return;
     }
@@ -81,6 +84,11 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
     return percentage * c;
   };
 
+  componentDidMount() {
+    if (this.props.theme === 'rest') {
+      this.start();
+    }
+  }
   componentWillUnmount() {
     this.clearTimers();
   }
@@ -88,68 +96,61 @@ export class TimedProgress extends PureComponent<TimedProgressProps, TimedProgre
   render() {
     const { status, remainingTime } = this.state;
     return (
-      <div
-        className="d-flex align-items-center w-100 text-center bg-light text-dark"
-        style={{
-          height: '100vh',
-          position: 'fixed',
-          top: 0,
-          left: 0
-        }}
-      >
-        <div className="m-auto">
-          <div>{status}</div>
-          <div className="timer-container" onClick={this.onTapTimer}>
-            <svg
-              className="timer-svg"
-              width="200"
-              height="200"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              transform="rotate(-90)"
-            >
-              <filter xmlns="http://www.w3.org/2000/svg" id="dropshadow" height="130%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-                <feOffset dx="2" dy="2" result="offsetblur" />
-                <feComponentTransfer>
-                  <feFuncA type="linear" slope="0.2" />
-                </feComponentTransfer>
-                <feMerge>
-                  <feMergeNode />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-              <circle
-                filter="url(#dropshadow)"
-                r="90"
-                cx="100"
-                cy="100"
-                fill="transparent"
-                strokeDasharray="565.48"
-                strokeDashoffset="0"
-              />
-              <circle
-                className="bar"
-                r="90"
-                cx="100"
-                cy="100"
-                fill="transparent"
-                strokeDasharray="565.48"
-                strokeDashoffset={this.getStrokeDashoffset(remainingTime / this.props.totalTime)}
-                style={{ transition: `stroke-dashoffset ${this.props.tick_ms! / 1000}s linear` }}
-              />
-            </svg>
-            <div className="timer-info d-flex">
-              <div className="m-auto display-2">{Math.ceil(remainingTime)}</div>
-            </div>
-          </div>
-          <div className="m-5">
-            <button className="btn btn-sm btn-primary m-1" onClick={this.reset}>
-              <FontAwesomeIcon flip="horizontal" icon={faRedo} /> Reset
-            </button>
+      <>
+        <div>{status}</div>
+        <div className={classNames('timer-container', { rest: this.props.theme === 'rest' })} onClick={this.onTapTimer}>
+          <svg
+            className="timer-svg m-auto d-flex"
+            width="200"
+            height="200"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            transform="rotate(-90)"
+          >
+            <filter xmlns="http://www.w3.org/2000/svg" id="dropshadow" height="130%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+              <feOffset dx="2" dy="2" result="offsetblur" />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="0.2" />
+              </feComponentTransfer>
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <circle
+              className="progress-bar"
+              filter="url(#dropshadow)"
+              r="90"
+              cx="100"
+              cy="100"
+              fill="transparent"
+              strokeDasharray="565.48"
+              strokeDashoffset="0"
+            />
+            <circle
+              className="bar"
+              r="90"
+              cx="100"
+              cy="100"
+              fill="transparent"
+              strokeDasharray="565.48"
+              strokeDashoffset={this.getStrokeDashoffset(remainingTime / this.props.totalTime)}
+              style={
+                status === 'RUNNING' ? { transition: `stroke-dashoffset ${this.props.tick_ms! / 1000}s linear` } : {}
+              }
+            />
+          </svg>
+          <div className="timer-info d-flex">
+            <div className="m-auto display-2">{Math.ceil(remainingTime)}</div>
           </div>
         </div>
-      </div>
+        <div className="my-2">
+          <button className="btn btn-block btn-link m-1" onClick={this.reset}>
+            <FontAwesomeIcon flip="horizontal" icon={faRedo} /> Reset
+          </button>
+        </div>
+      </>
     );
   }
 }
