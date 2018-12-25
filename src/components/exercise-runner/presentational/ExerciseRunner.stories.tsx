@@ -1,5 +1,4 @@
 import React from 'react';
-import './ExerciseRunner.css';
 import { storiesOf } from '@storybook/react';
 import { ExerciseRunner, ExerciseRunnerProps } from './ExerciseRunner';
 import { action } from '@storybook/addon-actions';

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import './ExerciseRunner.css';
 import classNames from 'classnames';
 import { Exercise, Step, StepTimed, StepRepetition } from 'store/types';
 import { Layout, CenteredPageLayout } from 'components/layout';
@@ -8,7 +9,7 @@ import { faTimes, faStepForward, faStepBackward } from '@fortawesome/free-solid-
 import { faSmileBeam } from '@fortawesome/free-regular-svg-icons';
 import { TimedProgress } from './TimedProgress';
 import { RepetitionProgress } from './RepetitionProgress';
-import { RouterChildContext } from 'react-router';
+import { Redirect } from 'react-router';
 
 export type ExerciseRunnerProps = {
   exerciseId: Exercise['id'];
@@ -21,39 +22,34 @@ export type ExerciseRunnerProps = {
 
 type ExerciseRunnerLayoutState = {
   rest: boolean;
+  renderNext: boolean;
 };
 
 export class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseRunnerLayoutState> {
   constructor(props: ExerciseRunnerProps) {
     super(props);
-    this.state = { rest: false };
+    this.state = { rest: false, renderNext: false };
   }
 
   static defaultProps: { currentStepIndex: number } = {
     currentStepIndex: 0
   };
 
-  context!: RouterChildContext;
-  goToNextStep = () => {
-    this.context.router.history.push(
-      `/${this.props.exerciseId}/runner/${this.props.steps[this.props.currentStepIndex + 1].id}`
-    );
+  goToNextStep = () => this.setState({ renderNext: true });
+
+  finishStepAndRest = () => {
+    this.setState({ rest: true });
+    this.props.onStepFinished(this.props.steps[this.props.currentStepIndex].id);
   };
 
-  rest = () => this.setState({ rest: true });
-
   renderProgress = (currentStep: Step) => {
-    const { type, onStepFinished } = this.props;
-    const onFinished = () => {
-      this.rest();
-      onStepFinished(currentStep.id);
-    };
+    const { type } = this.props;
     if (type === 'timed') {
       const step = currentStep as StepTimed;
-      return <TimedProgress totalTime={step.duration} onFinished={onFinished} />;
+      return <TimedProgress totalTime={step.duration} onFinished={this.finishStepAndRest} />;
     } else if (type === 'repetition') {
       const step = currentStep as StepRepetition;
-      return <RepetitionProgress repetition={step.repetition} kg={step.kg} onFinished={onFinished} />;
+      return <RepetitionProgress repetition={step.repetition} kg={step.kg} onFinished={this.finishStepAndRest} />;
     }
     return 'Error displaying progress of the exercise, unknown type';
   };
@@ -115,13 +111,16 @@ export class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseR
             <>
               {this.renderProgress(steps[currentStepIndex])}
               <div className="d-flex">
-                <button className="btn btn-outline-info btn-block m-1" onClick={this.rest}>
+                <button className="btn btn-outline-info btn-block m-1" onClick={this.finishStepAndRest}>
                   <FontAwesomeIcon icon={faSmileBeam} /> Rest
                 </button>
               </div>
             </>
           )}
         </CenteredPageLayout>
+        {this.state.renderNext && currentStepIndex < steps.length - 1 && (
+          <Redirect to={`/${exerciseId}/runner/${steps[currentStepIndex + 1].id}`} />
+        )}
       </Layout>
     );
   }

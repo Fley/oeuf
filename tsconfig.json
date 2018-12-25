@@ -1,15 +1,24 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "outDir": "build/lib",
-    "module": "es2015",
+    "module": "esnext",
     "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "es2017",
+      "dom"
+    ],
     "sourceMap": true,
     "allowJs": false,
-    "jsx": "react",
+    "jsx": "preserve",
     "moduleResolution": "node",
-    "rootDirs": ["src", "stories"],
-    "baseUrl": "src",
+    "rootDirs": [
+      "src",
+      "stories"
+    ],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -17,16 +26,31 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
-    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "paths": {
-    "@components/*": ["./src/components/*"],
-    "@idb/*": ["./src/idb/*"],
-    "@redux/*": ["./src/redux/*"],
-    "@store/*": ["./src/store/*"]
+    "@components/*": [
+      "./src/components/*"
+    ],
+    "@idb/*": [
+      "./src/idb/*"
+    ],
+    "@redux/*": [
+      "./src/redux/*"
+    ],
+    "@store/*": [
+      "./src/store/*"
+    ]
   }
 }
