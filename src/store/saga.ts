@@ -39,7 +39,10 @@ import {
   acknowledgeExerciseStepRequest,
   cancelExerciseStepRequest,
   moveExerciseStepRequest,
-  updateExerciseStepRequest
+  updateExerciseStepRequest,
+  fetchExerciseRequest,
+  fetchExerciseSuccess,
+  fetchExerciseFailure
 } from './actions';
 
 function* fetchExercises() {
@@ -52,6 +55,18 @@ function* fetchExercises() {
 }
 function* watchFetchExercises() {
   yield takeLatest(TYPES.FETCH_EXERCISES.REQUEST, fetchExercises);
+}
+
+function* fetchOneExercise({ id }: ReturnType<typeof fetchExerciseRequest>) {
+  try {
+    const exercise: Exercise = yield call(datastore.getExerciseById, id);
+    yield put(fetchExerciseSuccess(exercise));
+  } catch (e) {
+    yield put(fetchExerciseFailure(id, e));
+  }
+}
+function* watchFetchOneExercise() {
+  yield takeLatest(TYPES.FETCH_EXERCISE.REQUEST, fetchOneExercise);
 }
 
 function* addNewExercise({ exercise }: ReturnType<typeof addExerciseRequest>) {
@@ -242,6 +257,7 @@ function* watchUpdateExerciseStep() {
 export default function* rootSaga() {
   yield all([
     watchFetchExercises(),
+    watchFetchOneExercise(),
     watchAddNewExercise(),
     watchDeleteExercise(),
     watchAcknowledgeExercise(),

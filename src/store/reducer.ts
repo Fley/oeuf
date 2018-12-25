@@ -61,6 +61,7 @@ export const exsercisesInitialState: ExerciseStore = { loading: false, error: nu
 export const exercises: Reducer<ExerciseStore, Action> = (state = exsercisesInitialState, action) => {
   switch (action.type) {
     case actions.FETCH_EXERCISES.REQUEST:
+    case actions.FETCH_EXERCISE.REQUEST:
       return { ...state, loading: true, error: null };
     case actions.FETCH_EXERCISES.SUCCESS:
       return {
@@ -70,11 +71,13 @@ export const exercises: Reducer<ExerciseStore, Action> = (state = exsercisesInit
         byId: action.exercises.reduce((byId: ExerciseStore['byId'], e: Exercise) => ({ ...byId, [e.id]: e }), {})
       };
     case actions.FETCH_EXERCISES.FAILURE:
+    case actions.FETCH_EXERCISE.FAILURE:
       return { ...state, loading: false, error: action.error };
     case actions.ADD_EXERCISE.SUCCESS:
     case actions.FETCH_EXERCISE.SUCCESS:
       return {
         ...state,
+        loading: false,
         ids: [...state.ids, action.exercise.id],
         byId: { ...state.byId, [action.exercise.id]: action.exercise }
       };

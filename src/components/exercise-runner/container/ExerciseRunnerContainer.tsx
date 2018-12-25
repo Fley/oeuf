@@ -30,6 +30,17 @@ const ExerciseNotFoundPage = () => (
     }
   />
 );
+const ExerciseStepNotFoundPage = () => (
+  <EmptyPage
+    text="Step not found"
+    icon={faQuidditch}
+    action={
+      <Link className="btn btn-sm btn-primary" to="/">
+        Back to exercises
+      </Link>
+    }
+  />
+);
 
 export type ExerciseRunnerContainerOwnProps = {
   exerciseId: Exercise['id'];
@@ -64,7 +75,11 @@ class ExerciseRunnerContainerComponent extends PureComponent<ExerciseRunnerConta
       <LoadingPage />
     ) : errorLoading ? (
       <ErrorLoadingPage />
-    ) : exercise && stepIndex >= 0 ? (
+    ) : !exercise ? (
+      <ExerciseNotFoundPage />
+    ) : stepIndex < 0 ? (
+      <ExerciseStepNotFoundPage />
+    ) : (
       <ExerciseRunner
         key={`exercise-runner-${exercise.id}-${stepId}`}
         exerciseId={exercise.id}
@@ -74,8 +89,6 @@ class ExerciseRunnerContainerComponent extends PureComponent<ExerciseRunnerConta
         onStepFinished={onStepFinished}
         currentStepIndex={stepIndex}
       />
-    ) : (
-      <ExerciseNotFoundPage />
     );
   }
 }
