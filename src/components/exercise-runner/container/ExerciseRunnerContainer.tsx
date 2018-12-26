@@ -9,14 +9,12 @@ import EmptyPage from 'components/empty-page/EmptyPage';
 import { faSun, faPoo, faQuidditch } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-const LoadingPage = () => (
-  <EmptyPage text="Loading ..." icon={faSun} action={<div>Your exercise is being loaded</div>} />
-);
+const LoadingPage = () => <EmptyPage text="Loading ..." icon={faSun} action={<p>Your exercise is being loaded</p>} />;
 const ErrorLoadingPage = () => (
   <EmptyPage
     text="Error loading your exercise"
     icon={faPoo}
-    action={<div>Sorry an error occured loading your exercice !</div>}
+    action={<p>Sorry an error occured loading your exercice !</p>}
   />
 );
 const ExerciseNotFoundPage = () => (

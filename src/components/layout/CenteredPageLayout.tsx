@@ -15,6 +15,6 @@ export const CenteredPageLayout: SFC<CenteredPageLayoutProps> = ({ children, cla
       left: 0
     }}
   >
-    <div className="m-auto">{children}</div>
+    <section className="m-auto">{children}</section>
   </div>
 );

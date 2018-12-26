@@ -14,7 +14,7 @@ const EmptyPage: SFC<EmptyPageProps> = ({ icon, text, action }) => {
     <CenteredPageLayout>
       <div>{icon && <FontAwesomeIcon icon={icon} size="7x" />}</div>
       <div>{text}</div>
-      {action && <div className="m-5">{action}</div>}
+      {action && <nav className="m-5">{action}</nav>}
     </CenteredPageLayout>
   );
 };

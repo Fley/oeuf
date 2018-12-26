@@ -137,9 +137,9 @@ class Exercise extends Component<ExerciseProps, ExerciseState> {
       exercise: { type, steps }
     } = this.props;
     return (
-      <div className="card">
+      <article className="card">
         <form onSubmit={e => e.preventDefault()}>
-          <div className="card-body">
+          <header className="card-body">
             <label htmlFor="exerciseName" className="d-none">
               Exercise name
             </label>
@@ -153,10 +153,10 @@ class Exercise extends Component<ExerciseProps, ExerciseState> {
               autoComplete="off"
               required
             />
-          </div>
-          <div>
+          </header>
+          <>
             {type && steps && steps.length > 0 ? (
-              <div>
+              <section>
                 {type === 'timed' ? <HeaderStepTimed /> : <HeaderStepRepetition />}
                 <SortableStepList
                   type={type}
@@ -184,9 +184,9 @@ class Exercise extends Component<ExerciseProps, ExerciseState> {
                   useDragHandle={true}
                   helperClass="list-group-item-sortable-helper"
                 />
-              </div>
+              </section>
             ) : (
-              <div className="card-body text-center">
+              <section className="card-body text-center">
                 <p className="card-text lead">Choose your exercise type:</p>
                 <button type="button" className="btn btn-outline-primary m-1" onClick={() => onAddFirstStep('timed')()}>
                   <FontAwesomeIcon icon={faStopwatch} /> Time serie
@@ -198,11 +198,11 @@ class Exercise extends Component<ExerciseProps, ExerciseState> {
                 >
                   <FontAwesomeIcon icon={faDumbbell} /> Repetition serie
                 </button>
-              </div>
+              </section>
             )}
-          </div>
+          </>
         </form>
-      </div>
+      </article>
     );
   }
 }

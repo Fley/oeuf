@@ -69,7 +69,7 @@ export const StepRepetition = ({ kg, repetition, rest, onContentChange }: StepRe
 );
 
 export const HeaderStepRepetition = () => (
-  <div className="list-group-item-header border-top-0 border-left-0 border-right-0 d-flex justify-content-between text-dark text-center">
+  <header className="list-group-item-header border-top-0 border-left-0 border-right-0 d-flex justify-content-between text-dark text-center">
     <div style={{ width: '4em' }}>
       <FontAwesomeIcon icon={faDumbbell} size="lg" />
     </div>
@@ -80,11 +80,11 @@ export const HeaderStepRepetition = () => (
       <FontAwesomeIcon icon={faHandPaper} size="lg" />
     </div>
     <div style={{ width: '1em' }} />
-  </div>
+  </header>
 );
 
 export const HeaderStepTimed = () => (
-  <div className="list-group-item-header border-top-0 border-left-0 border-right-0 d-flex justify-content-between text-dark text-center">
+  <header className="list-group-item-header border-top-0 border-left-0 border-right-0 d-flex justify-content-between text-dark text-center">
     <div style={{ width: '4em' }}>
       <FontAwesomeIcon icon={faClock} size="lg" />
     </div>
@@ -92,7 +92,7 @@ export const HeaderStepTimed = () => (
       <FontAwesomeIcon icon={faHandPaper} size="lg" />
     </div>
     <div style={{ width: '1em' }} />
-  </div>
+  </header>
 );
 
 export type StepTimedProps = {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'App.css';
 import Theme from './components/theme/Theme';
-import Shell from './components/shell/Shell';
 import ExerciseListPageContainer from './components/exercise-list/container/ExerciseListPageContainer';
 import ExercisePageContainer from './components/exercise/container/ExercisePageContainer';
 import RootContainer from './redux/RootContainer';
@@ -15,26 +14,24 @@ class App extends Component {
       <RootContainer>
         <Router>
           <Theme>
-            <Shell>
-              <Switch>
-                <Route exact path="/" component={ExerciseListPageContainer} />
-                <Route
-                  exact
-                  path="/:id"
-                  component={({ match }: RouteComponentProps<{ id: string }>) => (
-                    <ExercisePageContainer exerciseId={match.params.id} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/:exerciseId/runner/:stepId"
-                  component={({ match }: RouteComponentProps<{ exerciseId: string; stepId: string }>) => (
-                    <ExerciseRunnerContainer exerciseId={match.params.exerciseId} stepId={match.params.stepId} />
-                  )}
-                />
-                <Route component={Error404} />
-              </Switch>
-            </Shell>
+            <Switch>
+              <Route exact path="/" component={ExerciseListPageContainer} />
+              <Route
+                exact
+                path="/:id"
+                component={({ match }: RouteComponentProps<{ id: string }>) => (
+                  <ExercisePageContainer exerciseId={match.params.id} />
+                )}
+              />
+              <Route
+                exact
+                path="/:exerciseId/runner/:stepId"
+                component={({ match }: RouteComponentProps<{ exerciseId: string; stepId: string }>) => (
+                  <ExerciseRunnerContainer exerciseId={match.params.exerciseId} stepId={match.params.stepId} />
+                )}
+              />
+              <Route component={Error404} />
+            </Switch>
           </Theme>
         </Router>
       </RootContainer>

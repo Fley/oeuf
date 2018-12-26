@@ -92,24 +92,24 @@ const ExerciseList = ({
       {exercises && exercises.filter(e => e.done).map(mapExerciceItem(onCancelExercise, onDeleteExercise))}
     </ul>
   ) : loading ? (
-    <EmptyPage text="Loading ..." icon={faSun} action={<div>Your exercises are being loaded</div>} />
+    <EmptyPage text="Loading ..." icon={faSun} action={<p>Your exercises are being loaded</p>} />
   ) : errorLoading ? (
     <EmptyPage
       text="Error loading your exercises"
       icon={faPoo}
-      action={<div>Sorry an error occured loading your exercices !</div>}
+      action={<p>Sorry an error occured loading your exercices !</p>}
     />
   ) : (
     <EmptyPage
       text="You have no exercises yet"
       icon={faListAlt}
       action={
-        <div>
+        <>
           <button className="btn btn-sm btn-primary m-1" onClick={() => onAddExercise()}>
             Create your first exercise
           </button>
           <button className="btn btn-sm btn-outline-primary m-1">Import exercises</button>
-        </div>
+        </>
       }
     />
   );
