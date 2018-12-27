@@ -5,29 +5,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -37,30 +42,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -69,27 +79,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -98,9 +113,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -111,29 +126,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -143,30 +163,35 @@ Object {
     },
     "2": Object {
       "done": true,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
-          "kg": 70,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
-          "kg": 70,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
-          "kg": 70,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
-          "kg": 70,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -175,27 +200,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -204,9 +234,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -217,29 +247,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -249,30 +284,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -281,27 +321,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -310,9 +355,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -323,29 +368,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -355,30 +405,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -387,27 +442,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -416,9 +476,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -429,29 +489,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -461,30 +526,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -493,27 +563,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": true,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -522,9 +597,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -535,29 +610,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -567,30 +647,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -599,27 +684,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -628,9 +718,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -650,29 +740,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -683,7 +778,7 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
+    "1",
   ],
   "loading": false,
 }
@@ -703,29 +798,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -735,30 +835,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -767,27 +872,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -796,9 +906,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -809,29 +919,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": false,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": false,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": false,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": false,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": false,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -841,30 +956,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -873,27 +993,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -902,9 +1027,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -915,29 +1040,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -947,30 +1077,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -979,27 +1114,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -1008,9 +1148,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -1021,29 +1161,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -1053,30 +1198,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -1085,27 +1235,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -1114,9 +1269,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -1127,29 +1282,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -1159,30 +1319,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -1191,27 +1356,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": false,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -1220,9 +1390,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -1233,29 +1403,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -1265,30 +1440,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -1297,27 +1477,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -1326,9 +1511,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -1339,29 +1524,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -1371,30 +1561,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -1403,27 +1598,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -1432,9 +1632,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -1445,30 +1645,35 @@ Object {
   "byId": Object {
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -1477,27 +1682,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -1506,8 +1716,8 @@ Object {
   },
   "error": null,
   "ids": Array [
-    2,
-    3,
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -1518,29 +1728,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -1550,30 +1765,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -1582,27 +1802,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -1611,9 +1836,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -1624,7 +1849,7 @@ Object {
   "byId": Object {},
   "error": null,
   "ids": Array [],
-  "loading": false,
+  "loading": true,
 }
 `;
 
@@ -1633,29 +1858,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -1666,7 +1896,7 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
+    "1",
   ],
   "loading": false,
 }
@@ -1675,7 +1905,9 @@ Object {
 exports[`store/reducer exercises should fetch a specific exercise 3`] = `
 Object {
   "byId": Object {},
-  "error": null,
+  "error": Object {
+    "message": "A failure message",
+  },
   "ids": Array [],
   "loading": false,
 }
@@ -1695,29 +1927,34 @@ Object {
   "byId": Object {
     "1": Object {
       "done": true,
-      "id": 1,
+      "id": "1",
       "name": "Chess press",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
+          "id": "1",
           "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "2",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "3",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
           "done": true,
+          "id": "4",
           "kg": 30,
           "repetition": 10,
           "rest": 60,
@@ -1727,30 +1964,35 @@ Object {
     },
     "2": Object {
       "done": false,
-      "id": 2,
+      "id": "2",
       "name": "Leg press",
+      "progress": null,
       "steps": Array [
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "1",
+          "kg": 30,
           "repetition": 15,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "2",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "3",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
         Object {
-          "done": false,
-          "kg": 70,
+          "done": true,
+          "id": "4",
+          "kg": 30,
           "repetition": 10,
           "rest": 60,
         },
@@ -1759,27 +2001,32 @@ Object {
     },
     "3": Object {
       "done": false,
-      "id": 3,
+      "id": "3",
       "name": "Abs",
+      "progress": null,
       "steps": Array [
         Object {
           "done": true,
           "duration": 120,
+          "id": "1",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "2",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "3",
           "rest": 60,
         },
         Object {
           "done": false,
           "duration": 120,
+          "id": "4",
           "rest": 60,
         },
       ],
@@ -1788,9 +2035,9 @@ Object {
   },
   "error": null,
   "ids": Array [
-    1,
-    2,
-    3,
+    "1",
+    "2",
+    "3",
   ],
   "loading": false,
 }
@@ -1803,336 +2050,6 @@ Object {
     "message": "A failure message",
   },
   "ids": Array [],
-  "loading": false,
-}
-`;
-
-exports[`store/reducer exercises should pause an exercise 1`] = `
-Object {
-  "byId": Object {
-    "1": Object {
-      "done": true,
-      "id": 1,
-      "name": "Chess press",
-      "steps": Array [
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 15,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-      ],
-      "type": "repetition",
-    },
-    "2": Object {
-      "done": false,
-      "id": 2,
-      "name": "Leg press",
-      "progress": Object {
-        "pausedAt": 2018-01-01T00:00:00.000Z,
-        "status": "paused",
-      },
-      "steps": Array [
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 15,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-      ],
-      "type": "repetition",
-    },
-    "3": Object {
-      "done": false,
-      "id": 3,
-      "name": "Abs",
-      "steps": Array [
-        Object {
-          "done": true,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-      ],
-      "type": "timed",
-    },
-  },
-  "error": null,
-  "ids": Array [
-    1,
-    2,
-    3,
-  ],
-  "loading": false,
-}
-`;
-
-exports[`store/reducer exercises should start an exercise 1`] = `
-Object {
-  "byId": Object {
-    "1": Object {
-      "done": true,
-      "id": 1,
-      "name": "Chess press",
-      "steps": Array [
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 15,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-      ],
-      "type": "repetition",
-    },
-    "2": Object {
-      "done": false,
-      "id": 2,
-      "name": "Leg press",
-      "progress": Object {
-        "startedAt": 2018-01-01T00:00:00.000Z,
-        "status": "started",
-      },
-      "steps": Array [
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 15,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-      ],
-      "type": "repetition",
-    },
-    "3": Object {
-      "done": false,
-      "id": 3,
-      "name": "Abs",
-      "steps": Array [
-        Object {
-          "done": true,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-      ],
-      "type": "timed",
-    },
-  },
-  "error": null,
-  "ids": Array [
-    1,
-    2,
-    3,
-  ],
-  "loading": false,
-}
-`;
-
-exports[`store/reducer exercises should stop an exercise 1`] = `
-Object {
-  "byId": Object {
-    "1": Object {
-      "done": true,
-      "id": 1,
-      "name": "Chess press",
-      "steps": Array [
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 15,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": true,
-          "kg": 30,
-          "repetition": 10,
-          "rest": 60,
-        },
-      ],
-      "type": "repetition",
-    },
-    "2": Object {
-      "done": false,
-      "id": 2,
-      "name": "Leg press",
-      "progress": Object {
-        "status": "stopped",
-        "stoppedAt": 2018-01-01T00:00:00.000Z,
-      },
-      "steps": Array [
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 15,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "kg": 70,
-          "repetition": 10,
-          "rest": 60,
-        },
-      ],
-      "type": "repetition",
-    },
-    "3": Object {
-      "done": false,
-      "id": 3,
-      "name": "Abs",
-      "steps": Array [
-        Object {
-          "done": true,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-        Object {
-          "done": false,
-          "duration": 120,
-          "rest": 60,
-        },
-      ],
-      "type": "timed",
-    },
-  },
-  "error": null,
-  "ids": Array [
-    1,
-    2,
-    3,
-  ],
   "loading": false,
 }
 `;

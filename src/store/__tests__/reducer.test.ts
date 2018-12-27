@@ -1,52 +1,51 @@
-import { TYPE_REPETITION, TYPE_TIMED } from '../propTypes';
 import * as actions from '../actions';
-import { exercises, exsercisesInitialState } from '../reducer';
-
-const DATE_TO_USE = new Date('2018');
-global.Date = jest.fn(() => DATE_TO_USE);
+import { exercises, exsercisesInitialState, AppStore } from '../reducer';
 
 describe('store/reducer', () => {
-  const existingState = {
+  const existingState: AppStore = {
     exercises: {
       loading: false,
       error: null,
-      ids: [1, 2, 3],
+      ids: ['1', '2', '3'],
       byId: {
-        1: {
-          id: 1,
+        '1': {
+          id: '1',
           done: true,
           name: 'Chess press',
-          type: TYPE_REPETITION,
+          type: 'repetition',
           steps: [
-            { kg: 30, repetition: 15, rest: 60, done: true },
-            { kg: 30, repetition: 10, rest: 60, done: true },
-            { kg: 30, repetition: 10, rest: 60, done: true },
-            { kg: 30, repetition: 10, rest: 60, done: true }
-          ]
+            { id: '1', kg: 30, repetition: 15, rest: 60, done: true },
+            { id: '2', kg: 30, repetition: 10, rest: 60, done: true },
+            { id: '3', kg: 30, repetition: 10, rest: 60, done: true },
+            { id: '4', kg: 30, repetition: 10, rest: 60, done: true }
+          ],
+          progress: null
         },
-        2: {
-          id: 2,
+        '2': {
+          id: '2',
           done: false,
           name: 'Leg press',
-          type: TYPE_REPETITION,
+          type: 'repetition',
           steps: [
-            { kg: 70, repetition: 15, rest: 60, done: false },
-            { kg: 70, repetition: 10, rest: 60, done: false },
-            { kg: 70, repetition: 10, rest: 60, done: false },
-            { kg: 70, repetition: 10, rest: 60, done: false }
-          ]
+            { id: '1', kg: 30, repetition: 15, rest: 60, done: true },
+            { id: '2', kg: 30, repetition: 10, rest: 60, done: true },
+            { id: '3', kg: 30, repetition: 10, rest: 60, done: true },
+            { id: '4', kg: 30, repetition: 10, rest: 60, done: true }
+          ],
+          progress: null
         },
-        3: {
-          id: 3,
+        '3': {
+          id: '3',
           done: false,
           name: 'Abs',
-          type: TYPE_TIMED,
+          type: 'timed',
           steps: [
-            { duration: 120, rest: 60, done: true },
-            { duration: 120, rest: 60, done: false },
-            { duration: 120, rest: 60, done: false },
-            { duration: 120, rest: 60, done: false }
-          ]
+            { id: '1', duration: 120, rest: 60, done: true },
+            { id: '2', duration: 120, rest: 60, done: false },
+            { id: '3', duration: 120, rest: 60, done: false },
+            { id: '4', duration: 120, rest: 60, done: false }
+          ],
+          progress: null
         }
       }
     }
@@ -68,7 +67,7 @@ describe('store/reducer', () => {
     });
 
     it('should fetch a specific exercise', () => {
-      const fetchedId = 1;
+      const fetchedId = '1';
       const stateRequest = exercises(exsercisesInitialState, actions.fetchExerciseRequest(fetchedId));
       expect(stateRequest).toMatchSnapshot();
 
@@ -100,7 +99,7 @@ describe('store/reducer', () => {
     });
 
     it('should delete exercise', () => {
-      const exerciseId = 1;
+      const exerciseId = '1';
       const stateRequest = exercises(existingState.exercises, actions.deleteExerciseRequest(exerciseId));
       expect(stateRequest).toMatchSnapshot();
 
@@ -115,7 +114,7 @@ describe('store/reducer', () => {
     });
 
     it('should acknowledge an exercise', () => {
-      const exerciseId = 2;
+      const exerciseId = '2';
       const stateRequest = exercises(existingState.exercises, actions.acknowledgeExerciseRequest(exerciseId));
       expect(stateRequest).toMatchSnapshot();
 
@@ -131,20 +130,14 @@ describe('store/reducer', () => {
 
       const stateFailure = exercises(
         stateRequest,
-        actions.acknowledgeExerciseFailure(
-          { ...existingState.exercises.byId[exerciseId] },
-          { message: 'A failure message' }
-        )
+        actions.acknowledgeExerciseFailure(exerciseId, { message: 'A failure message' })
       );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should cancel an exercise', () => {
-      const exerciseId = 1;
-      const stateRequest = exercises(
-        existingState.exercises,
-        actions.cancelExerciseRequest(existingState.exercises.byId[exerciseId])
-      );
+      const exerciseId = '1';
+      const stateRequest = exercises(existingState.exercises, actions.cancelExerciseRequest(exerciseId));
       expect(stateRequest).toMatchSnapshot();
 
       const stateSuccess = exercises(
@@ -159,17 +152,17 @@ describe('store/reducer', () => {
 
       const stateFailure = exercises(
         stateRequest,
-        actions.cancelExerciseFailure({ ...existingState.exercises.byId[exerciseId] }, { message: 'A failure message' })
+        actions.cancelExerciseFailure(exerciseId, { message: 'A failure message' })
       );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should acknowledge an exercise step', () => {
-      const exerciseId = 3;
-      const stepIndex = 1;
+      const exerciseId = '3';
+      const stepId = '2';
       const stateRequest = exercises(
         existingState.exercises,
-        actions.acknowledgeExerciseStepRequest(existingState.exercises.byId[exerciseId], stepIndex)
+        actions.acknowledgeExerciseStepRequest(exerciseId, stepId)
       );
       expect(stateRequest).toMatchSnapshot();
 
@@ -177,8 +170,8 @@ describe('store/reducer', () => {
         stateRequest,
         actions.acknowledgeExerciseStepSuccess({
           ...existingState.exercises.byId[exerciseId],
-          steps: existingState.exercises.byId[exerciseId].steps.map((step, index) =>
-            index === stepIndex ? { ...step, done: true } : step
+          steps: existingState.exercises.byId[exerciseId].steps.map(step =>
+            step.id === stepId ? { ...step, done: true } : step
           )
         })
       );
@@ -186,21 +179,15 @@ describe('store/reducer', () => {
 
       const stateFailure = exercises(
         stateRequest,
-        actions.acknowledgeExerciseStepFailure(
-          { ...existingState.exercises.byId[exerciseId] },
-          { message: 'A failure message' }
-        )
+        actions.acknowledgeExerciseStepFailure(exerciseId, stepId, { message: 'A failure message' })
       );
       expect(stateFailure).toMatchSnapshot();
     });
 
     it('should cancel an exercise step', () => {
-      const exerciseId = 3;
-      const stepIndex = 0;
-      const stateRequest = exercises(
-        existingState.exercises,
-        actions.cancelExerciseStepRequest(existingState.exercises.byId[exerciseId], stepIndex)
-      );
+      const exerciseId = '3';
+      const stepId = '1';
+      const stateRequest = exercises(existingState.exercises, actions.cancelExerciseStepRequest(exerciseId, stepId));
       expect(stateRequest).toMatchSnapshot();
 
       const stateSuccess = exercises(
@@ -208,7 +195,7 @@ describe('store/reducer', () => {
         actions.cancelExerciseStepSuccess({
           ...existingState.exercises.byId[exerciseId],
           steps: existingState.exercises.byId[exerciseId].steps.map((step, index) =>
-            index === stepIndex ? { ...step, done: false } : step
+            step.id === stepId ? { ...step, done: false } : step
           )
         })
       );
@@ -216,39 +203,9 @@ describe('store/reducer', () => {
 
       const stateFailure = exercises(
         stateRequest,
-        actions.cancelExerciseStepFailure(
-          { ...existingState.exercises.byId[exerciseId] },
-          { message: 'A failure message' }
-        )
+        actions.cancelExerciseStepFailure(exerciseId, stepId, { message: 'A failure message' })
       );
       expect(stateFailure).toMatchSnapshot();
-    });
-
-    it('should start an exercise', () => {
-      const exerciseId = 2;
-      const stateRequest = exercises(
-        existingState.exercises,
-        actions.startExercise(existingState.exercises.byId[exerciseId])
-      );
-      expect(stateRequest).toMatchSnapshot();
-    });
-
-    it('should stop an exercise', () => {
-      const exerciseId = 2;
-      const stateRequest = exercises(
-        existingState.exercises,
-        actions.stopExercise(existingState.exercises.byId[exerciseId])
-      );
-      expect(stateRequest).toMatchSnapshot();
-    });
-
-    it('should pause an exercise', () => {
-      const exerciseId = 2;
-      const stateRequest = exercises(
-        existingState.exercises,
-        actions.pauseExercise(existingState.exercises.byId[exerciseId])
-      );
-      expect(stateRequest).toMatchSnapshot();
     });
   });
 });
