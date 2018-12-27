@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <RootContainer>
-        <Router>
+        <Router basename={process.env.REACT_APP_BASE_DIR}>
           <Theme>
             <Switch>
               <Route exact path="/" component={ExerciseListPageContainer} />
