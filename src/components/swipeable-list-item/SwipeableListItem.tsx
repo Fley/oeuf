@@ -53,19 +53,19 @@ export default class SwipeableListItem extends Component<SwipeableListItemProps,
 }
 
 export const SwipedItemAcknowledged = () => (
-  <div className="d-flex bg-success text-white py-2 px-3 h-100 justify-content-end">
+  <div className="d-flex bg-success text-white py-3 px-3 h-100 justify-content-end">
     <FontAwesomeIcon icon={faCheck} className="align-self-center" />
   </div>
 );
 
 export const SwipedItemRemoved = () => (
-  <div className="bg-danger text-white py-2 px-3 h-100">
+  <div className="bg-danger text-white py-3 px-3 h-100">
     <FontAwesomeIcon icon={faTimes} className="align-self-center" />
   </div>
 );
 
 export const SwipedItemCanceled = () => (
-  <div className="d-flex bg-warning text-white py-2 px-3 h-100 justify-content-end">
+  <div className="d-flex bg-warning text-white py-3 px-3 h-100 justify-content-end">
     <FontAwesomeIcon icon={faUndo} className="align-self-center" />
   </div>
 );

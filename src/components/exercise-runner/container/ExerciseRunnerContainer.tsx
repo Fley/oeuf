@@ -22,7 +22,7 @@ const ExerciseNotFoundPage = () => (
     text="Exercise not found"
     icon={faQuidditch}
     action={
-      <Link className="btn btn-sm btn-primary" to="/">
+      <Link className="btn btn-primary" to="/">
         Back to exercises
       </Link>
     }
@@ -33,7 +33,7 @@ const ExerciseStepNotFoundPage = () => (
     text="Step not found"
     icon={faQuidditch}
     action={
-      <Link className="btn btn-sm btn-primary" to="/">
+      <Link className="btn btn-primary" to="/">
         Back to exercises
       </Link>
     }

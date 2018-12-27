@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router';
 
 export default ({ history }: RouteComponentProps) => {
   const goBackButton = (
-    <button className="btn btn-sm btn-primary" onClick={() => history.goBack()}>
+    <button className="btn btn-primary" onClick={() => history.goBack()}>
       Go back
     </button>
   );

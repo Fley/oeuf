@@ -28,17 +28,17 @@ const mapExerciceItem = (onSwipeLeft: (id: string) => void, onSwipeRight: (id: s
     >
       <Link
         to={`/${id}`}
-        className={`d-flex py-2 px-3 list-group-item-action ${done ? 'list-group-item-success' : ''} h-100`}
+        className={`d-flex py-3 px-3 list-group-item-action ${done ? 'list-group-item-success' : ''} h-100`}
       >
         <span className="flex-grow-1 p-1">{name}</span>
         <div
-          className="btn-toolbar list-toolbar-hover"
+          className="d-none d-sm-block btn-toolbar list-toolbar-hover"
           role="toolbar"
           aria-label="Toolbar with actions on the exercise"
         >
           <button
             type="button"
-            className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
+            className="btn btn-outline-dark rounded-circle border-0 mx-1"
             aria-label="Delete"
             onClick={e => {
               onSwipeRight(id);
@@ -49,7 +49,7 @@ const mapExerciceItem = (onSwipeLeft: (id: string) => void, onSwipeRight: (id: s
           </button>
           <button
             type="button"
-            className="btn btn-sm btn-outline-dark rounded-circle border-0 mx-1"
+            className="btn btn-outline-dark rounded-circle border-0 mx-1"
             aria-label="Complete"
             onClick={e => {
               onSwipeLeft(id);
@@ -105,10 +105,10 @@ const ExerciseList = ({
       icon={faListAlt}
       action={
         <>
-          <button className="btn btn-sm btn-primary m-1" onClick={() => onAddExercise()}>
+          <button className="btn btn-primary m-1" onClick={() => onAddExercise()}>
             Create your first exercise
           </button>
-          <button className="btn btn-sm btn-outline-primary m-1">Import exercises</button>
+          <button className="btn btn-outline-primary m-1">Import exercises</button>
         </>
       }
     />

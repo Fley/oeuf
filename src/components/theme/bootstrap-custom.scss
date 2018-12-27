@@ -13,66 +13,6 @@
 @import 'bootstrap/scss/code';
 @import 'bootstrap/scss/grid';
 @import 'bootstrap/scss/tables';
-@import 'bootstrap/scss/forms';
-@import 'bootstrap/scss/buttons';
-@import 'bootstrap/scss/transitions';
-@import 'bootstrap/scss/dropdown';
-@import 'bootstrap/scss/button-group';
-@import 'bootstrap/scss/input-group';
-@import 'bootstrap/scss/custom-forms';
-@import 'bootstrap/scss/nav';
-@import 'bootstrap/scss/navbar';
-@import 'bootstrap/scss/card';
-@import 'bootstrap/scss/breadcrumb';
-@import 'bootstrap/scss/pagination';
-@import 'bootstrap/scss/badge';
-@import 'bootstrap/scss/jumbotron';
-@import 'bootstrap/scss/alert';
-@import 'bootstrap/scss/progress';
-@import 'bootstrap/scss/media';
-@import 'bootstrap/scss/list-group';
-@import 'bootstrap/scss/close';
-@import 'bootstrap/scss/modal';
-// @import 'bootstrap/scss/tooltip';
-@import 'bootstrap/scss/popover';
-@import 'bootstrap/scss/carousel';
-@import 'bootstrap/scss/utilities';
-@import 'bootstrap/scss/print';
-
-// Overrides
-
-// Forms
-.form-control,
-.form-control:focus {
-  border-left: none;
-  border-top: none;
-  border-right: none;
-  box-shadow: none;
-}
-
-.list-group-item-header {
-  @extend .list-group-item;
-}
-
-// Sortable list-group-item
-.list-group-item {
-  animation: fadein 1s;
-  .list-group-item-drag-handle {
-    cursor: grab;
-    color: $black;
-    opacity: 0.25;
-  }
-
-  &.list-group-item-sortable-helper {
-    cursor: grabbing;
-    pointer-events: auto !important;
-    opacity: 0.75;
-    .list-group-item-drag-handle {
-      cursor: grabbing;
-    }
-  }
-}
-
 // Sortable table
 .table.table-sortable {
   .th-drag-handle {
@@ -97,3 +37,58 @@ tr.tr-sortable-helper {
     opacity: 0.25;
   }
 }
+@import 'bootstrap/scss/forms';
+.form-control,
+.form-control:focus {
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  box-shadow: none;
+}
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/button-group';
+@import 'bootstrap/scss/input-group';
+@import 'bootstrap/scss/custom-forms';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/navbar';
+.navbar-expand .navbar-nav .nav-link {
+  padding: 1rem;
+}
+@import 'bootstrap/scss/card';
+@import 'bootstrap/scss/breadcrumb';
+@import 'bootstrap/scss/pagination';
+@import 'bootstrap/scss/badge';
+@import 'bootstrap/scss/jumbotron';
+@import 'bootstrap/scss/alert';
+@import 'bootstrap/scss/progress';
+@import 'bootstrap/scss/media';
+@import 'bootstrap/scss/list-group';
+.list-group-item-header {
+  @extend .list-group-item;
+}
+// Sortable list-group-item
+.list-group-item {
+  animation: fadein 1s;
+  .list-group-item-drag-handle {
+    cursor: grab;
+    color: $black;
+    opacity: 0.25;
+  }
+  &.list-group-item-sortable-helper {
+    cursor: grabbing;
+    pointer-events: auto !important;
+    opacity: 0.75;
+    .list-group-item-drag-handle {
+      cursor: grabbing;
+    }
+  }
+}
+@import 'bootstrap/scss/close';
+@import 'bootstrap/scss/modal';
+// @import 'bootstrap/scss/tooltip';
+@import 'bootstrap/scss/popover';
+@import 'bootstrap/scss/carousel';
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/print';
