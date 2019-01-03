@@ -1,0 +1,55 @@
+@keyframes toast-slidein-bottom {
+  from {
+    bottom: -2.2rem; }
+  to {
+    bottom: 0; } }
+
+.toast-container {
+  position: relative; }
+
+.toast {
+  background: #484848;
+  position: absolute;
+  color: #f5f5f5;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  height: 2.2rem;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer; }
+  .toast.toast-visible {
+    animation-name: toast-slidein-bottom;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in; }
+  .toast.toast-hidden {
+    bottom: -2.2rem;
+    transition-property: bottom;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out; }
+  .toast.toast-danger {
+    background: #ff4444; }
+  .toast.toast-success {
+    background: #00c851; }
+  .toast.toast-warning {
+    background: #ffbb33;
+    color: #616161; }
+  .toast.toast-info {
+    background: #33b5e5; }
+  .toast .toast-actions {
+    text-transform: uppercase;
+    font-weight: bold; }
+    .toast .toast-actions a {
+      color: #77ceee; }
+    .toast .toast-actions span {
+      margin-right: 0.25rem;
+      margin-left: 0.25rem; }
+    .toast .toast-actions span:first-of-type {
+      margin-left: 0; }
+    .toast .toast-actions span:last-of-type {
+      margin-right: 0; }
+
+.toast-light a, .toast.toast-danger a, .toast.toast-success a, .toast.toast-warning a, .toast.toast-info a {
+  color: #093443; }
