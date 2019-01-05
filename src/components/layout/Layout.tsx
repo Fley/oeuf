@@ -1,6 +1,6 @@
 import React, { ReactNode, SFC } from 'react';
 import classNames from 'classnames';
-import { Toast } from 'components/toast';
+import { NotificationContainer } from 'components/notification';
 
 export interface LayoutProps {
   header?: ReactNode;
@@ -28,6 +28,7 @@ export const Layout: SFC<LayoutProps> = ({
     </header>
     <main className="col-sm-10 mx-auto mb-5 py-3 px-0 px-xs-2">{children}</main>
     <footer className="fixed-bottom ">
+      <NotificationContainer />
       <nav className="navbar navbar-light bg-white p-0 navbar-expand shadow-up-sm">
         <ul className="navbar-nav nav-justified w-100">
           {navItems.map((navItem, index) => (

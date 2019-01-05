@@ -1,9 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Toast, ToastProps } from './Toast';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import { Layout } from '../../components/layout';
 import { action } from '@storybook/addon-actions';
 import { Store, State } from '@sambego/storybook-state';
 
@@ -12,13 +9,8 @@ const store = new Store({
 });
 
 const props: ToastProps = {
-  text: 'Some alert text',
-  actions: [
-    <a key="action-1" href="#">
-      LEARN MORE
-    </a>,
-    'X'
-  ],
+  message: 'Some alert text',
+  actions: [<a key="action-1">LEARN MORE</a>, 'X'],
   hidden: store.get('hidden'),
   onClick: () => {
     action('onClick');
@@ -28,7 +20,7 @@ const props: ToastProps = {
 
 const types: ToastProps['type'][] = ['default', 'info', 'success', 'warning', 'danger'];
 
-storiesOf('Toast', module)
+storiesOf('toast/Toast', module)
   .add('default', () => (
     <div
       style={{
@@ -57,14 +49,4 @@ storiesOf('Toast', module)
         ))}
       </State>
     </div>
-  ))
-  .add('with layout', () => (
-    <Layout
-      header={'Exercises'}
-      navItems={[
-        <button key="nav-new-exercise" className="btn btn-link nav-link">
-          <FontAwesomeIcon icon={faPlusSquare} /> NEW EXERCISE
-        </button>
-      ]}
-    />
   ));

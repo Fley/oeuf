@@ -39,11 +39,12 @@ const defaultStore: AppStore = {
     ids: ['timedExerciseId', 'repetitionExerciseId'],
     error: null,
     loading: false
-  }
+  },
+  notification: {}
 };
 
-export const ReduxDecorator: (store?: AppStore) => StoryDecorator = store => storyFn => (
-  <RootContainer store={configureStore(store || defaultStore)}>{storyFn()}</RootContainer>
+export const ReduxDecorator: (store?: Partial<AppStore>) => StoryDecorator = (store = {}) => storyFn => (
+  <RootContainer store={configureStore({ ...defaultStore, ...store })}>{storyFn()}</RootContainer>
 );
 
 export const StoryWrapper: StoryDecorator = storyFn => (

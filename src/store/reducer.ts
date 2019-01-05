@@ -1,51 +1,7 @@
 import { Exercise } from './types';
-import {
-  TYPES as actions,
-  Action
-  // fetchAllExercisesRequest,
-  // fetchAllExercisesSuccess,
-  // fetchAllExercisesFailure,
-  // fetchExerciseRequest,
-  // fetchExerciseSuccess,
-  // fetchExerciseFailure,
-  // addExerciseRequest,
-  // addExerciseSuccess,
-  // addExerciseFailure,
-  // deleteExerciseRequest,
-  // deleteExerciseStepSuccess,
-  // deleteExerciseFailure,
-  // deleteExerciseSuccess,
-  // acknowledgeExerciseRequest,
-  // acknowledgeExerciseSuccess,
-  // acknowledgeExerciseFailure,
-  // cancelExerciseRequest,
-  // cancelExerciseSuccess,
-  // cancelExerciseFailure,
-  // updateExerciseNameRequest,
-  // updateExerciseNameSuccess,
-  // updateExerciseNameFailure,
-  // acknowledgeExerciseStepRequest,
-  // acknowledgeExerciseStepSuccess,
-  // cancelExerciseStepRequest,
-  // acknowledgeExerciseStepFailure,
-  // cancelExerciseStepSuccess,
-  // cancelExerciseStepFailure,
-  // addExerciseStepRequest,
-  // addExerciseStepSuccess,
-  // addExerciseStepFailure,
-  // deleteExerciseStepRequest,
-  // deleteExerciseStepFailure,
-  // updateExerciseStepRequest,
-  // updateExerciseStepFailure,
-  // updateExerciseStepSuccess,
-  // moveExerciseStepRequest,
-  // moveExerciseStepSuccess,
-  // moveExerciseStepFailure,
-  // startExercise,
-  // stopExercise,
-  // pauseExercise
-} from './actions';
+import { TYPES as actions, Action } from './actions';
 import { combineReducers, Reducer } from 'redux';
+import { notificationReducer } from '../components/notification';
 
 export type ExerciseStore = {
   loading: boolean;
@@ -152,7 +108,8 @@ const removeExerciseFromStateById = (state: ExerciseStore, exerciseId: string) =
 };
 
 const reducer = combineReducers({
-  exercises
+  exercises,
+  notification: notificationReducer
 });
 
 export type AppStore = ReturnType<typeof reducer>;

@@ -44,6 +44,8 @@ import {
   fetchExerciseSuccess,
   fetchExerciseFailure
 } from './actions';
+import { watchNotifications } from 'components/notification';
+import { watchServiceWorker } from 'serviceWorker';
 
 function* fetchExercises() {
   try {
@@ -268,6 +270,8 @@ export default function* rootSaga() {
     watchAcknowledgeExerciseStep(),
     watchCancelExerciseStep(),
     watchMoveExerciseStep(),
-    watchUpdateExerciseStep()
+    watchUpdateExerciseStep(),
+    watchNotifications(),
+    watchServiceWorker()
   ]);
 }
