@@ -6,7 +6,8 @@ import { AppStore } from '../../../store/reducer';
 import { getExerciseById, areExercisesLoading, hasErrorLoadingExercises } from '../../../store/selectors';
 import { fetchExerciseRequest, acknowledgeExerciseStepRequest } from '../../../store/actions';
 import EmptyPage from 'components/empty-page/EmptyPage';
-import { faSun, faPoo, faQuidditch } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faPoo } from '@fortawesome/free-solid-svg-icons';
+import { faFrown } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 
 const LoadingPage = () => <EmptyPage text="Loading ..." icon={faSun} action={<p>Your exercise is being loaded</p>} />;
@@ -20,7 +21,7 @@ const ErrorLoadingPage = () => (
 const ExerciseNotFoundPage = () => (
   <EmptyPage
     text="Exercise not found"
-    icon={faQuidditch}
+    icon={faFrown}
     action={
       <Link className="btn btn-primary" to="/">
         Back to exercises
@@ -31,7 +32,7 @@ const ExerciseNotFoundPage = () => (
 const ExerciseStepNotFoundPage = () => (
   <EmptyPage
     text="Step not found"
-    icon={faQuidditch}
+    icon={faFrown}
     action={
       <Link className="btn btn-primary" to="/">
         Back to exercises

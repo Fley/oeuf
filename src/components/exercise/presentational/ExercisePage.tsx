@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare, faPlay, faTimes, faPoo, faSun, faQuidditch } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare, faPlay, faTimes, faPoo, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faFrown } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 import EmptyPage from '../../../components/empty-page/EmptyPage';
 import { Layout } from '../../../components/layout';
@@ -20,7 +21,7 @@ const ErrorLoadingPage = () => (
 const ExerciseNotFoundPage = () => (
   <EmptyPage
     text="Exercise not found"
-    icon={faQuidditch}
+    icon={faFrown}
     action={
       <Link className="btn btn-primary" to="/">
         Back to exercises
