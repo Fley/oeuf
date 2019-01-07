@@ -33,7 +33,7 @@ function* onContentCached({  }: ReturnType<typeof contentCached>) {
   yield put(pushNotification({ message: 'Content is cached for offline use.' }));
 }
 
-function* onofflineReady({ offline }: ReturnType<typeof offlineMode>) {
+function* onOfflineReady({ offline }: ReturnType<typeof offlineMode>) {
   if (offline) {
     yield put(pushNotification({ message: "Offline ? Keep working out it's fine !" }));
   }
@@ -44,6 +44,6 @@ export function* watchServiceWorker() {
     yield takeLatest(SERVICEWORKER_REGISTRATION_ERROR, onRegistrationError),
     yield takeLatest(SERVICEWORKER_NEW_CONTENT_AVAILABLE, onNewContentAvailable),
     yield takeLatest(SERVICEWORKER_CONTENT_CACHED, onContentCached),
-    yield takeLatest(SERVICEWORKER_OFFLINE, onofflineReady)
+    yield takeLatest(SERVICEWORKER_OFFLINE, onOfflineReady)
   ]);
 }

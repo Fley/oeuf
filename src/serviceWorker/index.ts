@@ -52,7 +52,7 @@ export function register(dispatch: Dispatch<ServiceWorkerAction>) {
 }
 
 const updateOnlineStatus = (dispatch: Dispatch<ServiceWorkerAction>) => () => {
-  dispatch(offlineMode(navigator.onLine));
+  dispatch(offlineMode(!navigator.onLine));
 };
 
 function registerValidSW(swUrl: string, dispatch: Dispatch<ServiceWorkerAction>) {
