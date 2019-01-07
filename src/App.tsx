@@ -7,11 +7,18 @@ import RootContainer from './redux/RootContainer';
 import { BrowserRouter as Router, Switch, Route, RouteComponentProps } from 'react-router-dom';
 import Error404 from './components/empty-page/Error404';
 import { ExerciseRunnerContainer } from 'components/exercise-runner';
+import { register as registerServiceWorker } from './serviceWorker';
+import configureStore from './store/configureStore';
+
+const appStore = configureStore();
+
+// Register service worker
+registerServiceWorker(appStore.dispatch);
 
 class App extends Component {
   render() {
     return (
-      <RootContainer>
+      <RootContainer store={appStore}>
         <Router basename={process.env.REACT_APP_BASE_DIR}>
           <Theme>
             <Switch>

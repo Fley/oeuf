@@ -4,7 +4,7 @@ import Theme from './components/theme/Theme';
 import RootContainer from './redux/RootContainer';
 import { StoryDecorator } from '@storybook/react';
 import { AppStore } from 'store/reducer';
-import configureStore from 'redux/configureStore';
+import configureStore from 'store/configureStore';
 import { StepTimed, StepRepetition } from 'store/types';
 
 const defaultStore: AppStore = {
