@@ -30,6 +30,7 @@ const NotificationComponent: SFC<NotificationComponentProps> = ({
       <Toast
         message={notification.message}
         type={notification.type}
+        actions={notification.actions}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
