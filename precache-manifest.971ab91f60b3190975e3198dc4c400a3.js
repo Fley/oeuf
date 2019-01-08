@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/oeuf/static/js/runtime~main.8836d024.js"
   },
   {
-    "revision": "e87e7ccbef80f33476a5",
-    "url": "/oeuf/static/js/main.e87e7ccb.chunk.js"
+    "revision": "b5f093955ff017fdc141",
+    "url": "/oeuf/static/js/main.b5f09395.chunk.js"
   },
   {
     "revision": "833f2fcbdb2c5e70addf",
     "url": "/oeuf/static/js/1.833f2fcb.chunk.js"
   },
   {
-    "revision": "e87e7ccbef80f33476a5",
+    "revision": "b5f093955ff017fdc141",
     "url": "/oeuf/static/css/main.6a42d9b4.chunk.css"
   },
   {
-    "revision": "e86ef3d564d8dea5a65a820afa02d89b",
+    "revision": "b244433343abf09c7611203d8b44dd21",
     "url": "/oeuf/index.html"
   }
 ];
