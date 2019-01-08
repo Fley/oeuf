@@ -16,8 +16,6 @@ const dbPromise = idb.open(dbname, version, upgradeDB => {
   }
 });
 
-export default dbPromise;
-
 // EXERCISE
 
 export const putExercise = async (exercise: Exercise) => {
