@@ -3,6 +3,7 @@ import ExerciseList, { ExerciseListProps } from './ExerciseList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Layout } from '../../../components/layout';
+import { version as appVersion } from '../../../../package.json';
 
 const ExerciseListPage = ({
   loading = false,
@@ -14,7 +15,12 @@ const ExerciseListPage = ({
   onCancelExercise
 }: ExerciseListProps) => (
   <Layout
-    header={<span className="navbar-brand mb-0 h1">Exercises</span>}
+    header={
+      <>
+        <span className="navbar-brand mb-0 h1">Exercises</span>
+        <span className="navbar-text">{appVersion}</span>
+      </>
+    }
     headerBackground={{ className: 'bg-primary', isLight: false }}
     navItems={[
       <button

@@ -59,12 +59,12 @@ export class ExerciseRunner extends PureComponent<ExerciseRunnerProps, ExerciseR
     return (
       <Layout
         header={
-          <>
+          <span>
             <Link to={`/${exerciseId}`} className="btn btn-link text-dark" aria-label="Back to exercises list">
               <FontAwesomeIcon icon={faTimes} />
             </Link>
             {`${exerciseName} - Step ${currentStepIndex + 1}`}
-          </>
+          </span>
         }
         navItems={[
           <>

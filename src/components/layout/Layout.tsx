@@ -19,7 +19,7 @@ export const Layout: SFC<LayoutProps> = ({
 }) => (
   <>
     <header
-      className={classNames('navbar justify-content-start sticky-top shadow-sm', headerBackground.className, {
+      className={classNames('navbar justify-content-between sticky-top shadow-sm', headerBackground.className, {
         'navbar-light': headerBackground.isLight,
         'navbar-dark': !headerBackground.isLight
       })}
