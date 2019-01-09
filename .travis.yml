@@ -4,9 +4,12 @@ node_js:
 cache:
   directories:
     - node_modules
+before_script:
+  - git config --global user.name "CI"
+  - git config --global user.email "ci@travis.com"
 script:
   - npm version patch -m "Bumping to %s [skip ci]"
-  - git push origin $TRAVIS_BRANCH
+  - git push "https://$GITHUB_TOKEN@github.com/Fley/oeuf.git"
   - npm run build
   - npm test
 deploy:
