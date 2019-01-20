@@ -40,7 +40,10 @@ const defaultStore: AppStore = {
     error: null,
     loading: false
   },
-  notification: {}
+  notification: {},
+  serviceWorker: {
+    newVersionAvailable: false
+  }
 };
 
 export const ReduxDecorator: (store?: Partial<AppStore>) => StoryDecorator = (store = {}) => storyFn => (

@@ -2,6 +2,7 @@ import { Exercise } from './types';
 import { TYPES as actions, Action } from './actions';
 import { combineReducers, Reducer } from 'redux';
 import { notificationReducer } from '../components/notification';
+import { serviceWorkerReducer } from '../serviceWorker';
 
 export type ExerciseStore = {
   loading: boolean;
@@ -109,7 +110,8 @@ const removeExerciseFromStateById = (state: ExerciseStore, exerciseId: string) =
 
 const reducer = combineReducers({
   exercises,
-  notification: notificationReducer
+  notification: notificationReducer,
+  serviceWorker: serviceWorkerReducer
 });
 
 export type AppStore = ReturnType<typeof reducer>;

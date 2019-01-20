@@ -66,35 +66,37 @@ function registerValidSW(
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+      if (registration.waiting) {
+        // SW is waiting to activate. Can occur if multiple clients open and one of the clients is refreshed.
+        dispatch(newContentAvailable(registration.waiting));
+        return;
+      }
+
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
-        if (installingWorker == null) {
-          return;
-        }
-        installingWorker!.onstatechange = () => {
-          if (installingWorker!.state === 'installed') {
-            if (navigator.serviceWorker.controller) {
-              // At this point, the old content will have been purged and
-              // the fresh content will have been added to the cache.
-              // It's the perfect time to display a "New content is
-              // available; please refresh." message in your web app.
-              dispatch(newContentAvailable());
-              // Execute callback
-              if (config && config.onUpdate) {
-                config.onUpdate(registration);
-              }
-            } else {
-              // At this point, everything has been precached.
-              // It's the perfect time to display a
-              // "Content is cached for offline use." message.
-              dispatch(contentCached());
-              // Execute callback
-              if (config && config.onSuccess) {
-                config.onSuccess(registration);
+        if (installingWorker) {
+          installingWorker!.onstatechange = () => {
+            if (installingWorker!.state === 'installed') {
+              if (navigator.serviceWorker.controller) {
+                // At this point, the old content will have been purged and the fresh content will have been added to the cache.
+                // It's the perfect time to display a "New content is available; please refresh." message in your web app.
+                dispatch(newContentAvailable(installingWorker));
+                // Execute callback
+                if (config && config.onUpdate) {
+                  config.onUpdate(registration);
+                }
+              } else {
+                // At this point, everything has been precached.
+                // It's the perfect time to display a "Content is cached for offline use." message.
+                dispatch(contentCached());
+                // Execute callback
+                if (config && config.onSuccess) {
+                  config.onSuccess(registration);
+                }
               }
             }
-          }
-        };
+          };
+        }
       };
     })
     .catch(error => {

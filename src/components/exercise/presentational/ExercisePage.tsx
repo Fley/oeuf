@@ -57,7 +57,6 @@ const ExercisePage = ({
   onDeleteStep,
   onAcknowledgeStep,
   onCancelStep,
-  onStartExercise,
   onUpdateStep,
   onMoveStep,
   onExerciseNameChange

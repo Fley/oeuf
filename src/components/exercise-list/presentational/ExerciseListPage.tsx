@@ -2,8 +2,8 @@ import React from 'react';
 import ExerciseList, { ExerciseListProps } from './ExerciseList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import { Layout } from '../../../components/layout';
-import { version as appVersion } from '../../../../package.json';
+import { Layout } from 'components/layout';
+import { Version } from 'components/version/Version';
 
 const ExerciseListPage = ({
   loading = false,
@@ -18,7 +18,9 @@ const ExerciseListPage = ({
     header={
       <>
         <span className="navbar-brand mb-0 h1">Exercises</span>
-        <span className="navbar-text">{appVersion}</span>
+        <span className="navbar-text">
+          <Version />
+        </span>
       </>
     }
     headerBackground={{ className: 'bg-primary', isLight: false }}

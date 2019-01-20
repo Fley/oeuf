@@ -11,3 +11,4 @@ export const hasErrorLoadingExercises = (state: AppStore) => !!getExercisesState
 
 export const getExercisesState = (state: AppStore) => state.exercises;
 export const getNotificationState = (state: AppStore) => state.notification;
+export const getServiceWorkerState = (state: AppStore) => state.serviceWorker;

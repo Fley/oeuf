@@ -11,7 +11,15 @@ export const registrationSuccess = () => ({ type: SERVICEWORKER_REGISTRATION_SUC
 
 export const SERVICEWORKER_NEW_CONTENT_AVAILABLE: 'SERVICEWORKER_NEW_CONTENT_AVAILABLE' =
   'SERVICEWORKER_NEW_CONTENT_AVAILABLE';
-export const newContentAvailable = () => ({ type: SERVICEWORKER_NEW_CONTENT_AVAILABLE });
+export const newContentAvailable = (serviceWorker: ServiceWorker) => ({
+  type: SERVICEWORKER_NEW_CONTENT_AVAILABLE,
+  serviceWorker
+});
+
+export const SERVICEWORKER_UPDATE_CONTENT: 'SERVICEWORKER_UPDATE_CONTENT' = 'SERVICEWORKER_UPDATE_CONTENT';
+export const updateContent = () => ({
+  type: SERVICEWORKER_UPDATE_CONTENT
+});
 
 export const SERVICEWORKER_CONTENT_CACHED: 'SERVICEWORKER_CONTENT_CACHED' = 'SERVICEWORKER_CONTENT_CACHED';
 export const contentCached = () => ({ type: SERVICEWORKER_CONTENT_CACHED });

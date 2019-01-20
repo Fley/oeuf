@@ -1,5 +1,5 @@
 import React from 'react';
-import { all, put, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest, call } from 'redux-saga/effects';
 import {
   SERVICEWORKER_REGISTRATION_ERROR,
   registrationError,
@@ -8,9 +8,12 @@ import {
   SERVICEWORKER_OFFLINE,
   newContentAvailable,
   contentCached,
-  offlineMode
+  offlineMode,
+  updateContent,
+  SERVICEWORKER_UPDATE_CONTENT
 } from './actions';
 import { pushNotification } from 'components/notification';
+import { UpgradeVersionButton } from 'components/version/UpgradeVersionButton';
 
 function* onRegistrationError({ errorMessage }: ReturnType<typeof registrationError>) {
   yield put(pushNotification({ message: errorMessage, type: 'danger' }));
@@ -19,14 +22,16 @@ function* onRegistrationError({ errorMessage }: ReturnType<typeof registrationEr
 function* onNewContentAvailable({  }: ReturnType<typeof newContentAvailable>) {
   yield put(
     pushNotification({
-      message: 'New content is available; please refresh.',
-      actions: [
-        <a key="refresh-button" href="" onClick={() => window.location.reload()}>
-          REFRESH
-        </a>
-      ]
+      message: 'New version is available!',
+      actions: [<UpgradeVersionButton key="upgrade-button" />]
     })
   );
+}
+
+function* onUpdateContent({  }: ReturnType<typeof updateContent>) {
+  // const serviceWorker: ServiceWorker = yield select<AppStore>(state => getServiceWorker(getServiceWorkerState(state)));
+  // yield call([serviceWorker, 'postMessage'], 'skipWaiting');
+  yield call([window.location, 'reload']);
 }
 
 function* onContentCached({  }: ReturnType<typeof contentCached>) {
@@ -44,6 +49,7 @@ export function* watchServiceWorker() {
     yield takeLatest(SERVICEWORKER_REGISTRATION_ERROR, onRegistrationError),
     yield takeLatest(SERVICEWORKER_NEW_CONTENT_AVAILABLE, onNewContentAvailable),
     yield takeLatest(SERVICEWORKER_CONTENT_CACHED, onContentCached),
-    yield takeLatest(SERVICEWORKER_OFFLINE, onOfflineReady)
+    yield takeLatest(SERVICEWORKER_OFFLINE, onOfflineReady),
+    yield takeLatest(SERVICEWORKER_UPDATE_CONTENT, onUpdateContent)
   ]);
 }
