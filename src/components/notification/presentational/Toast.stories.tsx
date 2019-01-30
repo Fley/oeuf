@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { Toast, ToastProps } from './Toast';
 import { action } from '@storybook/addon-actions';
 import { Store, State } from '@sambego/storybook-state';
+import { UpgradeVersionButton } from 'components/version/UpgradeVersionButton';
 
 const store = new Store({
   hidden: false
@@ -47,6 +48,19 @@ storiesOf('toast/Toast', module)
         {types.map(type => (
           <Toast {...props} key={type} type={type} />
         ))}
+      </State>
+    </div>
+  ))
+  .add('upgrade button', () => (
+    <div
+      style={{
+        position: 'absolute',
+        bottom: '50%',
+        width: '100%'
+      }}
+    >
+      <State store={store}>
+        <Toast {...props} actions={[<UpgradeVersionButton key="upgrade-button" />]} />
       </State>
     </div>
   ));

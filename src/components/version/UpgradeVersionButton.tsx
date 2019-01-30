@@ -7,9 +7,7 @@ type UpgradeVersionButtonDispatchProps = {
 };
 
 const UpgradeVersionButtonComponent = ({ updateContent }: UpgradeVersionButtonDispatchProps) => (
-  <button className="btn btn-link" onClick={updateContent}>
-    UPDATE
-  </button>
+  <a onClick={updateContent}>UPDATE</a>
 );
 
 const mapDispatchToProps: MapDispatchToProps<UpgradeVersionButtonDispatchProps, {}> = dispatch => ({

@@ -29,8 +29,6 @@ function* onNewContentAvailable({  }: ReturnType<typeof newContentAvailable>) {
 }
 
 function* onUpdateContent({  }: ReturnType<typeof updateContent>) {
-  // const serviceWorker: ServiceWorker = yield select<AppStore>(state => getServiceWorker(getServiceWorkerState(state)));
-  // yield call([serviceWorker, 'postMessage'], 'skipWaiting');
   yield call([window.location, 'reload']);
 }
 
