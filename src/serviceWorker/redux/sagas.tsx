@@ -29,7 +29,7 @@ function* onNewContentAvailable({  }: ReturnType<typeof newContentAvailable>) {
 }
 
 function* onUpdateContent({  }: ReturnType<typeof updateContent>) {
-  yield call([window.location, 'reload']);
+  yield call(window.location.reload, false);
 }
 
 function* onContentCached({  }: ReturnType<typeof contentCached>) {

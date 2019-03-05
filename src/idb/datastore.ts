@@ -1,4 +1,4 @@
-import idb from 'idb';
+import { openDb } from 'idb';
 import { Exercise } from '../store/types';
 
 const RW = 'readwrite';
@@ -8,7 +8,7 @@ const version = 1;
 
 const EXERCISE_STORE = 'exercise';
 
-const dbPromise = idb.open(dbname, version, upgradeDB => {
+const dbPromise = openDb(dbname, version, upgradeDB => {
   switch (upgradeDB.oldVersion) {
     case 0:
     default:

@@ -1,6 +1,5 @@
 import { Exercise } from './types';
-import { all, call, put, takeLatest, takeEvery } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+import { all, call, put, takeLatest, takeEvery, delay } from 'redux-saga/effects';
 import { arrayMove } from 'react-sortable-hoc';
 import * as datastore from '../idb/datastore';
 import {

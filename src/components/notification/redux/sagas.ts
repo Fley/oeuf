@@ -1,4 +1,4 @@
-import { take, actionChannel, call, put, race } from 'redux-saga/effects';
+import { take, actionChannel, call, put, race, delay } from 'redux-saga/effects';
 import {
   NOTIFICATION_PUSH,
   showNotification,
@@ -8,7 +8,7 @@ import {
   NOTIFICATION_PAUSE_AUTO_HIDE,
   NOTIFICATION_RESUME_AUTO_HIDE
 } from './actions';
-import { delay, Channel } from 'redux-saga';
+import { Channel } from 'redux-saga';
 import { Notification } from './reducer';
 
 const NOTIFICATION_DELAY_MS = 5000;
