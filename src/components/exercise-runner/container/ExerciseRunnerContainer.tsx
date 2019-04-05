@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { FC, useEffect } from 'react';
 import { MapStateToProps, MapDispatchToProps, connect } from 'react-redux';
 import { Exercise, Step } from '../../../store/types';
 import { ExerciseRunner } from '../presentational/ExerciseRunner';
@@ -61,36 +61,41 @@ type ExerciseRunnerContainerProps = ExerciseRunnerContainerOwnProps &
   ExerciseRunnerContainerStateProps &
   ExerciseRunnerContainerDispatchProps;
 
-class ExerciseRunnerContainerComponent extends PureComponent<ExerciseRunnerContainerProps> {
-  componentDidMount() {
-    if (!this.props.exercise) {
-      this.props.loadExercise();
+const ExerciseRunnerContainerComponent: FC<ExerciseRunnerContainerProps> = ({
+  stepId,
+  exercise,
+  onStepFinished,
+  loading,
+  errorLoading,
+  loadExercise
+}) => {
+  useEffect(() => {
+    if (!exercise) {
+      loadExercise();
     }
-  }
-  render() {
-    const { stepId, exercise, onStepFinished, loading, errorLoading } = this.props;
-    const stepIndex = exercise ? exercise.steps.findIndex(({ id }) => id === stepId) : -1;
-    return loading ? (
-      <LoadingPage />
-    ) : errorLoading ? (
-      <ErrorLoadingPage />
-    ) : !exercise ? (
-      <ExerciseNotFoundPage />
-    ) : stepIndex < 0 ? (
-      <ExerciseStepNotFoundPage />
-    ) : (
-      <ExerciseRunner
-        key={`exercise-runner-${exercise.id}-${stepId}`}
-        exerciseId={exercise.id}
-        exerciseName={exercise.name}
-        type={exercise.type}
-        steps={exercise.steps}
-        onStepFinished={onStepFinished}
-        currentStepIndex={stepIndex}
-      />
-    );
-  }
-}
+  }, []);
+
+  const stepIndex = exercise ? exercise.steps.findIndex(({ id }) => id === stepId) : -1;
+  return loading ? (
+    <LoadingPage />
+  ) : errorLoading ? (
+    <ErrorLoadingPage />
+  ) : !exercise ? (
+    <ExerciseNotFoundPage />
+  ) : stepIndex < 0 ? (
+    <ExerciseStepNotFoundPage />
+  ) : (
+    <ExerciseRunner
+      key={`exercise-runner-${exercise.id}-${stepId}`}
+      exerciseId={exercise.id}
+      exerciseName={exercise.name}
+      type={exercise.type}
+      steps={exercise.steps}
+      onStepFinished={onStepFinished}
+      currentStepIndex={stepIndex}
+    />
+  );
+};
 
 const mapStateToProps: MapStateToProps<ExerciseRunnerContainerStateProps, ExerciseRunnerContainerOwnProps, AppStore> = (
   state,

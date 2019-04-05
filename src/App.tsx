@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FC } from 'react';
 import 'App.css';
 import Theme from './components/theme/Theme';
 import ExerciseListPageContainer from './components/exercise-list/container/ExerciseListPageContainer';
@@ -15,35 +15,29 @@ const appStore = configureStore();
 // Register service worker
 registerServiceWorker(appStore.dispatch);
 
-class App extends Component {
-  render() {
-    return (
-      <RootContainer store={appStore}>
-        <Router basename={process.env.REACT_APP_BASE_DIR}>
-          <Theme>
-            <Switch>
-              <Route exact path="/" component={ExerciseListPageContainer} />
-              <Route
-                exact
-                path="/:id"
-                component={({ match }: RouteComponentProps<{ id: string }>) => (
-                  <ExercisePageContainer exerciseId={match.params.id} />
-                )}
-              />
-              <Route
-                exact
-                path="/:exerciseId/runner/:stepId"
-                component={({ match }: RouteComponentProps<{ exerciseId: string; stepId: string }>) => (
-                  <ExerciseRunnerContainer exerciseId={match.params.exerciseId} stepId={match.params.stepId} />
-                )}
-              />
-              <Route component={Error404} />
-            </Switch>
-          </Theme>
-        </Router>
-      </RootContainer>
-    );
-  }
-}
-
-export default App;
+export const App: FC = () => (
+  <RootContainer store={appStore}>
+    <Router basename={process.env.REACT_APP_BASE_DIR}>
+      <Theme>
+        <Switch>
+          <Route exact path="/" component={ExerciseListPageContainer} />
+          <Route
+            exact
+            path="/:id"
+            component={({ match }: RouteComponentProps<{ id: string }>) => (
+              <ExercisePageContainer exerciseId={match.params.id} />
+            )}
+          />
+          <Route
+            exact
+            path="/:exerciseId/runner/:stepId"
+            component={({ match }: RouteComponentProps<{ exerciseId: string; stepId: string }>) => (
+              <ExerciseRunnerContainer exerciseId={match.params.exerciseId} stepId={match.params.stepId} />
+            )}
+          />
+          <Route component={Error404} />
+        </Switch>
+      </Theme>
+    </Router>
+  </RootContainer>
+);

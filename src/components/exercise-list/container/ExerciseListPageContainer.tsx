@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect, MapStateToProps, MapDispatchToProps } from 'react-redux';
 import { getExerciseList, areExercisesLoading, hasErrorLoadingExercises } from '../../../store/selectors';
 import ExerciseListPage from '../presentational/ExerciseListPage';
@@ -53,17 +53,15 @@ const mapDispatchToProps: MapDispatchToProps<
   onCancelExercise: (id: string) => dispatch(cancelExerciseRequest(id))
 });
 
-class ExerciceListPageContainer extends Component<ExerciceListPageContainerProps> {
-  componentDidMount() {
-    if (this.props.exercises.length === 0) {
-      this.props.load();
+const ExerciceListPageContainer: FC<ExerciceListPageContainerProps> = ({ load, ...props }) => {
+  useEffect(() => {
+    if (props.exercises.length === 0) {
+      load();
     }
-  }
-  render() {
-    const { load, ...restProps } = this.props;
-    return <ExerciseListPage {...restProps} />;
-  }
-}
+  }, []);
+
+  return <ExerciseListPage {...props} />;
+};
 
 export default connect(
   mapStateToProps,

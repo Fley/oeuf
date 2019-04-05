@@ -30,7 +30,7 @@ function* handleNotification(notification?: Notification) {
     const { stopped, timeout } = yield race({
       hide: take(NOTIFICATION_HIDE),
       stopped: take(NOTIFICATION_PAUSE_AUTO_HIDE),
-      timeout: call(delay, NOTIFICATION_DELAY_MS)
+      timeout: delay(NOTIFICATION_DELAY_MS)
     });
     if (timeout) {
       yield put(hideNotification());

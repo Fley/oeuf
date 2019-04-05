@@ -1,18 +1,19 @@
-import { openDb } from 'idb';
+import { openDB } from 'idb';
 import { Exercise } from '../store/types';
+import { OeufDBSchema } from './types';
 
 const RW = 'readwrite';
 
 const dbname = 'oeuf-db';
 const version = 1;
 
-const EXERCISE_STORE = 'exercise';
-
-const dbPromise = openDb(dbname, version, upgradeDB => {
-  switch (upgradeDB.oldVersion) {
-    case 0:
-    default:
-      upgradeDB.createObjectStore<Exercise, string>(EXERCISE_STORE, { keyPath: 'id' });
+const dbPromise = openDB<OeufDBSchema>(dbname, version, {
+  upgrade: (db, oldVersion /* , newVersion, transaction */) => {
+    switch (oldVersion) {
+      case 0:
+      default:
+        db.createObjectStore('exercise', { keyPath: 'id' });
+    }
   }
 });
 
@@ -20,21 +21,19 @@ const dbPromise = openDb(dbname, version, upgradeDB => {
 
 export const putExercise = async (exercise: Exercise) => {
   const db = await dbPromise;
-  const tx = db.transaction(EXERCISE_STORE, RW);
-  tx.objectStore<Exercise, string>(EXERCISE_STORE).put(exercise);
-  await tx.complete;
+  await db.put('exercise', exercise);
   return exercise;
 };
 
 export const patchExerciseById = async (id: string, patchExercise: Partial<Exercise>) => {
   const db = await dbPromise;
-  const tx = db.transaction(EXERCISE_STORE, RW);
-  const store = tx.objectStore<Exercise, string>(EXERCISE_STORE);
+  const tx = db.transaction('exercise', RW);
+  const store = tx.objectStore('exercise');
   const exercise = await store.get(id);
   if (exercise) {
     const newExercise = { ...exercise, ...patchExercise };
     store.put(newExercise);
-    await tx.complete;
+    await tx.done;
     return newExercise;
   } else {
     throw new Error(`Exercise not found (id="${id}"")`);
@@ -43,23 +42,15 @@ export const patchExerciseById = async (id: string, patchExercise: Partial<Exerc
 
 export const deleteExercise = async (id: string) => {
   const db = await dbPromise;
-  const tx = db.transaction(EXERCISE_STORE, RW);
-  tx.objectStore<Exercise, string>(EXERCISE_STORE).delete(id);
-  return tx.complete;
+  return db.delete('exercise', id);
 };
 
 export const getAllExercises = async () => {
   const db = await dbPromise;
-  return db
-    .transaction(EXERCISE_STORE)
-    .objectStore<Exercise, string>(EXERCISE_STORE)
-    .getAll();
+  return db.getAll('exercise');
 };
 
 export const getExerciseById = async (id: string) => {
   const db = await dbPromise;
-  return db
-    .transaction(EXERCISE_STORE)
-    .objectStore<Exercise, string>(EXERCISE_STORE)
-    .get(id);
+  return db.get('exercise', id);
 };

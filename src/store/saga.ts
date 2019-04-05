@@ -130,7 +130,7 @@ function* watchCancelExercise() {
 
 function* updateExerciseName({ id, name }: ReturnType<typeof updateExerciseNameRequest>) {
   // Debounce
-  yield call(delay, 500);
+  yield delay(500);
   try {
     const patchedExercise: Exercise = yield call(datastore.patchExerciseById, id, { name });
     yield put(updateExerciseNameSuccess(patchedExercise));
@@ -235,7 +235,7 @@ function* watchMoveExerciseStep() {
 
 function* updateExerciseStep({ exerciseId, stepId, contentPatch }: ReturnType<typeof updateExerciseStepRequest>) {
   // Debounce
-  yield call(delay, 500);
+  yield delay(500);
   try {
     const exercise: Exercise = yield call(datastore.getExerciseById, exerciseId);
     const steps = [...exercise.steps];
