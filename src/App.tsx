@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import 'typeface-roboto';
 import 'App.css';
 import Theme from './components/theme/Theme';
 import ExerciseListPageContainer from './components/exercise-list/container/ExerciseListPageContainer';

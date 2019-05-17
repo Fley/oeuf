@@ -1,4 +1,5 @@
 import React from 'react';
+import 'typeface-roboto';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Theme from './components/theme/Theme';
 import RootContainer from './redux/RootContainer';
