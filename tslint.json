@@ -16,6 +16,7 @@
       }
     ],
     "quotes": ["warn", "single"],
-    "no-return-await": true
+    "no-return-await": true,
+    "no-empty-pattern": false
   }
 }

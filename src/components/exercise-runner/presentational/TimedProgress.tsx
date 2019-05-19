@@ -19,7 +19,9 @@ export const TimedProgress: FC<TimedProgressProps> = ({
   totalTime,
   tick_ms = 1000,
   theme = 'exercise',
-  onFinished = () => {}
+  onFinished = () => {
+    return;
+  }
 }) => {
   // Use reducer
   const initialState: TimedProgressState = {
@@ -95,6 +97,8 @@ export const TimedProgress: FC<TimedProgressProps> = ({
         break;
       case 'RESETING':
         start();
+        clearTimers();
+        break;
       case 'FINISHED':
       case 'STOPPED':
         clearTimers();
@@ -116,7 +120,7 @@ export const TimedProgress: FC<TimedProgressProps> = ({
 
   return (
     <>
-      <div>{status}</div>
+      <div>{state.status}</div>
       <div className={classNames('timer-container', { rest: theme === 'rest' })} onClick={onTapTimer}>
         <svg
           className="timer-svg m-auto d-flex"
@@ -155,7 +159,7 @@ export const TimedProgress: FC<TimedProgressProps> = ({
             fill="transparent"
             strokeDasharray="565.48"
             strokeDashoffset={getStrokeDashoffset(state.remainingTime / totalTime)}
-            style={status === 'RUNNING' ? { transition: `stroke-dashoffset ${tick_ms! / 1000}s linear` } : {}}
+            style={state.status === 'RUNNING' ? { transition: `stroke-dashoffset ${tick_ms! / 1000}s linear` } : {}}
           />
         </svg>
         <div className="timer-info d-flex">

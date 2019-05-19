@@ -58,7 +58,7 @@ const ExerciceListPageContainer: FC<ExerciceListPageContainerProps> = ({ load, .
     if (props.exercises.length === 0) {
       load();
     }
-  }, []);
+  }, [props.exercises, load]);
 
   return <ExerciseListPage {...props} />;
 };

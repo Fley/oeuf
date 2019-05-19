@@ -11,7 +11,12 @@ const store = new Store({
 
 const props: ToastProps = {
   message: 'Some alert text',
-  actions: [<a key="action-1">LEARN MORE</a>, 'X'],
+  actions: [
+    <a href="#" key="action-1">
+      LEARN MORE
+    </a>,
+    'X'
+  ],
   hidden: store.get('hidden'),
   onClick: () => {
     action('onClick');

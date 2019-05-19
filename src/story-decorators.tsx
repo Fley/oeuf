@@ -1,12 +1,11 @@
 import React from 'react';
-import 'typeface-roboto';
 import { MemoryRouter as Router } from 'react-router-dom';
-import Theme from './components/theme/Theme';
 import RootContainer from './redux/RootContainer';
 import { StoryDecorator } from '@storybook/react';
 import { AppStore } from 'store/reducer';
 import configureStore from 'store/configureStore';
 import { StepTimed, StepRepetition } from 'store/types';
+import { Theme } from 'components/theme-2/Theme';
 
 const defaultStore: AppStore = {
   exercises: {
@@ -52,7 +51,7 @@ export const ReduxDecorator: (store?: Partial<AppStore>) => StoryDecorator = (st
 );
 
 export const StoryWrapper: StoryDecorator = storyFn => (
-  <Router>
-    <Theme>{storyFn()}</Theme>
-  </Router>
+  <Theme>
+    <Router>{storyFn()}</Router>
+  </Theme>
 );

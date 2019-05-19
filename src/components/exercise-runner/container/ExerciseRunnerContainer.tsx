@@ -73,7 +73,7 @@ const ExerciseRunnerContainerComponent: FC<ExerciseRunnerContainerProps> = ({
     if (!exercise) {
       loadExercise();
     }
-  }, []);
+  }, [exercise, loadExercise]);
 
   const stepIndex = exercise ? exercise.steps.findIndex(({ id }) => id === stepId) : -1;
   return loading ? (
